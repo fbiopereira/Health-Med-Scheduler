@@ -1,0 +1,52 @@
+﻿version: "3.7"
+
+services:
+    sql-server-alodoutor:
+        container_name: sql-server
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        restart: always
+        ports:
+          - "1435:1433"
+        environment:
+            MSSQL_SA_PASSWORD: "P@ssw0rd"
+            ACCEPT_EULA: "Y"
+            MSSQL_PID: "Developer"
+        networks:
+          - "alo-doutor-net"
+
+    identidade-api-alodoutor:
+        container_name: identidade
+        image: fiappostech/identidade
+        build: 
+            context: .
+            dockerfile: ./Dockerfile.Identidade
+        restart: always
+        ports:
+            - "9191:80"
+        environment:
+            aspnetcore_environment: Staging      
+        depends_on:
+            - sql-server-alodoutor        
+        networks:
+            - "alo-doutor-net"
+  
+    alodoutor-api:
+        container_name: alodoutor
+        image: fiappostech/alodoutor
+        build:
+            context: .
+            dockerfile: ./Dockerfile.AloDoutor
+        restart: always
+        ports:
+            - "9090:80"
+        environment:
+            aspnetcore_environment: Staging      
+        depends_on:
+            - sql-server-alodoutor
+            - identidade-api-alodoutor 
+        networks:
+            - "alo-doutor-net"
+  
+networks:
+  alo-doutor-net:
+    driver: bridge

@@ -1,4 +1,4 @@
-﻿using AloDoutor.Core.Comunication;
+﻿using AloDoutor.Core.Communication;
 using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;

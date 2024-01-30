@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
 {
-    [Authorize]
+  //  [Authorize]
     [Route("api/especialidade-medico")]
     public class EspecialidadeMedicoController : MainController<EspecialidadeMedicoController>
     {

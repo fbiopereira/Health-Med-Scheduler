@@ -1,4 +1,3 @@
-using AloDoutor.Api.Configuration;
 using Identidade.API.Configuration;
 using Microsoft.AspNetCore.Identity;
 

@@ -1,4 +1,4 @@
-﻿namespace AloDoutor.Core.Comunication
+﻿namespace AloDoutor.Core.Communication
 {
     public class ResponseResult
     {

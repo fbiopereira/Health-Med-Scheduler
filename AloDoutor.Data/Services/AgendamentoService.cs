@@ -1,11 +1,8 @@
-﻿using AloDoutor.Domain.Entity;
+﻿using AloDoutor.Core.Messages;
+using AloDoutor.Domain.Command;
+using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AloDoutor.Domain.Services
 {
@@ -13,14 +10,16 @@ namespace AloDoutor.Domain.Services
     {
         private readonly IAgendamentoRepository _agendamentoRepository;
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
-        private readonly IPacienteRepository _pacienteRepository; 
+        private readonly IPacienteRepository _pacienteRepository;
+        private readonly MassTransit.IBus _bus;
 
-        public AgendamentoService(IAgendamentoRepository agendamentoRepository, 
-            IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository)
+        public AgendamentoService(IAgendamentoRepository agendamentoRepository,
+            IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, MassTransit.IBus bus)
         {
             _agendamentoRepository = agendamentoRepository;
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
             _pacienteRepository = pacienteRepository;
+            _bus = bus;
         }
 
         public async Task<ValidationResult> Adicionar(Agendamento agendamento)
@@ -31,13 +30,16 @@ namespace AloDoutor.Domain.Services
                 return ValidationResult;   
             
             await _agendamentoRepository.Adicionar(agendamento);
-            return await PersistirDados(_agendamentoRepository.UnitOfWork);
+
+            var commit = await PersistirDados(_agendamentoRepository.UnitOfWork);
+            if (commit.IsValid) await _bus.Publish(new AgendamentoRealizadoEvent(agendamento.Id, agendamento.DataHoraAtendimento));
+            return commit;
         }
 
         public async Task<ValidationResult> Reagendar(Guid id, DateTime data)
         {
             var agendamento = await _agendamentoRepository.ObterPorId(id);
-
+            
             if (agendamento == null)
             {
                 AdicionarErro("Agendamento não localizado!");
@@ -92,7 +94,11 @@ namespace AloDoutor.Domain.Services
 
             agendamento.CancelarAgendamento();
 
-            return await PersistirDados(_agendamentoRepository.UnitOfWork);
+            var commit = await PersistirDados(_agendamentoRepository.UnitOfWork);
+
+            if(commit.IsValid) await _bus.Publish(new AgendamentoCanceladoEvent(agendamento.Id));
+
+            return commit;
         }
 
         private async Task ValidarAgendamento(Agendamento agendamento)

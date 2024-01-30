@@ -33,6 +33,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Dockerfile.Identidade = Dockerfile.Identidade
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AloFinances", "AloFinances", "{6763F131-5567-4142-B0ED-67D4DBAB7232}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AloFinances.Api", "AloFInances\AloFinances.Api.csproj", "{E9112F8B-B231-4061-9622-CDB94EA1FAB6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +63,10 @@ Global
 		{5AA053C1-6144-4C8D-B9D3-F81BD93BE52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AA053C1-6144-4C8D-B9D3-F81BD93BE52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AA053C1-6144-4C8D-B9D3-F81BD93BE52E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E9112F8B-B231-4061-9622-CDB94EA1FAB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9112F8B-B231-4061-9622-CDB94EA1FAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9112F8B-B231-4061-9622-CDB94EA1FAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9112F8B-B231-4061-9622-CDB94EA1FAB6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -72,6 +80,8 @@ Global
 		{6234BED6-6AF7-4BEA-B929-08F37214870F} = {1042E9E1-E2F3-4D44-8E1A-C3D459B8A8A7}
 		{6E58F1FF-E3C0-4C6F-A18E-7569EBB1162D} = {B6223967-0AF5-4E4F-B363-1B282163D891}
 		{5AA053C1-6144-4C8D-B9D3-F81BD93BE52E} = {6E58F1FF-E3C0-4C6F-A18E-7569EBB1162D}
+		{6763F131-5567-4142-B0ED-67D4DBAB7232} = {F0FE3AAF-09C8-4B05-88A0-CBAB00D154D2}
+		{E9112F8B-B231-4061-9622-CDB94EA1FAB6} = {6763F131-5567-4142-B0ED-67D4DBAB7232}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {877E6D01-399B-4D04-98A6-F21235CA469F}

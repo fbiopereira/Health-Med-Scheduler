@@ -5,7 +5,7 @@ using Serilog.Events;
 using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
 
-namespace AloDoutor.Api.Configuration
+namespace Identidade.API.Configuration
 {
     public static class SerilogConfig
     {
@@ -26,7 +26,7 @@ namespace AloDoutor.Api.Configuration
 
             ILoggerProvider serilogProvider = new SerilogLoggerProvider(logConfig);
 
-            services.AddSingleton<ILoggerProvider>(serilogProvider);
+            services.AddSingleton(serilogProvider);
             services.AddSingleton<ILoggerFactory, LoggerFactory>(serviceProvider =>
             {
                 var factory = new LoggerFactory();

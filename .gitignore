@@ -12,8 +12,6 @@
 **/logs
 **/logs/debug.log
 *.log
-appsettings.Development.json
-appsettings.json
 
 # Visual Studio Code
 .vscode/*

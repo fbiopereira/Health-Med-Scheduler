@@ -1,7 +1,7 @@
 ﻿using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
 
-namespace AloDoutor.Domain
+namespace AloDoutor.Domain.Command
 {
     public abstract class CommandHandler
     {

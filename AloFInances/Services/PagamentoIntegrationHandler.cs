@@ -1,0 +1,15 @@
+﻿using AloDoutor.Core.Messages;
+using MassTransit;
+
+namespace AloFInances.Services
+{
+    public class PagamentoRealizadoIntegrationHandler : IConsumer<AgendamentoRealizadoEvent>
+    {
+        public async Task Consume(ConsumeContext<AgendamentoRealizadoEvent> context)
+        {
+            await Task.CompletedTask;
+
+            return;
+        }
+    }
+}

@@ -1,4 +1,5 @@
-﻿using AloDoutor.Domain.Entity;
+﻿using AloDoutor.Domain.Command;
+using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
 

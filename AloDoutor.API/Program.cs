@@ -20,6 +20,8 @@ builder.Services.AddApiConfig(builder.Configuration);
 
 builder.Services.AddJwtConfiguration(builder.Configuration);
 
+builder.Services.AddMessageBusConfiguration(builder.Configuration);
+
 builder.Services.ResolveDependencies();
 
 var app = builder.Build();

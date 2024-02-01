@@ -1,7 +1,7 @@
 ﻿using AloDoutor.Core.Messages;
 using MassTransit;
 
-namespace AloFInances.Services
+namespace AloFinances.Api.Services
 {
     public class PagamentoRealizadoIntegrationHandler : IConsumer<AgendamentoRealizadoEvent>
     {

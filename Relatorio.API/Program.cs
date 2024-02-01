@@ -1,4 +1,4 @@
-using AloFinances.Api.Configuration;
+using Relatorio.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

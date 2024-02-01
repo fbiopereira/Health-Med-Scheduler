@@ -1,15 +1,17 @@
-﻿using AloDoutor.Core.Messages;
-using MassTransit;
+﻿using MassTransit;
 
-namespace AloDoutor.Api.Configuration
+namespace Relatorio.API.Configuration
 {
-    public static class MessageBusConfigcs
+    public static class MessageBusConfigRabbit
     {
-        public static void AddMessageBusConfiguration(this IServiceCollection services,
-                  IConfiguration configuration)
+      /*  public static void AddMessageBusConfigurationRabbit(this IServiceCollection services,
+           IConfiguration configuration)
         {
             services.AddMassTransit(x =>
             {
+                x.AddConsumer<PagamentoRealizadoIntegrationHandler>();
+                x.AddConsumer<PagamentoCanceladoIntegrationHandler>();
+
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, cfg) =>
                 {
@@ -21,11 +23,9 @@ namespace AloDoutor.Api.Configuration
                         h.Password(rabbitMQConfig["credentials:password"]);
                     });
 
-                
-
-                    cfg.ConfigureEndpoints(context, new KebabCaseEndpointNameFormatter("dev", false));
+                    cfg.ConfigureEndpoints(context);
                 });
             });
-        }
+        }*/
     }
 }

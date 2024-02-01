@@ -1,9 +1,9 @@
 ﻿using AloDoutor.Core.Messages;
 using MassTransit;
 
-namespace AloFinances.Api.Services
+namespace Relatorio.API.Services
 {
-    public class PagamentoCanceladoIntegrationHandler : IConsumer<AgendamentoCanceladoEvent>
+    public class AgendamentoIntegratorHanlder : IConsumer<AgendamentoCanceladoEvent>
     {
         public async Task Consume(ConsumeContext<AgendamentoCanceladoEvent> context)
         {

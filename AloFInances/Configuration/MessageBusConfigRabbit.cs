@@ -1,17 +1,18 @@
-﻿using AloFInances.Services;
+﻿using AloFinances.Api.Services;
 using MassTransit;
 
-namespace AloFinances.Configuration
+namespace AloFinances.Api.Configuration
 {
-    public static class MessageBusConfig
+    public static class MessageBusConfigRabbit
     {
-        public static void AddMessageBusConfiguration(this IServiceCollection services,
+        public static void AddMessageBusConfigurationRabbit(this IServiceCollection services,
            IConfiguration configuration)
         {
             services.AddMassTransit(x =>
             {
                 x.AddConsumer<PagamentoRealizadoIntegrationHandler>();
                 x.AddConsumer<PagamentoCanceladoIntegrationHandler>();
+
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, cfg) =>
                 {

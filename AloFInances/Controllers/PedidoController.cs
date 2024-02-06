@@ -9,20 +9,27 @@ namespace AloFinances.Api.Controllers
     [Route("/pedido")]
     public class PedidoController : ControllerBase
     {
-        private readonly IBus _bus;
+        private readonly IBus _bus; 
+        private readonly ILogger _logger;
 
-        public PedidoController(IBus bus)
+        public PedidoController(IBus bus, ILogger<string> logger)
         {
             _bus = bus;
+            _logger = logger;
         }
 
         [HttpPost("publish")]
-        public async Task<IActionResult> Publish()
+        public IActionResult Publish()
         {
-            var nomeFila = "fila";
-            // var endPoint = await _bus.GetSendEndpoint(new Uri($"queue:{nomeFila}"));
-            //  await endPoint.Send(new AgendamentoCanceladoEvent(Guid.NewGuid()));
-            await _bus.Publish(new AgendamentoCanceladoEvent(Guid.NewGuid()));          
+            Task.Run(async () =>
+            {
+                for (int i = 0; i < 100000; i++) // Envie 100.000 mensagens para estressar a fila
+                {
+                    Guid id = Guid.NewGuid();
+                    await _bus.Publish(new RelatorioEvent(id));
+                    _logger.LogInformation($"{i} Mensagem publicada: {id}");
+                }
+            });
 
             return Ok();
         }               

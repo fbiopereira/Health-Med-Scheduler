@@ -1,16 +1,16 @@
 ﻿using MassTransit;
+using Relatorio.API.Services;
 
 namespace Relatorio.API.Configuration
 {
     public static class MessageBusConfigRabbit
     {
-      /*  public static void AddMessageBusConfigurationRabbit(this IServiceCollection services,
+        public static void AddMessageBusConfigurationRabbit(this IServiceCollection services,
            IConfiguration configuration)
         {
             services.AddMassTransit(x =>
             {
-                x.AddConsumer<PagamentoRealizadoIntegrationHandler>();
-                x.AddConsumer<PagamentoCanceladoIntegrationHandler>();
+                x.AddConsumer<RelatorioIntegratorHandler>();
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, cfg) =>
@@ -26,6 +26,6 @@ namespace Relatorio.API.Configuration
                     cfg.ConfigureEndpoints(context);
                 });
             });
-        }*/
+        }
     }
 }

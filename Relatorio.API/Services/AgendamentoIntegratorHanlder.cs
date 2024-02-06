@@ -3,9 +3,9 @@ using MassTransit;
 
 namespace Relatorio.API.Services
 {
-    public class AgendamentoIntegratorHanlder : IConsumer<AgendamentoCanceladoEvent>
+    public class RelatorioIntegratorHandler : IConsumer<RelatorioEvent>
     {
-        public async Task Consume(ConsumeContext<AgendamentoCanceladoEvent> context)
+        public async Task Consume(ConsumeContext<RelatorioEvent> context)
         {
             await Task.CompletedTask;
 

@@ -8,5 +8,11 @@ namespace AloDoutor.Core.Messages
 {
     public class RelatorioEvent
     {
+        public RelatorioEvent(Guid id)
+        {
+            Id = id;
+        }
+
+        public Guid Id { get; private set; }
     }
 }

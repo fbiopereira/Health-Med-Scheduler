@@ -17,13 +17,8 @@ namespace Relatorio.API.Configuration
                     cfg.Host(azureMQConfig["host"]);
                     cfg.SubscriptionEndpoint("sub-1", azureMQConfig["topico"] ?? string.Empty, c =>
                     {
-                        c.Consumer<AgendamentoIntegratorHanlder>();
-                    });
-
-                   /* cfg.ReceiveEndpoint("fila", e =>
-                    {
-                        e.Consumer<AgendamentoIntegratorHanlder>();
-                    });*/
+                        c.Consumer<RelatorioIntegratorHandler>();
+                    });                  
                 });
             });
         }

@@ -9,8 +9,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddMessageBusConfigurationRabbit(builder.Configuration);
-builder.Services.AddMessageBusConfigurationAzure(builder.Configuration);
+builder.Services.AddMessageBusConfigurationRabbit(builder.Configuration);
+//builder.Services.AddMessageBusConfigurationAzure(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,4 +1,5 @@
-﻿using AloFinances.Api.Services;
+﻿using AloDoutor.Core.Messages;
+using AloFinances.Api.Services;
 using MassTransit;
 
 namespace AloFinances.Api.Configuration
@@ -24,8 +25,8 @@ namespace AloFinances.Api.Configuration
                         h.Password(rabbitMQConfig["credentials:password"]);
                     });
 
-                    cfg.ConfigureEndpoints(context);
-                });
+                    cfg.ConfigureEndpoints(context);                 
+                });                
             });
         }
     }

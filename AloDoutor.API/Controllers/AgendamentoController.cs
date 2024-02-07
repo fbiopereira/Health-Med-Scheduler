@@ -11,7 +11,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace AloDoutor.Api.Controllers
 {
-  //  [Authorize]
+    [Authorize]
     [Route("api")]
     public class AgendamentoController : MainController<AgendamentoController>
     {

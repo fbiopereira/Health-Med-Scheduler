@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AloDoutor.Domain.Entity
+namespace AloDoutor.Core.DomainObjects
 {
     public abstract class Entidade
     {

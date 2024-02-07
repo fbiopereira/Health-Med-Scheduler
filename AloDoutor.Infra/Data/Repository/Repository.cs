@@ -1,4 +1,5 @@
-﻿using AloDoutor.Domain.Entity;
+﻿using AloDoutor.Core.DomainObjects;
+using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using AloDoutor.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;

@@ -1,4 +1,4 @@
-﻿using AloDoutor.Domain.Interfaces;
+﻿using AloDoutor.Core.DomainObjects;
 using FluentValidation.Results;
 
 namespace AloDoutor.Domain.Command

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AloDoutor.Core.Messages
+namespace AloDoutor.Core.Messages.Integration
 {
     public class RelatorioEvent
     {

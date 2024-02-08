@@ -1,5 +1,5 @@
 ﻿using MassTransit;
-using AloDoutor.Core.Messages;
+using AloDoutor.Core.Messages.Integration;
 
 namespace AloFinances.Api.Services
 {

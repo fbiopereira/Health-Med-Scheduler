@@ -1,4 +1,5 @@
-﻿using AloDoutor.Domain.Command;
+﻿using AloDoutor.Core.Messages;
+using AloDoutor.Core.Messages.Integration;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
@@ -8,10 +9,12 @@ namespace AloDoutor.Domain.Services
     public class PacienteService : CommandHandler, IPacienteService
     {
         private readonly IPacienteRepository _pacienteRepository;
+        private readonly MassTransit.IBus _bus;
 
-        public PacienteService(IPacienteRepository pacienteRepository)
+        public PacienteService(IPacienteRepository pacienteRepository, MassTransit.IBus bus)
         {
             _pacienteRepository = pacienteRepository;
+            _bus = bus;
         }
 
         public async Task<ValidationResult> Adicionar(Paciente paciente)
@@ -25,7 +28,9 @@ namespace AloDoutor.Domain.Services
             
             await _pacienteRepository.Adicionar(paciente);
 
-            return await PersistirDados(_pacienteRepository.UnitOfWork);
+            var sucesso = await PersistirDados(_pacienteRepository.UnitOfWork);
+            if (sucesso.IsValid) await _bus.Publish(new PacienteEvent(paciente.Nome, paciente.Cpf, paciente.Cep, paciente.Endereco, paciente.Estado, paciente.Telefone));
+            return sucesso;
         }
 
         public async Task<ValidationResult> Atualizar(Paciente paciente)

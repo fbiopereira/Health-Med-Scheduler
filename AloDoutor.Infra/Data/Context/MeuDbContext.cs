@@ -1,5 +1,5 @@
-﻿using AloDoutor.Domain.Entity;
-using AloDoutor.Domain.Interfaces;
+﻿using AloDoutor.Core.Data;
+using AloDoutor.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

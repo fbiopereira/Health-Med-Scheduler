@@ -7,5 +7,7 @@
         public IEnumerable<EspecialidadeMedico>? EspecialidadesMedicos { get; private set; }
 
         public Medico() { }
+
+
     }
 }

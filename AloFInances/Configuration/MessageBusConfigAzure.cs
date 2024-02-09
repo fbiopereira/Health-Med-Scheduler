@@ -1,4 +1,4 @@
-﻿using AloDoutor.Core.Messages;
+﻿using AloDoutor.Core.Messages.Integration;
 using AloFinances.Api.Services;
 using MassTransit;
 

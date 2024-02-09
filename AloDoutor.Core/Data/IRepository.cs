@@ -1,12 +1,7 @@
-﻿using AloDoutor.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AloDoutor.Core.DomainObjects;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace AloDoutor.Domain.Interfaces
+namespace AloDoutor.Core.Data
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entidade
     {

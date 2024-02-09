@@ -1,4 +1,6 @@
-﻿namespace AloDoutor.Domain.Entity
+﻿using AloDoutor.Core.DomainObjects;
+
+namespace AloDoutor.Domain.Entity
 {
     public class Especialidade: Entidade
     {   

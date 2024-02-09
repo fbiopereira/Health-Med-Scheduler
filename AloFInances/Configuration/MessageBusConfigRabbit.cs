@@ -13,6 +13,8 @@ namespace AloFinances.Api.Configuration
             {
                 x.AddConsumer<PagamentoRealizadoIntegrationHandler>();
                 x.AddConsumer<PagamentoCanceladoIntegrationHandler>();
+                x.AddConsumer<PacienteIntegrationHandler>();
+                x.AddConsumer<MedicoIntegrationHandler>();
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, cfg) =>

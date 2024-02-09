@@ -1,4 +1,5 @@
 ﻿using AloDoutor.Core.Messages;
+using AloDoutor.Core.Messages.Integration;
 using Azure.Core.Extensions;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;

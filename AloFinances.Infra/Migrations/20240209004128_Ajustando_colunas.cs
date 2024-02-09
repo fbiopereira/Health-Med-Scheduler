@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace AloFinances.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class paciente_medico : Migration
+    public partial class Ajustando_colunas : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,7 +22,9 @@ namespace AloFinances.Infra.Migrations
                     cep = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
                     endereco = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
                     estado = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
-                    telefone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
+                    telefone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false),
+                    data_Criacao = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -39,7 +41,9 @@ namespace AloFinances.Infra.Migrations
                     cep = table.Column<string>(type: "varchar(8)", maxLength: 8, nullable: false),
                     endereco = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false),
                     estado = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false),
-                    telefone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false)
+                    telefone = table.Column<string>(type: "varchar(11)", maxLength: 11, nullable: false),
+                    data_Criacao = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ativo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {

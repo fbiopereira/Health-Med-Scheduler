@@ -1,4 +1,5 @@
-﻿using AloDoutor.Domain.Entity;
+﻿using AloDoutor.Core.Data;
+using AloDoutor.Domain.Entity;
 
 namespace AloDoutor.Domain.Interfaces
 {

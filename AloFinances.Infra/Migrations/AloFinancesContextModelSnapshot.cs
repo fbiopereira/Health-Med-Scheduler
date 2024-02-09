@@ -28,6 +28,10 @@ namespace AloFinances.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("ativo");
+
                     b.Property<string>("Cep")
                         .IsRequired()
                         .HasMaxLength(8)
@@ -45,6 +49,10 @@ namespace AloFinances.Infra.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("varchar")
                         .HasColumnName("crm");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime")
+                        .HasColumnName("data_Criacao");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -81,6 +89,10 @@ namespace AloFinances.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("ativo");
+
                     b.Property<string>("Cep")
                         .IsRequired()
                         .HasMaxLength(8)
@@ -92,6 +104,10 @@ namespace AloFinances.Infra.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar")
                         .HasColumnName("cpf");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime")
+                        .HasColumnName("data_Criacao");
 
                     b.Property<string>("Endereco")
                         .IsRequired()

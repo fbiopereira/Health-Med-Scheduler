@@ -1,4 +1,4 @@
-﻿using AloDoutor.Core.DomainObjects;
+﻿using AloDoutor.Core.Data;
 using AloDoutor.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;

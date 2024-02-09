@@ -1,4 +1,6 @@
 ﻿using AloDoutor.Core.Messages;
+using AloFinances.Domain.Entity;
+using AloFinances.Domain.Interfaces;
 using FluentValidation.Results;
 using MassTransit.Mediator;
 using MediatR;
@@ -6,23 +8,26 @@ using MediatR;
 namespace AloFinances.Api.Application.Commands
 {
     public class FinancasCommandHanlder : CommandHandler,
-        IRequestHandler<PacienteComand, bool>
+        IRequestHandler<PacienteComand, ValidationResult>
     {
 
         private readonly ILogger _logger;
-
-        public FinancasCommandHanlder(ILogger<FinancasCommandHanlder> logger)
+        private readonly IPacienteRepository _pacienteRepository;
+        public FinancasCommandHanlder(ILogger<FinancasCommandHanlder> logger, IPacienteRepository pacienteRepository)
         {
             _logger = logger;
+            _pacienteRepository = pacienteRepository;
         }
 
-        public async Task<bool> Handle(PacienteComand message, CancellationToken cancellationToken)
+        public async Task<ValidationResult> Handle(PacienteComand message, CancellationToken cancellationToken)
         {
-            if (ValidarComando(message)) return false;
+            if (!ValidarComando(message)) return ValidationResult;
 
-            Task.CompletedTask.Wait();
+            await _pacienteRepository.Adicionar(new Paciente(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone, message.DataCadastro, message.Ativo));
 
-            return true;
+            _logger.LogInformation("Data: {data}, Paciente Adicionado - CPF: {Cpf}, Nome: {Nome}", DateTime.Now, message.Cpf, message.Nome);
+
+            return await (PersistirDados(_pacienteRepository.UnitOfWork));
         }
 
         private bool ValidarComando(Command message)

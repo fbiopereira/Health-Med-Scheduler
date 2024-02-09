@@ -14,8 +14,9 @@ namespace AloFinances.Api.Application.Commands
         public string Endereco { get; private set; }
         public string Estado { get; private set; }
         public string Telefone { get; private set; }
+        public bool Ativo { get; private set; }
 
-        public PacienteComand(string nome, string cpf, string cep, string endereco, string estado, string telefone)
+        public PacienteComand(string nome, string cpf, string cep, string endereco, string estado, string telefone, bool ativo)
         {
             Nome = nome;
             DataCadastro = DateTime.Now;
@@ -24,6 +25,7 @@ namespace AloFinances.Api.Application.Commands
             Endereco = endereco;
             Estado = estado;
             Telefone = telefone;
+            Ativo = ativo;
         }
 
         public override bool EhValido()

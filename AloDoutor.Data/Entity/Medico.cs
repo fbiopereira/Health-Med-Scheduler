@@ -1,6 +1,4 @@
-﻿using AloDoutor.Core.DomainObjects;
-
-namespace AloDoutor.Domain.Entity
+﻿namespace AloDoutor.Domain.Entity
 {
     public class Medico : Pessoa
     {
@@ -9,5 +7,7 @@ namespace AloDoutor.Domain.Entity
         public IEnumerable<EspecialidadeMedico>? EspecialidadesMedicos { get; private set; }
 
         public Medico() { }
+
+
     }
 }

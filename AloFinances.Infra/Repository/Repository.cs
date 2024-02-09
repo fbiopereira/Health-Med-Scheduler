@@ -1,18 +1,22 @@
 ﻿using AloDoutor.Core.Data;
 using AloDoutor.Core.DomainObjects;
-using AloDoutor.Infra.Data.Context;
+using AloFinances.Infra.Context;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace AloDoutor.Infra.Data.Repository
+namespace AloFinances.Infra.Repository
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entidade, new()
     {
-
-        protected readonly MeuDbContext Db;
+        protected readonly AloFinancesContext Db;
         protected readonly DbSet<TEntity> DbSet;
 
-        protected Repository(MeuDbContext db)
+        protected Repository(AloFinancesContext db)
         {
             Db = db;
             DbSet = db.Set<TEntity>();

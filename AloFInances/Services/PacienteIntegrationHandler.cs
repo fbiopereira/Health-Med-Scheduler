@@ -8,14 +8,16 @@ namespace AloFinances.Api.Services
     public class PacienteIntegrationHandler : IConsumer<PacienteEvent>
     {
         private readonly IServiceProvider _serviceProvider;
+        private readonly ILogger _logger;
 
-        public PacienteIntegrationHandler(IServiceProvider serviceProvider)
+        public PacienteIntegrationHandler(IServiceProvider serviceProvider, ILogger<PacienteIntegrationHandler> logger)
         {
             _serviceProvider = serviceProvider;
+            _logger = logger;
         }
 
         public async Task Consume(ConsumeContext<PacienteEvent> context)
-        {
+        {            
             await ProcessarConta(context.Message);
         }
 
@@ -23,9 +25,17 @@ namespace AloFinances.Api.Services
         {
             using (var scope = _serviceProvider.CreateScope())
             {
-                var commandHandler = scope.ServiceProvider.GetRequiredService<IMediator>();
-                var command = new PacienteComand(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone);
-                await commandHandler.Send(command);
+                try
+                {
+                    var commandHandler = scope.ServiceProvider.GetRequiredService<IMediator>();
+                    var command = new PacienteComand(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone, message.Ativo);
+                    await commandHandler.Send(command);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "PacienteIntegrationHandler: {Nome}, CPF: {CPF}", message.Nome, message.Cpf);
+
+                }
             }
         }
     }

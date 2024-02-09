@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AloFinances.Infra.Migrations
 {
     [DbContext(typeof(AloFinancesContext))]
-    [Migration("20240207014235_paciente_medico")]
-    partial class paciente_medico
+    [Migration("20240209004128_Ajustando_colunas")]
+    partial class Ajustando_colunas
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,6 +30,10 @@ namespace AloFinances.Infra.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("ativo");
 
                     b.Property<string>("Cep")
                         .IsRequired()
@@ -48,6 +52,10 @@ namespace AloFinances.Infra.Migrations
                         .HasMaxLength(25)
                         .HasColumnType("varchar")
                         .HasColumnName("crm");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime")
+                        .HasColumnName("data_Criacao");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -84,6 +92,10 @@ namespace AloFinances.Infra.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<bool>("Ativo")
+                        .HasColumnType("bit")
+                        .HasColumnName("ativo");
+
                     b.Property<string>("Cep")
                         .IsRequired()
                         .HasMaxLength(8)
@@ -95,6 +107,10 @@ namespace AloFinances.Infra.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar")
                         .HasColumnName("cpf");
+
+                    b.Property<DateTime>("DataCriacao")
+                        .HasColumnType("datetime")
+                        .HasColumnName("data_Criacao");
 
                     b.Property<string>("Endereco")
                         .IsRequired()

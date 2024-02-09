@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AloFinances.Infra.Mappings
 {
-    public class MedidoMappings : IEntityTypeConfiguration<Medico>
+    public class MedicoMappings : IEntityTypeConfiguration<Medico>
     {        
         public void Configure(EntityTypeBuilder<Medico> builder)
         {
@@ -55,7 +55,16 @@ namespace AloFinances.Infra.Mappings
             .IsRequired()
             .HasMaxLength(11)
             .HasColumnType("varchar")
-                .HasColumnName("telefone");               
+                .HasColumnName("telefone");
+
+            builder.Property(c => c.DataCriacao)
+            .IsRequired()
+            .HasColumnType("datetime")
+                .HasColumnName("data_Criacao");
+
+            builder.Property(c => c.Ativo)
+            .IsRequired()
+                .HasColumnName("ativo");
 
             builder.ToTable("medico");
         }

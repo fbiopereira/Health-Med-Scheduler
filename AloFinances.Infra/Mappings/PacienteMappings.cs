@@ -49,7 +49,16 @@ namespace AloFinances.Infra.Mappings
               .IsRequired()
               .HasMaxLength(150)
               .HasColumnType("varchar")
-               .HasColumnName("estado");  
+               .HasColumnName("estado");
+
+            builder.Property(c => c.DataCriacao)
+            .IsRequired()
+            .HasColumnType("datetime")
+            .HasColumnName("data_Criacao");
+
+            builder.Property(c => c.Ativo)
+            .IsRequired()
+            .HasColumnName("ativo");
 
             builder.ToTable("paciente");
         }

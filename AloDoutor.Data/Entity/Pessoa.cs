@@ -1,10 +1,11 @@
-﻿using System;
+﻿using AloDoutor.Core.DomainObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AloDoutor.Core.DomainObjects
+namespace AloDoutor.Domain.Entity
 {
     public abstract class Pessoa : Entidade
     {

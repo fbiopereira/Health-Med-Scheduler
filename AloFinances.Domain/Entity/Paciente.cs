@@ -8,6 +8,16 @@
         {
             
         }
+
+        public void AtualizarPaciente(Paciente paciente)
+        {            
+            AtualizarPessoa(paciente);
+        }
+
+        public void InativarPaciente(bool ativo)
+        {
+            InativarPessoa(ativo);
+        }
        
     }
 }

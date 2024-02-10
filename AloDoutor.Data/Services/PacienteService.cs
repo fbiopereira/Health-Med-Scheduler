@@ -58,7 +58,13 @@ namespace AloDoutor.Domain.Services
 
             await _pacienteRepository.Atualizar(paciente);
 
-            return await PersistirDados(_pacienteRepository.UnitOfWork);
+            var sucesso = await PersistirDados(_pacienteRepository.UnitOfWork);
+            if (sucesso.IsValid) 
+                await _bus.Publish(new PacienteEvent(paciente.Nome, paciente.Cpf, paciente.Cep, paciente.Endereco, paciente.Estado, paciente.Telefone, true));
+
+            _logger.LogInformation("Mensagem publicada: Atualizar Paciente {classe} Data: {data}, Paciente: {paciente}", this, DateTime.Now, paciente);
+
+            return sucesso;
         }
 
         public async Task<ValidationResult> Remover(Guid id)
@@ -68,9 +74,18 @@ namespace AloDoutor.Domain.Services
                 AdicionarErro("Paciente Não localizado!");
                 return ValidationResult;
             }
-            await _pacienteRepository.Remover(await _pacienteRepository.ObterPorId(id));
+            var paciente = await _pacienteRepository.ObterPorId(id);
 
-            return await PersistirDados(_pacienteRepository.UnitOfWork);
+            await _pacienteRepository.Remover(paciente);
+
+            var sucesso = await PersistirDados(_pacienteRepository.UnitOfWork);
+
+            if (sucesso.IsValid)
+                await _bus.Publish(new PacienteRemovidoEvent(paciente.Cpf));
+
+            _logger.LogInformation("Mensagem publicada: Remover Paciente {classe} Data: {data}, Paciente: {paciente}", this, DateTime.Now, paciente);
+
+            return sucesso;
         }
     }
 }

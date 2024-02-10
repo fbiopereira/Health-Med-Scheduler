@@ -5,35 +5,35 @@ using MediatR;
 
 namespace AloFinances.Api.Services
 {
-    public class PacienteIntegrationHandler : IConsumer<PacienteEvent>
+    public class PacienteRemoverIntegrationHandler : IConsumer<PacienteRemovidoEvent>
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger _logger;
 
-        public PacienteIntegrationHandler(IServiceProvider serviceProvider, ILogger<PacienteIntegrationHandler> logger)
+        public PacienteRemoverIntegrationHandler(IServiceProvider serviceProvider, ILogger<PacienteRemoverIntegrationHandler> logger)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<PacienteEvent> context)
-        {            
+        public async Task Consume(ConsumeContext<PacienteRemovidoEvent> context)
+        {
             await ProcessarPaciente(context.Message);
         }
 
-        private async Task ProcessarPaciente(PacienteEvent message)
+        private async Task ProcessarPaciente(PacienteRemovidoEvent message)
         {
             using (var scope = _serviceProvider.CreateScope())
             {
                 try
                 {
                     var commandHandler = scope.ServiceProvider.GetRequiredService<IMediator>();
-                    var command = new PacienteComand(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone, message.Ativo);
+                    var command = new PacienteRemovidoComand(message.CpfPaciente);
                     await commandHandler.Send(command);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "PacienteIntegrationHandler: {Nome}, CPF: {CPF}", message.Nome, message.Cpf);
+                    _logger.LogError(ex, "PacienteIntegrationHandler: {Nome}, CPF: {CPF}", message.CpfPaciente);
 
                 }
             }

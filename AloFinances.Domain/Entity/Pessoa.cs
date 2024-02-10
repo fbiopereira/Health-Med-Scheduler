@@ -32,5 +32,20 @@ namespace AloFinances.Domain.Entity
 
         public DateTime DataCriacao { get; private set; }
         public bool Ativo { get; private set; }
+
+        protected void AtualizarPessoa(Pessoa pessoa)
+        {
+            Nome = pessoa.Nome;
+            Cpf = pessoa.Cpf;
+            Cep = pessoa.Cep;
+            Endereco = pessoa.Endereco;
+            Estado = pessoa.Estado;
+            Telefone = pessoa.Telefone;
+        }
+
+        protected void InativarPessoa(bool ativo)
+        {
+            Ativo = false;
+        }
     }
 }

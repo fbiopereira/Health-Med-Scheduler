@@ -15,12 +15,13 @@ namespace AloFinances.Api.Configuration
                 x.AddConsumer<PagamentoCanceladoIntegrationHandler>();
                 x.AddConsumer<PacienteIntegrationHandler>();
                 x.AddConsumer<MedicoIntegrationHandler>();
+                x.AddConsumer<PacienteRemoverIntegrationHandler > ();
 
                 x.SetKebabCaseEndpointNameFormatter();
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     var rabbitMQConfig = configuration.GetSection("MessageQueueConnection:MassTransit");
-                    cfg.Host(new Uri(rabbitMQConfig["host"]), h =>
+                    cfg.Host(new Uri(rabbitMQConfig["host"] ?? ""), h =>
                     {
                         h.PublisherConfirmation = rabbitMQConfig.GetValue<bool>("publisherConfirms");
                         h.Username(rabbitMQConfig["credentials:username"]);

@@ -11,7 +11,8 @@ namespace AloFinances.Api.Configuration
     {
         public static void RegisterServices(this IServiceCollection services)
         {
-            services.AddScoped<IRequestHandler< PacienteComand, ValidationResult>, FinancasCommandHanlder>();
+            services.AddScoped<IRequestHandler< PacienteComand, ValidationResult>, FinancasCommandHandler>();
+            services.AddScoped<IRequestHandler<PacienteRemovidoComand, ValidationResult>, FinancasCommandHandler>();
 
             //Repository
             services.AddScoped<AloFinancesContext>();

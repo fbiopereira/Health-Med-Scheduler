@@ -30,12 +30,12 @@ namespace AloFinances.Api.Application.Commands
 
         public override bool EhValido()
         {
-            ValidationResult = new AdicionarPacineteValidation().Validate(this);
+            ValidationResult = new AdicionarPacienteValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }
 
-    public class AdicionarPacineteValidation : AbstractValidator<PacienteComand>
+    public class AdicionarPacienteValidation : AbstractValidator<PacienteComand>
     {
         public static string NomeErroMsg => "Nome do pedido inválido";
         public static string CpfErroMsg => "Cpf do pedido inválido";
@@ -44,7 +44,7 @@ namespace AloFinances.Api.Application.Commands
         public static string EstadoErroMsg => "Estado do pedido inválido";
         public static string TelefoneErroMsg => "Telefone do pedido inválido";
 
-        public AdicionarPacineteValidation() {
+        public AdicionarPacienteValidation() {
             RuleFor(c => c.Nome)
                 .NotEmpty()
                 .WithMessage(NomeErroMsg);

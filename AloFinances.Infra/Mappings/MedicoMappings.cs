@@ -2,10 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AloFinances.Infra.Mappings
 {
@@ -65,6 +61,14 @@ namespace AloFinances.Infra.Mappings
             builder.Property(c => c.Ativo)
             .IsRequired()
                 .HasColumnName("ativo");
+
+            builder.Property(c => c.Valor)
+               .HasColumnType("decimal(10, 2)")
+               .IsRequired();
+
+            builder.HasMany(c => c.Contas)
+                .WithOne(c => c.Medico)
+                .HasForeignKey(c => c.MedicoId);
 
             builder.ToTable("medico");
         }

@@ -60,6 +60,10 @@ namespace AloFinances.Infra.Mappings
             .IsRequired()
             .HasColumnName("ativo");
 
+            builder.HasMany(c => c.Contas)
+               .WithOne(c => c.Paciente)
+               .HasForeignKey(c => c.PacienteId);
+
             builder.ToTable("paciente");
         }
     }

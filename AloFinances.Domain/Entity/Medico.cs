@@ -3,6 +3,8 @@
     public class Medico: Pessoa
     {
         public string Crm { get; private set; }
+        public decimal Valor { get; private set; }
+        public IEnumerable<Contas>? Contas { get; private set; }
 
         public Medico() { }
 

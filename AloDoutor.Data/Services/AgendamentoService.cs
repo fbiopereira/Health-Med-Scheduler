@@ -11,15 +11,17 @@ namespace AloDoutor.Domain.Services
         private readonly IAgendamentoRepository _agendamentoRepository;
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
         private readonly IPacienteRepository _pacienteRepository;
+        private readonly IMedicoRepository _medicoRepository;
         private readonly MassTransit.IBus _bus;
 
         public AgendamentoService(IAgendamentoRepository agendamentoRepository,
-            IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, MassTransit.IBus bus)
+            IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, MassTransit.IBus bus, IMedicoRepository medicoRepository)
         {
             _agendamentoRepository = agendamentoRepository;
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
             _pacienteRepository = pacienteRepository;
             _bus = bus;
+            _medicoRepository = medicoRepository;
         }
 
         public async Task<ValidationResult> Adicionar(Agendamento agendamento)
@@ -32,7 +34,13 @@ namespace AloDoutor.Domain.Services
             await _agendamentoRepository.Adicionar(agendamento);
 
             var commit = await PersistirDados(_agendamentoRepository.UnitOfWork);
-            if (commit.IsValid) await _bus.Publish(new AgendamentoRealizadoEvent(agendamento.Id, agendamento.DataHoraAtendimento));
+            var paciente = await _pacienteRepository.ObterPorId(agendamento.PacienteId);
+            var medicoEspecialidade = await _especialidadeMedicoRepository.ObterPorId(agendamento.EspecialidadeMedicoId);
+            var medico = await _medicoRepository.ObterPorId(medicoEspecialidade.MedicoId);
+
+            if (commit.IsValid) 
+                await _bus.Publish(new AgendamentoRealizadoEvent(agendamento.Id, agendamento.DataHoraAtendimento, paciente.Cpf, medico.Crm));
+
             return commit;
         }
 

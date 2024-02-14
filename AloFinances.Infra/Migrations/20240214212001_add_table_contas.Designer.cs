@@ -4,6 +4,7 @@ using AloFinances.Infra.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AloFinances.Infra.Migrations
 {
     [DbContext(typeof(AloFinancesContext))]
-    partial class AloFinancesContextModelSnapshot : ModelSnapshot
+    [Migration("20240214212001_add_table_contas")]
+    partial class add_table_contas
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -119,8 +122,9 @@ namespace AloFinances.Infra.Migrations
                         .HasColumnType("varchar")
                         .HasColumnName("telefone");
 
-                    b.Property<decimal>("Valor")
-                        .HasColumnType("decimal(10, 2)");
+                    b.Property<string>("Valor")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

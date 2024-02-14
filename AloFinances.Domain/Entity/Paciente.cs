@@ -3,6 +3,9 @@
     public class Paciente: Pessoa
     {
         public Paciente() { }
+
+        public IEnumerable<Contas>? Contas { get; private set; }
+
         public Paciente(string nome, string cpf, string cep, string endereco, string estado, string telefone, DateTime dataCriacao, bool ativo)
            : base(nome, cpf, cep, endereco, estado, telefone, dataCriacao, ativo)
         {

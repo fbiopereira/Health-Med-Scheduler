@@ -8,11 +8,25 @@ namespace AloDoutor.Core.Messages.Integration
 {
     public class MedicoEvent
     {
-        public MedicoEvent(Guid IdMedico)
+        public MedicoEvent(string nome, string cpf, string cep, string endereco, string estado, string telefone, bool ativo, string crm)
         {
-            IdMedico = IdMedico;
+            Nome = nome;
+            Cpf = cpf;
+            Cep = cep;
+            Endereco = endereco;
+            Estado = estado;
+            Telefone = telefone;
+            Ativo = ativo;
+            Crm = crm;
         }
 
-        public Guid IdMedico { get; private set; }
+        public string Nome { get; private set; }
+        public string Cpf { get; private set; }
+        public string Cep { get; private set; }
+        public string Endereco { get; private set; }
+        public string Estado { get; private set; }
+        public string Telefone { get; private set; }
+        public bool Ativo { get; private set; }
+        public string Crm { get; private set; }
     }
 }

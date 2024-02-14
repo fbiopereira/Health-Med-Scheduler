@@ -1,39 +1,39 @@
-﻿using MassTransit;
-using AloDoutor.Core.Messages.Integration;
+﻿using AloDoutor.Core.Messages.Integration;
 using AloFinances.Api.Application.Commands;
+using MassTransit;
 using MediatR;
 
 namespace AloFinances.Api.Services
 {
-    public class MedicoIntegrationHandler : IConsumer<MedicoEvent>
+    public class MedicoRemoverIntegrationHandler : IConsumer<MedicoRemovidoEvent>
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ILogger _logger;
 
-        public MedicoIntegrationHandler(IServiceProvider serviceProvider, ILogger<MedicoIntegrationHandler> logger)
+        public MedicoRemoverIntegrationHandler(IServiceProvider serviceProvider, ILogger<MedicoRemoverIntegrationHandler> logger)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<MedicoEvent> context)
+        public async Task Consume(ConsumeContext<MedicoRemovidoEvent> context)
         {
             await ProcessarMedico(context.Message);
         }
 
-        private async Task ProcessarMedico(MedicoEvent message)
+        private async Task ProcessarMedico(MedicoRemovidoEvent message)
         {
             using (var scope = _serviceProvider.CreateScope())
             {
                 try
                 {
                     var commandHandler = scope.ServiceProvider.GetRequiredService<IMediator>();
-                    var command = new MedicoComand(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone, message.Ativo, message.Crm);
+                    var command = new MedicoRemovidoComand(message.CpfMedico, message.Crm);
                     await commandHandler.Send(command);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "MedicoIntegrationHandler: {Nome}, CPF: {CPF}, CRM: {crm}", message.Nome, message.Cpf, message.Crm);
+                    _logger.LogError(ex, "PacienteIntegrationHandler: {Nome}, CPF: {CPF}", message.CpfMedico);
 
                 }
             }

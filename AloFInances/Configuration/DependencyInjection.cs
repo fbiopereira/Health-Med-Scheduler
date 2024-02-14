@@ -13,10 +13,13 @@ namespace AloFinances.Api.Configuration
         {
             services.AddScoped<IRequestHandler< PacienteComand, ValidationResult>, FinancasCommandHandler>();
             services.AddScoped<IRequestHandler<PacienteRemovidoComand, ValidationResult>, FinancasCommandHandler>();
+            services.AddScoped<IRequestHandler<MedicoComand, ValidationResult>, FinancasCommandHandler>();
+            services.AddScoped<IRequestHandler<MedicoRemovidoComand, ValidationResult>, FinancasCommandHandler>();
 
             //Repository
             services.AddScoped<AloFinancesContext>();
             services.AddScoped<IPacienteRepository, PacienteRepository>();
+            services.AddScoped<IMedicoRepository, MedicoRepository>();
         }
 
 

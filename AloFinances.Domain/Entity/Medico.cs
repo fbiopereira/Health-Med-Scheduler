@@ -4,10 +4,23 @@
     {
         public string Crm { get; private set; }
 
-        public Medico(string nome, string cpf, string cep, string endereco, string estado, string telefone, DateTime dataCriacao, bool ativo)
+        public Medico() { }
+
+        public Medico(string nome, string cpf, string cep, string endereco, string estado, string telefone, DateTime dataCriacao, bool ativo, string crm)
             : base(nome, cpf, cep, endereco, estado, telefone, dataCriacao, ativo)
         {
-            // Outras inicializações específicas do Paciente, se necessário
+            Crm = crm;
+        }
+
+        public void AtualizarMedico(Medico medico)
+        {
+            AtualizarPessoa(medico);
+            Crm = medico.Crm;
+        }
+
+        public void InativarMedico(bool ativo)
+        {
+            InativarPessoa(ativo);
         }
     }
 }

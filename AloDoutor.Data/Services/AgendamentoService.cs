@@ -74,7 +74,17 @@ namespace AloDoutor.Domain.Services
                 return ValidationResult;
 
             await _agendamentoRepository.Atualizar(agendamento);
-            return await PersistirDados(_agendamentoRepository.UnitOfWork);
+
+            var commit = await PersistirDados(_agendamentoRepository.UnitOfWork);
+
+            var paciente = await _pacienteRepository.ObterPorId(agendamento.PacienteId);
+            var medicoEspecialidade = await _especialidadeMedicoRepository.ObterPorId(agendamento.EspecialidadeMedicoId);
+            var medico = await _medicoRepository.ObterPorId(medicoEspecialidade.MedicoId);
+
+            if (commit.IsValid)
+                await _bus.Publish(new AgendamentoRealizadoEvent(agendamento.Id, agendamento.DataHoraAtendimento, paciente.Cpf, medico.Crm));
+
+            return commit;
         }
 
         public async Task<ValidationResult> Cancelar(Guid id)

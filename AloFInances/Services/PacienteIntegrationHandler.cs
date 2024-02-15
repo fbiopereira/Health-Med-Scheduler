@@ -28,7 +28,7 @@ namespace AloFinances.Api.Services
                 try
                 {
                     var commandHandler = scope.ServiceProvider.GetRequiredService<IMediator>();
-                    var command = new PacienteComand(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone, message.Ativo);
+                    var command = new PacienteCommand(message.Nome, message.Cpf, message.Cep, message.Endereco, message.Estado, message.Telefone, message.Ativo);
                     await commandHandler.Send(command);
                 }
                 catch (Exception ex)

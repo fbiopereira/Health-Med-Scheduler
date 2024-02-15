@@ -24,6 +24,9 @@ namespace AloFinances.Infra.Mappings
             builder.Property(c => c.StatusConta)
                .IsRequired();
 
+            builder.Property(c => c.AgendamentoId)
+               .IsRequired();
+
             builder.Property(c => c.Codigo)
                 .HasDefaultValueSql("NEXT VALUE FOR MinhaSequencia");
 

@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace AloFinances.Api.Application.Commands
 {
-    public class MedicoComand : Command
+    public class PacienteCommand : Command
     {
        
         public string Nome { get; private set; }
@@ -15,9 +15,8 @@ namespace AloFinances.Api.Application.Commands
         public string Estado { get; private set; }
         public string Telefone { get; private set; }
         public bool Ativo { get; private set; }
-        public string Crm { get; private set; }
 
-        public MedicoComand(string nome, string cpf, string cep, string endereco, string estado, string telefone, bool ativo, string crm)
+        public PacienteCommand(string nome, string cpf, string cep, string endereco, string estado, string telefone, bool ativo)
         {
             Nome = nome;
             DataCadastro = DateTime.Now;
@@ -27,17 +26,16 @@ namespace AloFinances.Api.Application.Commands
             Estado = estado;
             Telefone = telefone;
             Ativo = ativo;
-            Crm = crm;
         }
 
         public override bool EhValido()
         {
-            ValidationResult = new AdicionarMedicoValidation().Validate(this);
+            ValidationResult = new AdicionarPacienteValidation().Validate(this);
             return ValidationResult.IsValid;
         }
     }
 
-    public class AdicionarMedicoValidation : AbstractValidator<MedicoComand>
+    public class AdicionarPacienteValidation : AbstractValidator<PacienteCommand>
     {
         public static string NomeErroMsg => "Nome do pedido inválido";
         public static string CpfErroMsg => "Cpf do pedido inválido";
@@ -45,9 +43,8 @@ namespace AloFinances.Api.Application.Commands
         public static string EnderecoErroMsg => "Endereco do pedido inválido";
         public static string EstadoErroMsg => "Estado do pedido inválido";
         public static string TelefoneErroMsg => "Telefone do pedido inválido";
-        public static string CrmErroMsg => "CRM do pedido inválido";
 
-        public AdicionarMedicoValidation() {
+        public AdicionarPacienteValidation() {
             RuleFor(c => c.Nome)
                 .NotEmpty()
                 .WithMessage(NomeErroMsg);
@@ -71,11 +68,7 @@ namespace AloFinances.Api.Application.Commands
             RuleFor(c => c.Telefone)
                .NotEmpty()
                .WithMessage(TelefoneErroMsg);
-
-            RuleFor(c => c.Crm)
-               .NotEmpty()
-               .WithMessage(CrmErroMsg);
-
+            
         }
     }
 }

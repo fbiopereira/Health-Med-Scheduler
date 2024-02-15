@@ -6,13 +6,11 @@ namespace AloFinances.Domain.Entity
     {
         public Contas() { }
 
-        public Contas(int codigo, Guid pacienteId, Guid medicoId, decimal valor, DateTime dataCadastro, DateTime dataVencimento, StatusConta statusConta, Guid agendamentoId)
+        public Contas(Guid pacienteId, Guid medicoId, DateTime dataVencimento, StatusConta statusConta, Guid agendamentoId)
         {
-            Codigo = codigo;
             PacienteId = pacienteId;
             MedicoId = medicoId;
-            Valor = valor;
-            DataCadastro = dataCadastro;
+            DataCadastro = DateTime.Now;
             DataVencimento = dataVencimento;
             StatusConta = statusConta;
             AgendamentoId = agendamentoId;
@@ -29,5 +27,22 @@ namespace AloFinances.Domain.Entity
 
         public Paciente Paciente { get; set; }
         public Medico Medico { get; set; }
+
+        public void AtualizarConta(Guid pacienteId, Guid medicoId, DateTime dataVencimento)
+        {
+            PacienteId = pacienteId;
+            MedicoId = medicoId;
+            DataVencimento = dataVencimento;
+        }
+
+        public void CalcularValor(decimal valorMedico, decimal valorDefault)
+        {
+            Valor = valorMedico != 0 ? valorMedico : valorDefault;
+        }
+
+        public void CancelarConta()
+        {
+            StatusConta = StatusConta.CANCELADA;
+        }
     }
 }

@@ -27,6 +27,7 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        working-directory: ./AloFinances
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -53,5 +54,5 @@ jobs:
         with:
           app-name: 'alo-identidade'
           slot-name: 'Production'
-          package: .
+          package: ${{ github.workspace }}/.net-app
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9CFC879B1409491EB61B6B15A2699C8C }}

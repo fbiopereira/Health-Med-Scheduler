@@ -54,5 +54,5 @@ jobs:
         with:
           app-name: 'alo-identidade'
           slot-name: 'Production'
-          package: ${{ github.workspace }}/.net-app
+          package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9CFC879B1409491EB61B6B15A2699C8C }}

@@ -34,6 +34,7 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+          working-directory: ./AloFinances
 
   deploy:
     runs-on: windows-latest

@@ -13,21 +13,49 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Setup .NET Core
+      - name: Set up .NET Core
         uses: actions/setup-dotnet@v1
         with:
-          dotnet-version: '7.x' # ou a versão que você está usando
+          dotnet-version: '3.1.x' # ou a versão que você está usando
 
-      - name: Build and publish APIs
+      - name: Build and publish AloDoutor.API
         run: |
-          dotnet publish ../AloDoutor.API/AloDoutor.API.csproj -c Release -o ./publish/AloDoutor
-          dotnet publish ./AloFInances/AloFinances.Api.csproj -c Release -o ./publish/AloFinances
-          dotnet publish ./Identidade.API/Identidade.API.csproj -c Release -o ./publish/Identidade
+          cd AloDoutor.API
+          dotnet publish -c Release -o ./publish
+        working-directory: ${{ github.workspace }}
 
-      - name: Deploy to Azure
+      - name: Build and publish AloFinances.API
+        run: |
+          cd AloFInances
+          dotnet publish -c Release -o ./publish
+        working-directory: ${{ github.workspace }}
+
+      - name: Build and publish Identidade.API
+        run: |
+          cd Identidade.API
+          dotnet publish -c Release -o ./publish
+        working-directory: ${{ github.workspace }}
+
+      - name: Deploy to Azure - AloDoutor.API
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'seu-app-no-azure'
+          app-name: 'alo-identidade-agendamento'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9CFC879B1409491EB61B6B15A2699C8C }}
-          package: './publish'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_91A1202092234BDB96207ECFEA48C9BA }}
+          package: './AloDoutor.API/publish'
+
+      - name: Deploy to Azure - AloFinances.API
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'alo-identidade-financeiro'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_2CA862D972BD4A5583D7F15492561B83 }}
+          package: './AloFInances/publish'
+
+      - name: Deploy to Azure - Identidade.API
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'alo-identidade'
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_BFE303BAB8F849F98D6FA773F025787D }}
+          package: './Identidade.API/publish'

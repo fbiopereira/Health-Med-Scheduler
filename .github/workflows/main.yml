@@ -20,7 +20,7 @@ jobs:
 
       - name: Build and publish APIs
         run: |
-          dotnet publish AloDoutor.API/AloDoutor.API.csproj -c Release -o ./publish/AloDoutor
+          dotnet publish ../AloDoutor.API/AloDoutor.API.csproj -c Release -o ./publish/AloDoutor
           dotnet publish ./AloFInances/AloFinances.Api.csproj -c Release -o ./publish/AloFinances
           dotnet publish ./Identidade.API/Identidade.API.csproj -c Release -o ./publish/Identidade
 

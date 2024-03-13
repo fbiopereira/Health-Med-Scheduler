@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api")]
     public class AgendamentoController : MainController<AgendamentoController>
     {

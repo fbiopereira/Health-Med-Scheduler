@@ -20,7 +20,6 @@ builder.Services.AddMediatR(config => config.RegisterServicesFromAssembly(Assemb
 builder.Services.AddLogging();
 
 builder.Services.AddMessageBusConfigurationRabbit(builder.Configuration);
-//builder.Services.AddMessageBusConfigurationAzure(builder.Configuration);
 
 var app = builder.Build();
 

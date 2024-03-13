@@ -4,10 +4,10 @@ namespace AloFinances.Api.Controllers
 {
     [ApiController]
     [Route("/financeiro")]
-    public class PedidoController : ControllerBase
+    public class FinanceiroController : ControllerBase
     {
 
-        public PedidoController()
+        public FinanceiroController()
         {
         }
 

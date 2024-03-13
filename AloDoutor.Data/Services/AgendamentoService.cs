@@ -3,6 +3,7 @@ using AloDoutor.Core.Messages.Integration;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
 
 namespace AloDoutor.Domain.Services
 {
@@ -13,6 +14,7 @@ namespace AloDoutor.Domain.Services
         private readonly IPacienteRepository _pacienteRepository;
         private readonly IMedicoRepository _medicoRepository;
         private readonly MassTransit.IBus _bus;
+        private readonly ILogger _logger;
 
         public AgendamentoService(IAgendamentoRepository agendamentoRepository,
             IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, MassTransit.IBus bus, IMedicoRepository medicoRepository)
@@ -196,6 +198,33 @@ namespace AloDoutor.Domain.Services
                 diasUteisCalculados++;
             }
             return diasUteisCalculados;
+        }
+
+        public async Task<Agendamento> ObterPorId(Guid id)
+        {
+            var retorno = await _agendamentoRepository.ObterPorId(id);
+
+            if (retorno != null)
+                _logger.LogInformation("Obtem agendamento por ID na Service.");
+
+            return retorno;
+        }
+
+        public async Task<List<Agendamento>> ObterTodos()
+        {
+            var retorno = await _agendamentoRepository.ObterTodos();
+            if (retorno != null)
+                _logger.LogInformation("Obtem agendamento por ID na Service.");
+            return retorno;
+        }
+        public async Task<IEnumerable<Agendamento>> ObterAgendamentosPorIStatus(int status)
+        {
+            var retorno = await _agendamentoRepository.ObterAgendamentosPorIStatus(status);
+
+            if (retorno != null)
+                _logger.LogInformation("Obtem agendamento por Status na Service.");
+
+            return retorno;
         }
     }
 }

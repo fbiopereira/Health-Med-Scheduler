@@ -38,7 +38,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<IActionResult> ObterTodos()
         {
             _logger.LogInformation("Endpoint de obtenção de todos agendamentos cadastrados.");
-            return CustomResponse(await _agendamentoRepository.ObterTodos());
+            return CustomResponse(await _agendamentoService.ObterTodos());
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterPorId(Guid id)
         {
             _logger.LogInformation("Endpoint de obtenção de agendamento por ID.");
-            return CustomResponse(await _agendamentoRepository.ObterPorId(id));
+            return CustomResponse(await _agendamentoService.ObterPorId(id));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterAgendamentoPorStatus(int status)
         {
             _logger.LogInformation("Endpoint de obtenção de agendamentos por status.");
-            return CustomResponse(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoRepository.ObterAgendamentosPorIStatus(status)));
+            return CustomResponse(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoService.ObterAgendamentosPorIStatus(status)));
         }
 
         /// <summary>

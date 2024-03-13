@@ -37,7 +37,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<IActionResult> ObterTodos()
         {
             _logger.LogInformation("Endpoint de obtenção de todas especialidades cadastradas.");
-            return CustomResponse(await _especialidadeService.ObterTodos());
+            return CustomResponse(_mapper.Map<IEnumerable<EspecialidadeViewModel>>(await _especialidadeService.ObterTodos()));
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterPorId(Guid id)
         {
             _logger.LogInformation("Endpoint de obtenção de especialidade por ID.");
-            return CustomResponse(await _especialidadeService.ObterPorId(id));
+            return CustomResponse(_mapper.Map<EspecialidadeViewModel>(await _especialidadeService.ObterPorId(id)));
         }
 
         /// <summary>

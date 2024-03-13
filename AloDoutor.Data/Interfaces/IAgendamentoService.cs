@@ -9,7 +9,7 @@ namespace AloDoutor.Domain.Interfaces
         Task<ValidationResult> Reagendar(Guid id, DateTime data);
         Task<ValidationResult> Cancelar(Guid id);
         Task<Agendamento> ObterPorId(Guid id);
-        Task<List<Agendamento>> ObterTodos();
+        Task<IEnumerable<Agendamento>> ObterTodos();
         Task<IEnumerable<Agendamento>> ObterAgendamentosPorIStatus(int status);
     }
 }

@@ -17,13 +17,14 @@ namespace AloDoutor.Domain.Services
         private readonly ILogger _logger;
 
         public AgendamentoService(IAgendamentoRepository agendamentoRepository,
-            IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, MassTransit.IBus bus, IMedicoRepository medicoRepository)
+            IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, MassTransit.IBus bus, IMedicoRepository medicoRepository, ILogger<AgendamentoService> logger)
         {
             _agendamentoRepository = agendamentoRepository;
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
             _pacienteRepository = pacienteRepository;
             _bus = bus;
             _medicoRepository = medicoRepository;
+            _logger = logger;
         }
 
         public async Task<ValidationResult> Adicionar(Agendamento agendamento)
@@ -202,7 +203,7 @@ namespace AloDoutor.Domain.Services
 
         public async Task<Agendamento> ObterPorId(Guid id)
         {
-            var retorno = await _agendamentoRepository.ObterPorId(id);
+            var retorno = await _agendamentoRepository.ObterAgendamentoPorId(id);
 
             if (retorno != null)
                 _logger.LogInformation("Obtem agendamento por ID na Service.");
@@ -210,9 +211,9 @@ namespace AloDoutor.Domain.Services
             return retorno;
         }
 
-        public async Task<List<Agendamento>> ObterTodos()
+        public async Task<IEnumerable<Agendamento>> ObterTodos()
         {
-            var retorno = await _agendamentoRepository.ObterTodos();
+            var retorno = await _agendamentoRepository.ObterTodosAgendamentos();
             if (retorno != null)
                 _logger.LogInformation("Obtem agendamento por ID na Service.");
             return retorno;

@@ -18,7 +18,8 @@ namespace AloDoutor.Api.Configuration
 
             //Leitura
             CreateMap<Medico, EspecialidadeMedicosViewModel>();
-            CreateMap<Especialidade, MedicoEspecialidadesViewModel>();
+            CreateMap<Especialidade, EspecialidadeViewModel>();
+            CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
 
             //Obter todas as especialidades de um médico
             CreateMap<Medico, MedicoViewModel>()

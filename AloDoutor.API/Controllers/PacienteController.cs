@@ -36,7 +36,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<IActionResult> ObterTodos()
         {
             _logger.LogInformation("Endpoint de obtenção de todos pacientes cadastrados.");
-            return CustomResponse(await _pacienteService.ObterTodos());
+            return CustomResponse(_mapper.Map<IEnumerable<PacienteViewModel>>(await _pacienteService.ObterTodos()));
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterPorId(Guid id)
         {
             _logger.LogInformation("Endpoint de obtenção de paciente por ID.");
-            return CustomResponse(await _pacienteService.ObterPorId(id));
+            return CustomResponse(_mapper.Map<PacienteViewModel>(await _pacienteService.ObterPorId(id)));
         }
 
         /// <summary>

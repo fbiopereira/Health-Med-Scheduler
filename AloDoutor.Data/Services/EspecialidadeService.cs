@@ -11,9 +11,10 @@ namespace AloDoutor.Domain.Services
         private readonly IEspecialidadeRepository _especialidadeRepository;
         private readonly ILogger _logger;
 
-        public EspecialidadeService(IEspecialidadeRepository especialidadeRepository)
+        public EspecialidadeService(IEspecialidadeRepository especialidadeRepository, ILogger<EspecialidadeService> logger)
         {
             _especialidadeRepository = especialidadeRepository;
+            _logger = logger;
         }
 
         public async Task<ValidationResult> Adicionar(Especialidade especialidade)

@@ -12,7 +12,7 @@ namespace AloDoutor.Api.Application.ViewModel
         public string Estado { get; private set; }
         public string Crm { get; private set; }
         public string Telefone { get; private set; }
-        public IEnumerable<MedicoEspecialidadesViewModel>? Especialidades { get; private set; }
+        public IEnumerable<EspecialidadeMedicosViewModel>? Especialidades { get; private set; }
         public IEnumerable<AgendamentoMedicoViewModel>? agendasMedico { get; private set; }
     }
 }

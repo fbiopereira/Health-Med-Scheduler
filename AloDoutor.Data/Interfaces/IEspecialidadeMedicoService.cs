@@ -8,5 +8,7 @@ namespace AloDoutor.Domain.Interfaces
         Task<ValidationResult> Adicionar(EspecialidadeMedico especialidade);
         Task<ValidationResult> Atualizar(EspecialidadeMedico especialidade);
         Task<ValidationResult> Remover(Guid id);
+        Task<EspecialidadeMedico> ObterPorId(Guid id);
+        Task<List<EspecialidadeMedico>> ObterTodos();
     }
 }

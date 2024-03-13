@@ -4,7 +4,6 @@
     {
         public string Id { get; private set; }
         public string NomePaciente { get; private set; }
-
         public string CpfPaciente { get; private set; }
         public string NomeMedico { get; private set; }
         public string CrmMedico { get; private set; }

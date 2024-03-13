@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace AloDoutor.Api.Application.DTO
 {
     public class EspecialidadeDTO
     {
         [Key]
+        [JsonIgnore]
         public Guid Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]

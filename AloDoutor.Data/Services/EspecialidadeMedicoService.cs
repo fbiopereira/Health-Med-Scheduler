@@ -2,6 +2,7 @@
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
+using Microsoft.Extensions.Logging;
 
 namespace AloDoutor.Domain.Services
 {
@@ -10,12 +11,14 @@ namespace AloDoutor.Domain.Services
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
         private readonly IEspecialidadeRepository _especialidadeRepository;
         private readonly IMedicoRepository _medicoRepository;
+        private readonly ILogger _logger;
 
-        public EspecialidadeMedicoService(IEspecialidadeMedicoRepository especialidadeMedicoRepository, IEspecialidadeRepository especialidadeRepository, IMedicoRepository medicoRepository)
+        public EspecialidadeMedicoService(IEspecialidadeMedicoRepository especialidadeMedicoRepository, IEspecialidadeRepository especialidadeRepository, IMedicoRepository medicoRepository, ILogger<EspecialidadeMedicoService> logger)
         {
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
             _especialidadeRepository = especialidadeRepository;
             _medicoRepository = medicoRepository;
+            _logger = logger;
         }
 
         public async Task<ValidationResult> Adicionar(EspecialidadeMedico especialidadeMedico)
@@ -85,6 +88,23 @@ namespace AloDoutor.Domain.Services
             return await PersistirDados(_especialidadeMedicoRepository.UnitOfWork);
         }
 
+        public async Task<EspecialidadeMedico> ObterPorId(Guid id)
+        {
+            var retorno = await _especialidadeMedicoRepository.ObterPorId(id);
+
+            if (retorno != null)
+                _logger.LogInformation("Obter EspecialidadeMedico por ID na Service.");
+
+            return retorno;
+        }
+
+        public async Task<List<EspecialidadeMedico>> ObterTodos()
+        {
+            _logger.LogInformation("Obtendo todas as especialidadesMedico na Service.");
+            var especialidadesMedico = await _especialidadeMedicoRepository.ObterTodos();
+            return especialidadesMedico;
+        }
+
         public async Task<ValidationResult> Remover(Guid id)
         {
             if (!_especialidadeMedicoRepository.Buscar(e => e.Id == id).Result.Any())
@@ -96,6 +116,8 @@ namespace AloDoutor.Domain.Services
 
             return await PersistirDados(_especialidadeMedicoRepository.UnitOfWork);
         }
+
+
     }
 }
 

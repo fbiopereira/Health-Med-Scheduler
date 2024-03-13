@@ -87,5 +87,27 @@ namespace AloDoutor.Domain.Services
 
             return sucesso;
         }
+        public async Task<IEnumerable<Paciente>> ObterTodos()
+        {
+            _logger.LogInformation("Obtendo todos os pacientes na Service.");
+            var pacientes = await _pacienteRepository.ObterTodos();
+            return pacientes;
+        }
+        public async Task<Paciente> ObterPorId(Guid id)
+        {
+            var retorno = await _pacienteRepository.ObterPorId(id);
+
+            if (retorno != null)
+                _logger.LogInformation("Obtendo todos o paciente por ID na Service.");
+
+            return retorno;
+        }
+        public async Task<Paciente> ObterAgendamentosPorIdPaciente(Guid idPaciente)
+        {
+            var retorno = await _pacienteRepository.ObterAgendamentosPorIdPaciente(idPaciente);
+            if (retorno != null)
+                _logger.LogInformation("Obtem agendamento por ID de paciente na Service.");
+            return retorno;
+        }
     }
 }

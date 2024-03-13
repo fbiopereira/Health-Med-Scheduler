@@ -34,7 +34,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<IActionResult> ObterTodos()
         {
             _logger.LogInformation("Endpoint de obtenção de todos médicos cadastrados.");
-            return CustomResponse(_mapper.Map<IEnumerable<MedicoViewModel>>(await _medicoRepository.ObterTodos()));
+            return CustomResponse(_mapper.Map<IEnumerable<MedicoViewModel>>(await _medicoService.ObterTodos()));
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterPorId(Guid id)
         {
             _logger.LogInformation("Endpoint de obtenção de médico por ID.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoRepository.ObterPorId(id)));
+            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterPorId(id)));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterMedicoEspecialidadePorIdMedico(Guid idMedico)
         {
             _logger.LogInformation("Endpoint para obtenção de especialidades do médico por ID do médico.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoRepository.ObterEspecialidadesPorIdMedico(idMedico)));
+            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterEspecialidadesPorIdMedico(idMedico)));
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> ObterAgendamentoPorMedico(Guid idMedico)
         {
             _logger.LogInformation("Endpoint para obtenção de agendamentos por médico.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoRepository.ObterAgendamentosPorIdMedico(idMedico)));
+            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterAgendamentosPorIdMedico(idMedico)));
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace AloDoutor.Api.Controllers
         [HttpPost]
         public async Task<ActionResult> Adicionar(MedicoDTO medicoDTO)
         {
-            //verificar o custom response para created
+
             _logger.LogInformation("Endpoint para cadastramento de medico.");
             var validation = await _medicoService.Adicionar(_mapper.Map<Medico>(medicoDTO));
            return validation.IsValid ?  Created("", medicoDTO) :  CustomResponse(validation);         

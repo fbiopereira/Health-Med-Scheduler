@@ -8,5 +8,8 @@ namespace AloDoutor.Domain.Interfaces
         Task<ValidationResult> Adicionar(Paciente paciente);
         Task<ValidationResult> Atualizar(Paciente paciente);
         Task<ValidationResult> Remover(Guid id);
+        Task<Paciente> ObterPorId(Guid id);
+        Task<IEnumerable<Paciente>> ObterTodos();
+        Task<Paciente> ObterAgendamentosPorIdPaciente(Guid idPaciente);
     }
 }

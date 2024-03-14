@@ -14,7 +14,7 @@ namespace Identidade.API.Configuration
         {
             var logConfig = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .Enrich.WithProperty("Application", "AloDouto")
+                .Enrich.WithProperty("Application", "AloDoutor")
                 .ReadFrom.Configuration(configuration)
                 .WriteTo.File(
                     new CompactJsonFormatter(),

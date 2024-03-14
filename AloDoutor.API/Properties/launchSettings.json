@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "AloDOutor": {
+    "AloDoutor": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",

@@ -32,11 +32,11 @@ namespace AloFinances.Api.Configuration
             {
                 app.UseDeveloperExceptionPage();
 
-                /* using (var scope = app.ApplicationServices.CreateScope())
-                 {
-                     var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
-                     dbContext.Database.Migrate();
-                 }*/
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<AloFinancesContext>();
+                    dbContext.Database.Migrate();
+                }
             }
 
 

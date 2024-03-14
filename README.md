@@ -66,31 +66,34 @@ Foi criada uma Web Api em .NET Core 7 para gerenciar a parte financeira da aplic
 ### Execução local
 
 1. Clone o repositório
-2.	No terminal execute o seguinte comando para rodar o RabbitMQ no Docker
+2. No terminal execute os seguintes comandos para baixar a imagem e executar o container do Banco SQL Server
+   - `docker pull mcr.microsoft.com/mssql/server`
+   - `docker run -v ~/docker --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=1q2w3e4r@#$" -p 1433:1433 -d mcr.microsoft.com/mssql/server`
+2. Na **appsettings.Development.json**  dos projetos `AloDoutor.Api`, `AloFinances.Api` e `Identidade.Api` e substitua o valor na chave DefaultConnection pela seguinte string de conexão.
+   1. Na AloDoutor.Api
+      - `Server=localhost,1433;Database=AloDoutor;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;`
+   2. Na Identidade.Api
+      - `Server=localhost,1433;Database=AloIdentidade;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;`
+   3. Na AloFinances.Api
+      - `Server=localhost,1433;Database=AloFinances;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;`
+
+      
+3. No terminal execute o seguinte comando para baixar a imagem e executar o container do RabbitMQ no Docker
     - `docker pull masstransit/rabbitmq` 
     - `docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq`
     - Usuário e senha padrão:
         - Usuário: **guest**
         - Senha: **guest**
 
-1. No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
+4. No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
 
-2. Atualização da base de dados (este passo não é obrigatório pois a aplicação foi configurada para executar as migrations automaticamente, mas caso queira executar manualmente siga os passos abaixo):
-    - Execute o comando `dotnet tool install --global dotnet-ef`
-    - Vá para a pasta `/AloDoutor.Api`
-    - Execute o comando `dotnet ef database update`
-    - Vá para a pasta `/Identidade.Api`
-    - Execute novamente o comando `dotnet ef database update`
-    - Vá para a pasta `/AloFinances.Api`
-    - Execute novamente o comando `dotnet ef database update`
-
-3. Executando os projetos:
+5. Executando os projetos:
     - Volte na pasta `/AloDoutor.Api` execute o comando `dotnet run` para executar o projeto
     - Abra um novo terminal na pasta `/Identidade.Api` execute o comando `dotnet run` para executar o projeto
     - Abra o navegador e acesse:
         -  `http://localhost:5002/swagger/index.html` para a API de autenticação e autorização
         -  `http://localhost:5001/swagger/index.html` para a API AloDoutor 
-        -  `http://localhost:7174/swagger/index.html` para a API de finanças
+        -  `http://localhost:5003/swagger/index.html` para a API de finanças
 
 [voltar](#índice)
 
@@ -139,6 +142,20 @@ Foi criada uma Web Api em .NET Core 7 para gerenciar a parte financeira da aplic
 ### Exemplo: Cadastro de Paciente
 
 Segue abaixo um exemplo da API AloDoutor produzindo uma mensagem e publicando, o RabbitMQ recebe e é consumida pela API AloFinances.
+
+Antes devemos nos autenticar utilizando a Identidade.Api com o [usuário e a senha](#autenticação-e-autorização) que foram apresentados acima.
+
+![Autenticacao1](./documentacao/imagens/Autenticacao1.png)
+
+Copie o token que é fornecido após a autenticação.
+
+![Autenticacao2](./documentacao/imagens/Autenticacao2.png)
+
+Acesse a AloDoutor.Api e clique no botão Authorize
+
+![Autenticacao3](./documentacao/imagens/Autenticacao3.png)
+
+Agora é possível cadastrar um novo paciente.
 
 Quando é realizado um cadastro de paciente na API AloDoutor, vide imagem abaixo.
 

@@ -1,123 +1,169 @@
 # Clínica Alô Doutor
 ## Índice
-- [Clínica Alo Doutor](#clínica-alô-doutor)
-    - [Sobre](#sobre) 
-    - [Integrantes](#integrantes)  
-    - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-    - [Solução](#solução)
-        - [Como Executar o Projeto](#como-executar-o-projeto)
-            -[Execução com Docker (recomendada)](#execução-com-docker-recomendada)
-            -[Execução local](#execução-local)
+- [Clínica Alô Doutor](#clínica-alô-doutor)
+  - [Índice](#índice)
+  - [Sobre](#sobre)
+  - [Integrantes](#integrantes)
+  - [Tecnologias Utilizadas](#tecnologias-utilizadas)
+  - [Solução](#solução)
+  - [Como Executar o Projeto](#como-executar-o-projeto)
+    - [Execução local](#execução-local)
+    - [Autenticação e autorização](#autenticação-e-autorização)
+    - [Como funciona a comunicação entre os microsserviços](#como-funciona-a-comunicação-entre-os-microsserviços)
+      - [Fluxograma Mensageria](#fluxograma-mensageria)
+      - [API AloDoutor](#api-alodoutor)
+      - [API AloFinances](#api-alofinances)
+    - [Exemplo: Cadastro de Paciente](#exemplo-cadastro-de-paciente)
   - [Levantamento de Requisitos](#levantamento-de-requisitos)
     - [Histórico da Clínica](#histórico-da-clínica)
     - [DDD](#ddd)
-        - [Domain Storytelling](#domain-storytelling)
-        - [Domínios e Contextos Delimitados Identificados](#domínios-e-contextos-delimitados-identificados)
-            - [Domínios](#domínios)
-            - [Contextos Delimitados](#contextos-delimitados)
+      - [Domain Storytelling](#domain-storytelling)
+      - [Domínios e Contextos Delimitados Identificados](#domínios-e-contextos-delimitados-identificados)
+        - [Domínios](#domínios)
+      - [Contextos Delimitados](#contextos-delimitados)
     - [Critérios de Aceite](#critérios-de-aceite)
     
 
 ## Sobre
-Este projeto faz parte do trabalho de conclusão da primeira fase da POSTECH FIAP de Arquitetura de Sistemas .Net com Azure.
+Este projeto faz parte do trabalho de conclusão da terceira fase da POSTECH FIAP de Arquitetura de Sistemas .Net com Azure.
 
 [voltar](#índice)
 
 ## Integrantes
 
-| Nome | RM | GitHub
------------- | ------------- | -------------
-Alex Jussiani Junior | 350671 | https://github.com/AlexJussiani
-Erick Setti dos Santos | 351206 | https://github.com/ESettiCalculist
-Fábio da Silva Pereira | 351053 | https://github.com/fbiopereira
-Marcel da Silva Fonseca | 348885 |
-Richard Kendy Tanaka| 351234 | https://github.com/RichardKT88
+| Nome                   | RM     | GitHub                             |
+| ---------------------- | ------ | ---------------------------------- |
+| Alex Jussiani Junior   | 350671 | https://github.com/AlexJussiani    |
+| Erick Setti dos Santos | 351206 | https://github.com/ESettiCalculist |
+| Fábio da Silva Pereira | 351053 | https://github.com/fbiopereira     |
+| Richard Kendy Tanaka   | 351234 | https://github.com/RichardKT88     |
 
 [voltar](#índice)
 
 ## Tecnologias Utilizadas
 
-| Tecnologias | Uso
------------- | -------------
-[C#](https://docs.microsoft.com/en-us/dotnet/csharp/) | Linguagem de Programação
-[.NET](https://dotnet.microsoft.com/) | Framework web
-[Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) | Biblioteca para persistência de Dados (ORM)
-[Serilog](https://serilog.net/) | Captura de Logs
-[Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/) | Editor de Código
-[Docker](https://www.docker.com/) | Criação de Containers
+| Tecnologias                                                        | Uso                                         |
+| ------------------------------------------------------------------ | ------------------------------------------- |
+| [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)              | Linguagem de Programação                    |
+| [.NET](https://dotnet.microsoft.com/)                              | Framework web                               |
+| [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) | Biblioteca para persistência de Dados (ORM) |
+| [Serilog](https://serilog.net/)                                    | Captura de Logs                             |
+| [Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/)    | Editor de Código                            |
+| [Docker](https://www.docker.com/)                                  | Criação de Containers                       |
+| [RabbiMQ](https://www.rabbitmq.com/)                               | Message Broker                              |
+| [Mass Transit](https://masstransit.io/)                            | Software de Barramento                      |
 
 [voltar](#índice)
 
 ## Solução
-Desenvolvimento de uma Web Api em .NET Core com uma abordagem em Code First Migrations, e o Entity Framework para a persistência dos dados em um banco de dados Sql Server.
+Foi criada uma Web Api em .NET Core 7 para gerenciar a parte financeira da aplicação de agendamento de consultas. Ela funciona da seguinte maneira. Qualquer ação no serviço AloDoutor em médicos, pacientes e agendamento é disparado uma mensagem para o RabbitMQ e o serviço financeiro fica escutando esse tipo de mensagem para conseguir gerenciar a parte de contas a receber.
+
 
 [voltar](#índice)
 
 ## Como Executar o Projeto
 
-Existem duas opções para executar o projeto, utilizando o Docker ou executando localmente.
-
-### Execução com Docker (recomendada)
-
-1- Se você estiver no Windows instale o [WSL](https://learn.microsoft.com/pt-br/windows/wsl/install)
-
-2- Instale o [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-
-3- Clone o repositório
-
-4- No terminal vá até a pasta `/AloDoutor` e execute o comando `docker-compose up -d` para executar os containers das aplicações e do SQL Server
-
-5- Digite `docker-compose restart identidade-api-alodoutor` para reiniciar o container da API de autenticação e autorização e criar um usuário padrão para testes
-
-6- Abra o navegador e acesse:
-    -  [http://localhost:9191/swagger](http://localhost:9191/swagger) para a API de autenticação e autorização
-    -  [http://localhost:9090/swagger](http://localhost:9090/swagger) para a API AloDoutor
-
-[voltar](#índice)
-
 ### Execução local
 
-1- Clone o repositório
+1. Clone o repositório
+2.	No terminal execute o seguinte comando para rodar o RabbitMQ no Docker
+a.	`docker pull masstransit/rabbitmq` 
+b.	`docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq`
+    2.1 Usuário e senha padrão:
+    i.	Usuário: **guest**
+    ii.	Senha: **guest**
 
-2- No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
+2. No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
 
-3- Atualização da base de dados (este passo não é obrigatório pois a aplicação foi configurada para executar as migrations automaticamente, mas caso queira executar manualmente siga os passos abaixo):
+3. Atualização da base de dados (este passo não é obrigatório pois a aplicação foi configurada para executar as migrations automaticamente, mas caso queira executar manualmente siga os passos abaixo):
     - Execute o comando `dotnet tool install --global dotnet-ef`
     - Vá para a pasta `/AloDoutor.Api`
     - Execute o comando `dotnet ef database update`
     - Vá para a pasta `/Identidade.Api`
     - Execute novamente o comando `dotnet ef database update`
+    - Vá para a pasta `/AloFinances.Api`
+    - Execute novamente o comando `dotnet ef database update`
 
-4- Executando os projetos:
+4. Executando os projetos:
     - Volte na pasta `/AloDoutor.Api` execute o comando `dotnet run` para executar o projeto
     - Abra um novo terminal na pasta `/Identidade.Api` execute o comando `dotnet run` para executar o projeto
     - Abra o navegador e acesse:
-        -  `http://localhost:5002/swagger` para a API de autenticação e autorização
-        -  `http://localhost:5001/swagger` para a API AloDoutor 
+        -  `http://localhost:5002/swagger/index.html` para a API de autenticação e autorização
+        -  `http://localhost:5001/swagger/index.html` para a API AloDoutor 
+        -  `http://localhost:7174/swagger/index.html` para a API de finanças
 
 [voltar](#índice)
 
 ### Autenticação e autorização
 
-- A aplicaçao cria um usuário padrão para testes com as seguintes credenciais:
-    - Email (login): postechdotnet@gmail.com
-    - Senha: Pos@123
-    - Perfil: Administrador
+- A aplicação cria um usuário padrão para testes com as seguintes credenciais:
+    - Email (login): **postechdotnet@gmail.com**
+    - Senha: **Pos@123**
+    - Perfil: **Administrador**
 
-- Com esse usuario é possível cadastrar novos usuários e realizar o login para acessar as funcionalidades do sistema.
+- Com esse usuário é possível cadastrar novos usuários e realizar o login para acessar as funcionalidades do sistema.
 - Usuários não administradores não tem acesso a funcionalidades de cadastro de usuários. Somente as funcionalidades da API AloDoutor
 - Como fazer a autenticção:
-    - A autenticação é na API de Autentcação e Autorização
-    - Caso o login seja feito com subesso onde um token JWT será gerado
+    - A autenticação é na API de Autenticação e Autorização
+    - Caso o login seja feito com sucesso onde um token JWT será gerado
     - Este token deve ser utilizado na API AloDoutor para autorização dos endpoints e o token gerado é utilizado para autorizar o acesso as funcionalidades do sistema.
 
 [voltar](#índice)
+
+### Como funciona a comunicação entre os microsserviços
+#### Fluxograma Mensageria
+
+![FLuxograma Mensageria](./documentacao/imagens/Fluxograma_Broker.png)
+
+#### API AloDoutor
+1) **Paciente**
+	a) Quando é realizado um cadastro ou Atualização de um paciente é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteEvent*
+	b) Quando algum paciente é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteRemovidoEvent*
+2) **Médico**
+	a) Quando é realizado um cadastro ou Atualização de um médico é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoEvent*
+	b) Quando algum médico é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoRemovidoEvent*	
+3) **Agendamento**
+	a) Quando é realizado um reagendamento ou cadastro de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoRealizadoEvent*
+	b) Quando é realizado um cancelamento de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoCanceladoEvent*.
+
+	
+#### API AloFinances
+É uma api desenvolvida para gerencias as contas a receber com base nos agendamentos realizados na API Alo Doutor. Ela fica escutando as mensagens na fila do RabbitMQ dos tipos que vou destacar em seguida
+- *MedicoEvent*: Esse tipo de mensagem recebida basicamente serve para cadastrar ou atualizar um médico.
+- *MedicoRemovidoEvent*: Esse tipo de mensagem recebida é utilizado para remover um médico.
+- *PacienteEvent*:  Esse tipo de mensagem recebida basicamente serve para cadastrar ou atualizar um Paciente.
+- *PacienteRemovidoEvent*: Esse tipo de mensagem recebida é utilizado para remover um Paciente.
+- *AgendamentoRealizadoEvent*: Esse tipo de mensagem recebida basicamente serve para cadastrar ou atualizar uma conta.
+- *AgendamentoCanceladoEvent*: Esse tipo de mensagem recebida é utilizado para cancelar uma conta.
+
+### Exemplo: Cadastro de Paciente
+
+Segue abaixo um exemplo da API AloDoutor produzindo uma mensagem e publicando, o RabbitMQ recebe e é consumida pela API AloFinances.
+
+Quando é realizado um cadastro de paciente na API AloDoutor, vide imagem abaixo.
+
+![Cadastro Endpoint](./documentacao/imagens/AloFinances_1.png)
+
+É realizado a persistência dos dados na api AloDoutor, e caso o cadastro tenha sido realizado com sucesso é disparado uma mensagem do tipo “PacienteEvent”, como mostra a imagem abaixo: 
+
+![Exemplo Visual Studio 1](./documentacao/imagens/AloFinances_2.png)
+
+Mensagem disparada na fila do RabbitMQ aguardando ser consumida:
+
+![Fila do RabbitMQ](./documentacao/imagens/AloFinances_3.png)
+
+Do outro lado temos outro sistema que fica “escutando” essa fila. Quando executamos o projeto “Alo Finances” ela vai consumir essa mensagem como mostra a imagem abaixo: 
+
+![Exemplo Visual Studio 2](./documentacao/imagens/AloFinances_4.png)
+
+E posteriormente realizado toda a validação para depois ser persistido na base AloFinances.
+Todo esse processo ocorre da mesma maneira para Médicos e Agendamentos, onde cada um obedece a sua regra de negócio.
 
 ## Levantamento de Requisitos
 
 ### Histórico da Clínica
 
-A clímica Alô Doutor provê um serviço gratuito de consultas médicas para a população utilizando o sistema de atendimento presencial. 
+A clínica Alô Doutor provê um serviço gratuito de consultas médicas para a população utilizando o sistema de atendimento presencial. 
 
 A  clínica foi fundada em 2010 e desde então vem atendendo a população de forma gratuita. A clínica conta com médicos voluntários que atendem a população de segunda a sexta das 8h às 18h. 
 

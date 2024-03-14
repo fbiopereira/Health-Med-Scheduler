@@ -117,14 +117,14 @@ Foi criada uma Web Api em .NET Core 7 para gerenciar a parte financeira da aplic
 
 #### API AloDoutor
 1) **Paciente**
-	a) Quando é realizado um cadastro ou Atualização de um paciente é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteEvent*
-	b) Quando algum paciente é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteRemovidoEvent*
+    1. Quando é realizado um cadastro ou Atualização de um paciente é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteEvent*
+	2. Quando algum paciente é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteRemovidoEvent*
 2) **Médico**
-	a) Quando é realizado um cadastro ou Atualização de um médico é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoEvent*
-	b) Quando algum médico é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoRemovidoEvent*	
+	1. Quando é realizado um cadastro ou Atualização de um médico é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoEvent*
+	2. Quando algum médico é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoRemovidoEvent*	
 3) **Agendamento**
-	a) Quando é realizado um reagendamento ou cadastro de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoRealizadoEvent*
-	b) Quando é realizado um cancelamento de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoCanceladoEvent*.
+	1. Quando é realizado um reagendamento ou cadastro de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoRealizadoEvent*
+	2. Quando é realizado um cancelamento de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoCanceladoEvent*.
 
 	
 #### API AloFinances

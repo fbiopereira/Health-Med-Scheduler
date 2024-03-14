@@ -67,15 +67,15 @@ Foi criada uma Web Api em .NET Core 7 para gerenciar a parte financeira da aplic
 
 1. Clone o repositório
 2.	No terminal execute o seguinte comando para rodar o RabbitMQ no Docker
-a.	`docker pull masstransit/rabbitmq` 
-b.	`docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq`
-    2.1 Usuário e senha padrão:
-    i.	Usuário: **guest**
-    ii.	Senha: **guest**
+    - `docker pull masstransit/rabbitmq` 
+    - `docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq`
+    - Usuário e senha padrão:
+        - Usuário: **guest**
+        - Senha: **guest**
 
-2. No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
+1. No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
 
-3. Atualização da base de dados (este passo não é obrigatório pois a aplicação foi configurada para executar as migrations automaticamente, mas caso queira executar manualmente siga os passos abaixo):
+2. Atualização da base de dados (este passo não é obrigatório pois a aplicação foi configurada para executar as migrations automaticamente, mas caso queira executar manualmente siga os passos abaixo):
     - Execute o comando `dotnet tool install --global dotnet-ef`
     - Vá para a pasta `/AloDoutor.Api`
     - Execute o comando `dotnet ef database update`
@@ -84,7 +84,7 @@ b.	`docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq`
     - Vá para a pasta `/AloFinances.Api`
     - Execute novamente o comando `dotnet ef database update`
 
-4. Executando os projetos:
+3. Executando os projetos:
     - Volte na pasta `/AloDoutor.Api` execute o comando `dotnet run` para executar o projeto
     - Abra um novo terminal na pasta `/Identidade.Api` execute o comando `dotnet run` para executar o projeto
     - Abra o navegador e acesse:

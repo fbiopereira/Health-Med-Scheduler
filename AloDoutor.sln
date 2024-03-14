@@ -10,9 +10,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloDoutor.Api", "AloDoutor.API\AloDoutor.Api.csproj", "{F4EFB54C-E1B3-447D-842F-5F3346B247E6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{F0FE3AAF-09C8-4B05-88A0-CBAB00D154D2}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AloDoutor", "AloDoutor", "{8973AB77-5123-4A89-ADCC-7EE25AAB3470}"
 EndProject
@@ -25,13 +22,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{6E58F1FF-E3C0-4C6F-A18E-7569EBB1162D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloDoutor.Core", "AloDoutor.Core\AloDoutor.Core.csproj", "{5AA053C1-6144-4C8D-B9D3-F81BD93BE52E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CE6D107-78AD-4E17-A2AB-EAF2DDA21064}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-		Dockerfile.AloDoutor = Dockerfile.AloDoutor
-		Dockerfile.Identidade = Dockerfile.Identidade
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AloFinances", "AloFinances", "{6763F131-5567-4142-B0ED-67D4DBAB7232}"
 EndProject

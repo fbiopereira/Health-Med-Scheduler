@@ -7,6 +7,7 @@
   - [Tecnologias Utilizadas](#tecnologias-utilizadas)
   - [Solução](#solução)
   - [Como Executar o Projeto](#como-executar-o-projeto)
+    - [Execução com Docker (recomendada)](#execução-com-docker-recomendada)
     - [Execução local](#execução-local)
     - [Autenticação e autorização](#autenticação-e-autorização)
     - [Como funciona a comunicação entre os microsserviços](#como-funciona-a-comunicação-entre-os-microsserviços)
@@ -62,6 +63,20 @@ Foi criada uma Web Api em .NET Core 7 para gerenciar a parte financeira da aplic
 [voltar](#índice)
 
 ## Como Executar o Projeto
+Existem duas opções para executar o projeto, utilizando o Docker ou executando localmente.
+
+### Execução com Docker (recomendada)
+
+1. Se você estiver no Windows instale o [WSL](https://learn.microsoft.com/pt-br/windows/wsl/install)
+2. Instale o [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+3. Clone o repositório
+4. No terminal vá até a pasta `/AloDoutor` e execute o comando `docker-compose up -d` para executar os containers das aplicações, SQL Server e do RabbitMQ
+5. Abra o navegador e acesse:
+    -  [http://localhost:9090/swagger](http://localhost:9090/swagger) para a API de autenticação e autorização
+    -  [http://localhost:9091/swagger](http://localhost:9091/swagger) para a API AloDoutor
+    -  [http://localhost:9092/swagger](http://localhost:9092/swagger) para a API AloFinances
+
+[voltar](#índice)
 
 ### Execução local
 

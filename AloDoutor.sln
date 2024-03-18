@@ -31,6 +31,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloFinances.Domain", "AloFi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloFinances.Infra", "AloFinances.Infra\AloFinances.Infra.csproj", "{E28C0D18-53D9-4085-A4D5-8825B53CBD59}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BEE3838-E163-43C5-9E85-252E62193DDB}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		Dockerfile.AloDoutor = Dockerfile.AloDoutor
+		Dockerfile.AloFinances = Dockerfile.AloFinances
+		Dockerfile.Identidade = Dockerfile.Identidade
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -6,6 +6,7 @@ namespace AloFinances.Api.Configuration
 {
     public static class MessageBusConfigRabbit
     {
+      
         public static void AddMessageBusConfigurationRabbit(this IServiceCollection services,
            IConfiguration configuration)
         {
@@ -21,14 +22,14 @@ namespace AloFinances.Api.Configuration
                 x.UsingRabbitMq((context, cfg) =>
                 {
                     var rabbitMQConfig = configuration.GetSection("MessageQueueConnection:MassTransit");
-                    cfg.Host(new Uri(rabbitMQConfig["host"] ?? ""), h =>
+                    cfg.Host(rabbitMQConfig["host"], rabbitMQConfig["virtualHost"], h =>
                     {
                         h.PublisherConfirmation = rabbitMQConfig.GetValue<bool>("publisherConfirms");
                         h.Username(rabbitMQConfig["credentials:username"]);
                         h.Password(rabbitMQConfig["credentials:password"]);
                     });
 
-                    cfg.ConfigureEndpoints(context);                 
+                    cfg.ConfigureEndpoints(context);
                 });                
             });
         }

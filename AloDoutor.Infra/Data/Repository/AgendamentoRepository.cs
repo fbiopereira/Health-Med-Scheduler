@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
-using AloDoutor.Infra.Data.Context;
+using AloDoutor.Infra.Data.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AloDoutor.Infra.Data.Repository
+namespace AloDoutor.Infra.Data.Data.Repository
 {
     public class AgendamentoRepository : Repository<Agendamento>, IAgendamentoRepository
     {
@@ -36,7 +36,7 @@ namespace AloDoutor.Infra.Data.Repository
                     .ThenInclude(e => e.Especialidade)
                    .ThenInclude(m => m.EspecialidadeMedicos)
                        .ThenInclude(p => p.Medico)
-                .Where(a =>  (a.StatusAgendamento == statusDesejado || status == 0)).ToListAsync();
+                .Where(a => a.StatusAgendamento == statusDesejado || status == 0).ToListAsync();
         }
 
         public async Task<IEnumerable<Agendamento>> ObterTodosAgendamentos()

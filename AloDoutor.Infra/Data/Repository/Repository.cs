@@ -1,10 +1,10 @@
 ﻿using AloDoutor.Core.Data;
 using AloDoutor.Core.DomainObjects;
-using AloDoutor.Infra.Data.Context;
+using AloDoutor.Infra.Data.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace AloDoutor.Infra.Data.Repository
+namespace AloDoutor.Infra.Data.Data.Repository
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entidade, new()
     {

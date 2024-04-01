@@ -1,7 +1,9 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using System.Reflection;
 
-namespace Identidade.API.Configuration
+namespace AloDoutor.Infra.Ioc
 {
     public static class SwaggerConfig
     {
@@ -11,13 +13,14 @@ namespace Identidade.API.Configuration
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "Identidade API",
-                    Description = "Esta API é para gerenciar as permissões de acesso ao sistema",
+                    Title = "AloDoutor API",
+                    Description = "Esta API é Controle de Agendamentos de Consulta",
                     Contact = new OpenApiContact() { Name = "Alo Doutor", Email = "postechdotnet@gmail.com " }
                 });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

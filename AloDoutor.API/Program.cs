@@ -1,6 +1,6 @@
 using AloDoutor.Api.Configuration;
 using AloDoutor.Core.Identidade;
-using Microsoft.Extensions.Configuration;
+using AloDoutor.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddSerilogConfiguration(builder.Configuration, builder.Environment);
 
@@ -22,7 +22,7 @@ builder.Services.AddJwtConfiguration(builder.Configuration);
 
 builder.Services.AddMessageBusConfiguration(builder.Configuration);
 
-builder.Services.ResolveDependencies();
+builder.Services.RegisterServices();
 
 var app = builder.Build();
 

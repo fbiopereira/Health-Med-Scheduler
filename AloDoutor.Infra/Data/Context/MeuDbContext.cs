@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AloDoutor.Infra.Data.Context
+namespace AloDoutor.Infra.Data.Data.Context
 {
     public class MeuDbContext : DbContext, IUnitOfWork
     {
         public MeuDbContext(DbContextOptions<MeuDbContext> options)
         : base(options)
-        {}
+        { }
 
         public DbSet<Especialidade> Especialidades { get; set; }
         public DbSet<Medico> Medicos { get; set; }

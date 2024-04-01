@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace AloDoutor.Infra.Data.Mappings
+namespace AloDoutor.Infra.Data.Data.Mappings
 {
     public class EspecialidadeMappings : IEntityTypeConfiguration<Especialidade>
     {

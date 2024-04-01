@@ -1,19 +1,15 @@
-﻿using AloDoutor.Core.Usuario;
-using AloDoutor.Domain.Interfaces;
+﻿using AloDoutor.Domain.Interfaces;
 using AloDoutor.Domain.Services;
-using AloDoutor.Infra.Data.Context;
-using AloDoutor.Infra.Data.Repository;
+using AloDoutor.Infra.Data.Data.Context;
+using AloDoutor.Infra.Data.Data.Repository;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace AloDoutor.Api.Configuration
+namespace AloDoutor.Infra.Ioc
 {
-    public static class DependencyInjectionConfig
+    public static class LocInicialize
     {
-        public static IServiceCollection ResolveDependencies(this IServiceCollection services)
+        public static void RegisterServices(this IServiceCollection services)
         {
-            //Autenticação
-            services.AddScoped<IAspNetUser, AspNetUser>();
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
             //Repository
             services.AddScoped<MeuDbContext>();
             services.AddScoped<IEspecialidadeMedicoRepository, EspecialidadeMedicoRepository>();
@@ -28,9 +24,6 @@ namespace AloDoutor.Api.Configuration
             services.AddScoped<IPacienteService, PacienteService>();
             services.AddScoped<IMedicoService, MedicoService>();
             services.AddScoped<IEspecialidadeMedicoService, EspecialidadeMedicoService>();
-
-
-            return services;
         }
     }
 }

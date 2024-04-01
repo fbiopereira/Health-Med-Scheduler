@@ -1,9 +1,9 @@
 ﻿using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
-using AloDoutor.Infra.Data.Context;
+using AloDoutor.Infra.Data.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
-namespace AloDoutor.Infra.Data.Repository
+namespace AloDoutor.Infra.Data.Data.Repository
 {
     public class EspecialidadeMedicoRepository : Repository<EspecialidadeMedico>, IEspecialidadeMedicoRepository
     {

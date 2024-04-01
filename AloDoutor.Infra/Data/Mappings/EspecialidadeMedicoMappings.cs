@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AloDoutor.Infra.Data.Mappings
+namespace AloDoutor.Infra.Data.Data.Mappings
 {
     public class EspecialidadeMedicoMappings : IEntityTypeConfiguration<EspecialidadeMedico>
     {

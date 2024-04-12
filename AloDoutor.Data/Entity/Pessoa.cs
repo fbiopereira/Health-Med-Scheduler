@@ -1,19 +1,16 @@
-﻿using AloDoutor.Core.DomainObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AloDoutor.Domain.Entity.Common;
 
 namespace AloDoutor.Domain.Entity
 {
     public abstract class Pessoa : Entidade
     {
         public string Nome { get; private set; }
-        public string Cpf { get; private set; }
+        public string Cpf { get; set; }
         public string Cep { get; private set; }
         public string Endereco { get; private set; }
         public string Estado { get; private set; }
         public string Telefone { get; private set; }
+
+        
     }
 }

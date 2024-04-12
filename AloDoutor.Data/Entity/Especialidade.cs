@@ -1,4 +1,4 @@
-﻿using AloDoutor.Core.DomainObjects;
+﻿using AloDoutor.Domain.Entity.Common;
 
 namespace AloDoutor.Domain.Entity
 {

@@ -12,4 +12,13 @@
     <PackageReference Include="MediatR" Version="12.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Features\Pacientes\Commands\" />
+    <Folder Include="Features\Pacientes\Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AloDoutor.Data\AloDoutor.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

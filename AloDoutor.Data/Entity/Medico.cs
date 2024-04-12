@@ -4,10 +4,11 @@
     {
         public string Crm { get; private set; }
 
-        public IEnumerable<EspecialidadeMedico>? EspecialidadesMedicos { get; private set; }
-
-        public Medico() { }
-
-
+        public IEnumerable<EspecialidadeMedico>? EspecialidadesMedicos { get; private set; }      
+        public Medico()
+        {
+            
+        }
+       
     }
 }

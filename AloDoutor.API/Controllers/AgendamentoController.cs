@@ -1,12 +1,6 @@
-﻿using AloDoutor.Api.Application.DTO;
-using AloDoutor.Api.Application.ViewModel;
-using AloDoutor.Core.Controllers;
-using AloDoutor.Core.Usuario;
+﻿/*using AloDoutor.Core.Controllers;
 using AloDoutor.Domain.Entity;
-using AloDoutor.Domain.Interfaces;
-using AloDoutor.Domain.Services;
 using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
@@ -20,7 +14,7 @@ namespace AloDoutor.Api.Controllers
         private readonly IMapper _mapper;
         private readonly ILogger _logger;
 
-        public AgendamentoController(IAgendamentoService agendamentoService, IMapper mapper, 
+        public AgendamentoController(IAgendamentoService agendamentoService, IMapper mapper,
             IAgendamentoRepository agendamentoRepository, ILogger<AgendamentoController> logger, IAspNetUser user) : base(logger)
         {
             _agendamentoService = agendamentoService;
@@ -38,8 +32,8 @@ namespace AloDoutor.Api.Controllers
         public async Task<IActionResult> ObterTodos()
         {
             _logger.LogInformation("Endpoint de obtenção de todos agendamentos cadastrados.");
-           
-             return CustomResponse(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoService.ObterTodos()));
+
+            return CustomResponse(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoService.ObterTodos()));
         }
 
         /// <summary>
@@ -75,7 +69,7 @@ namespace AloDoutor.Api.Controllers
         public async Task<ActionResult> Adicionar(AgendamentoDTO agendamentoDTO)
         {
             _logger.LogInformation("Endpoint para cadastramento de agendamento.");
-            var validation = await _agendamentoService.Adicionar(_mapper.Map<Agendamento>(agendamentoDTO));            
+            var validation = await _agendamentoService.Adicionar(_mapper.Map<Agendamento>(agendamentoDTO));
             return validation.IsValid ? Created("", agendamentoDTO) : CustomResponse(validation);
         }
 
@@ -105,3 +99,4 @@ namespace AloDoutor.Api.Controllers
         }
     }
 }
+*/

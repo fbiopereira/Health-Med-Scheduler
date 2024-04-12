@@ -1,9 +1,6 @@
 ﻿using Serilog;
-using Serilog.Core;
-using Serilog.Formatting.Compact;
-using Serilog.Events;
-using Microsoft.Extensions.Logging;
 using Serilog.Extensions.Logging;
+using Serilog.Formatting.Compact;
 
 namespace AloDoutor.Api.Configuration
 {

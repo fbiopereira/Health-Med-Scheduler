@@ -1,10 +1,10 @@
-﻿using AloDoutor.Core.Data;
-using AloDoutor.Core.DomainObjects;
+﻿using AloDoutor.Application.Interfaces;
+using AloDoutor.Domain.Entity.Common;
 using AloDoutor.Infra.Data.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace AloDoutor.Infra.Data.Data.Repository
+namespace AloDoutor.Infrastructure.Data.Repository
 {
     public abstract class Repository<TEntity> : IRepository<TEntity> where TEntity : Entidade, new()
     {
@@ -18,7 +18,7 @@ namespace AloDoutor.Infra.Data.Data.Repository
             DbSet = db.Set<TEntity>();
         }
 
-        public IUnitOfWork UnitOfWork => Db;
+        public IUnitOfWork UnitOfWork => (IUnitOfWork)Db;
 
         public async Task<IEnumerable<TEntity>> Buscar(Expression<Func<TEntity, bool>> predicate)
         {

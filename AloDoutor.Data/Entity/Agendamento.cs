@@ -1,9 +1,5 @@
-﻿using AloDoutor.Core.DomainObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AloDoutor.Domain.Entity.Common;
+using AloDoutor.Domain.Enums;
 
 namespace AloDoutor.Domain.Entity
 {

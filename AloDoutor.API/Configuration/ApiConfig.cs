@@ -1,4 +1,4 @@
-﻿using AloDoutor.Core.Identidade;
+﻿using AloDoutor.Api.Middlewares;
 using AloDoutor.Infra.Data.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +12,8 @@ namespace AloDoutor.Api.Configuration
                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+
+            services.AddHttpContextAccessor();
 
             services.AddCors(options =>
             {
@@ -35,16 +37,17 @@ namespace AloDoutor.Api.Configuration
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
-                   // dbContext.Database.Migrate();
+                     dbContext.Database.Migrate();
                 }
             }
 
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseAuthConfiguration();
+            //app.UseAuthConfiguration();
 
             app.UseCors("Total");
 

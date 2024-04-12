@@ -1,4 +1,4 @@
-﻿using AloDoutor.Api.Application.DTO;
+﻿/*using AloDoutor.Api.Application.DTO;
 using AloDoutor.Api.Application.ViewModel;
 using AloDoutor.Core.Controllers;
 using AloDoutor.Domain.Entity;
@@ -97,3 +97,4 @@ namespace AloDoutor.Api.Controllers
         }
     }
 }
+*/

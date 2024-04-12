@@ -15,10 +15,4 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.17" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\AloDoutor.Application\AloDoutor.Application.csproj" />
-    <ProjectReference Include="..\AloDoutor.Data\AloDoutor.Domain.csproj" />
-    <ProjectReference Include="..\AloDoutor.Infra\AloDoutor.Infra.Data.csproj" />
-  </ItemGroup>
-
 </Project>

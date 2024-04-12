@@ -11,6 +11,12 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Extentions\**" />
+	  <Content Remove="Extentions\**" />
+	  <EmbeddedResource Remove="Extentions\**" />
+	  <None Remove="Extentions\**" />
+	</ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.17" />
@@ -24,6 +30,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog" Version="3.0.1" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
@@ -37,13 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AloDoutor.Core\AloDoutor.Core.csproj" />
-    <ProjectReference Include="..\AloDoutor.Infra.Ioc\AloDoutor.Infra.Ioc.csproj" />
-    <ProjectReference Include="..\AloDoutor.Infra\AloDoutor.Infra.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extentions\" />
+    <ProjectReference Include="..\AloDoutor.Application\AloDoutor.Application.csproj" />
+    <ProjectReference Include="..\AloDoutor.Infra\AloDoutor.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

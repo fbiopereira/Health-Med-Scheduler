@@ -11,7 +11,7 @@ namespace AloDoutor.Application.DTO
 
         [Required(ErrorMessage = "O campo {0} é obrigatório")]
         [StringLength(100, ErrorMessage = "O campo {0} precisa ter mais que {2} caracteres", MinimumLength = 2)]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
         public string? Descricao { get; set; }
     }
 }

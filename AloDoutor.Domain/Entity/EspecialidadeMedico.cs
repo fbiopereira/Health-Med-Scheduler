@@ -9,10 +9,10 @@ namespace AloDoutor.Domain.Entity
         public DateTime DataRegistro { get; private set; }
 
         /* EF Relations */
-        public Medico Medico { get; private set; }
+        public Medico? Medico { get; private set; }
 
         /* EF Relations */
-        public Especialidade Especialidade { get; private set; }
+        public Especialidade? Especialidade { get; private set; }
 
         /* EF Relations */
         public IEnumerable<Agendamento>? Agendamentos { get; private set; }

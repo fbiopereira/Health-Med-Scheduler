@@ -19,8 +19,8 @@ namespace AloDoutor.Application.MappingProfiles
 
             //Obter todas as especialidades de um médico
             CreateMap<Medico, MedicoViewModel>()
-                .ForMember(dest => dest.Especialidades, opt => opt.MapFrom(src => src.EspecialidadesMedicos.Select(e => e.Especialidade)))
-                .ForMember(dest => dest.agendasMedico, opt => opt.MapFrom(src => src.EspecialidadesMedicos.SelectMany(a => a.Agendamentos ?? Enumerable.Empty<Agendamento>())));
+                .ForMember(dest => dest.Especialidades, opt => opt.MapFrom(src => src.EspecialidadesMedicos!.Select(e => e.Especialidade)))
+                .ForMember(dest => dest.agendasMedico, opt => opt.MapFrom(src => src.EspecialidadesMedicos!.SelectMany(a => a.Agendamentos ?? Enumerable.Empty<Agendamento>())));
 
         }
     }

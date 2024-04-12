@@ -14,10 +14,10 @@ namespace AloDoutor.Domain.Entity
         public StatusAgendamento StatusAgendamento { get; private set; }
 
         /* EF Relations */
-        public EspecialidadeMedico EspecialidadeMedico { get; private set; }
+        public EspecialidadeMedico? EspecialidadeMedico { get; private set; }
 
         /* EF Relations */
-        public Paciente Paciente { get; private set; }
+        public Paciente? Paciente { get; private set; }
 
         public Agendamento() { }
 

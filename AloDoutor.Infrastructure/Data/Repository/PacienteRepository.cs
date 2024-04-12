@@ -30,7 +30,7 @@ namespace AloDoutor.Infrastructure.Data.Repository
 
         public async Task<bool> VerificarAgendaLivrePaciente(Guid idPaciente, DateTime dataAtendimento)
         {
-            var agenda = await DbSet.FirstOrDefaultAsync(e => e.Id == idPaciente && e.Agendamentos.Any(a => a.DataHoraAtendimento.Equals(dataAtendimento) && a.StatusAgendamento == StatusAgendamento.Ativo));
+            var agenda = await DbSet.FirstOrDefaultAsync(e => e.Id == idPaciente && e.Agendamentos!.Any(a => a.DataHoraAtendimento.Equals(dataAtendimento) && a.StatusAgendamento == StatusAgendamento.Ativo));
 
             return agenda == null;
         }

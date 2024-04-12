@@ -4,7 +4,7 @@ namespace AloDoutor.Domain.Entity
 {
     public class Especialidade: Entidade
     {   
-        public string Nome { get; private set; }
+        public string? Nome { get; private set; }
         public string? Descricao { get; private set; }
 
         /* EF Relations */

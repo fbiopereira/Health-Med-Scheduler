@@ -5,6 +5,57 @@ namespace AloDoutor.Api
 {
     public static class ApiServiceRegistration
     {
+        public static IServiceCollection AddApiConfig(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<MeuDbContext>(options =>
+               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddControllers();
+
+            services.AddHttpContextAccessor();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("Total",
+                    builder =>
+                        builder
+                            .AllowAnyOrigin()
+                            .AllowAnyMethod()
+                            .AllowAnyHeader());
+            });
+
+            return services;
+        }
+
+        public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment() || env.IsStaging())
+            {
+                app.UseDeveloperExceptionPage();
+
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
+                     dbContext.Database.Migrate();
+                }
+            }
+
+            app.UseMiddleware<ExceptionMiddleware>();
+
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            //app.UseAuthConfiguration();
+
+            app.UseCors("Total");
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+        }
+        
         public static void AddSwaggerConfiguration(this IServiceCollection services)
         {
             services.AddSwaggerGen(c =>

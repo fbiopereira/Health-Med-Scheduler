@@ -12,16 +12,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
-
-builder.Services.AddSerilogConfiguration(builder.Configuration, builder.Environment);
-
-builder.Services.AddSwaggerConfiguration();
-
 builder.Services.AddInfrastructureServices();
-
 builder.Services.AddApplicationServices();
 
 builder.Services.AddApiConfig(builder.Configuration);
+builder.Services.AddSerilogConfiguration(builder.Configuration, builder.Environment);
+
+builder.Services.AddSwaggerConfiguration()
 
 var app = builder.Build();
 

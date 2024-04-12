@@ -1,4 +1,4 @@
-﻿using AloDoutor.Application.DTO;
+﻿using AloDoutor.Application.Features.Pacientes.Queries;
 using AloDoutor.Application.ViewModel;
 using AloDoutor.Domain.Entity;
 using AutoMapper;

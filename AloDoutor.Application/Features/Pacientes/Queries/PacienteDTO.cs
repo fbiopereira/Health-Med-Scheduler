@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
-namespace AloDoutor.Application.DTO
+namespace AloDoutor.Application.Features.Pacientes.Queries
 {
     public class PacienteDTO
     {

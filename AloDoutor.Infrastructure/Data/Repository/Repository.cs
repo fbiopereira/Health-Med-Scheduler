@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity.Common;
-using AloDoutor.Infra.Data.Data.Context;
+using AloDoutor.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

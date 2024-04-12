@@ -1,6 +1,4 @@
 using AloDoutor.Api;
-using AloDoutor.Api.Configuration;
-using AloDoutor.Api.Middlewares;
 using AloDoutor.Application;
 using AloDoutor.Infrastructure;
 
@@ -18,7 +16,7 @@ builder.Services.AddApplicationServices();
 builder.Services.AddApiConfig(builder.Configuration);
 builder.Services.AddSerilogConfiguration(builder.Configuration, builder.Environment);
 
-builder.Services.AddSwaggerConfiguration()
+builder.Services.AddSwaggerConfiguration();
 
 var app = builder.Build();
 

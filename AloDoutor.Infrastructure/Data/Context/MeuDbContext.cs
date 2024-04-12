@@ -2,7 +2,7 @@
 using AloDoutor.Domain.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace AloDoutor.Infra.Data.Data.Context
+namespace AloDoutor.Infrastructure.Data.Context
 {
     public class MeuDbContext : DbContext, IUnitOfWork
     {

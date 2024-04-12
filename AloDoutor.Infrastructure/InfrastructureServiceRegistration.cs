@@ -1,7 +1,11 @@
 ﻿using AloDoutor.Application.Interfaces;
-using AloDoutor.Infra.Data.Data.Context;
+using AloDoutor.Infrastructure.Data.Context;
 using AloDoutor.Infrastructure.Data.Repository;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Serilog;
 
 namespace AloDoutor.Infrastructure
 {
@@ -25,6 +29,6 @@ namespace AloDoutor.Infrastructure
              services.AddScoped<IEspecialidadeMedicoService, EspecialidadeMedicoService>();*/
 
             return services;
-        }
+        }        
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity;
-using AloDoutor.Infra.Data.Data.Context;
+using AloDoutor.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace AloDoutor.Infrastructure.Data.Repository

@@ -45,7 +45,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AloDoutor.Application\AloDoutor.Application.csproj" />
-    <ProjectReference Include="..\AloDoutor.Infra\AloDoutor.Infrastructure.csproj" />
+    <ProjectReference Include="..\AloDoutor.Infrastructure\AloDoutor.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

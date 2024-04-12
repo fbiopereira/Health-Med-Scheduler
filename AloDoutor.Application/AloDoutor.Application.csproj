@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AloDoutor.Data\AloDoutor.Domain.csproj" />
+    <ProjectReference Include="..\AloDoutor.Domain\AloDoutor.Domain.csproj" />
   </ItemGroup>
 
 </Project>

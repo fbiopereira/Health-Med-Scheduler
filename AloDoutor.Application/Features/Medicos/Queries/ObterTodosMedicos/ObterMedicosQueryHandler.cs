@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 
 namespace AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos
 {
-    public class ObterMedicosQueryHandler : IRequestHandler<ObterMedicosQuery, IEnumerable<MedicoDTO>>
+    public class ObterMedicosQueryHandler : IRequestHandler<ObterMedicosQuery, List<MedicoDTO>>
     {
         private readonly IMapper _mapper;
         private readonly IMedicoRepository _medicoRepository;
@@ -17,13 +17,13 @@ namespace AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos
             _medicoRepository = medicoRepository;
             _logger = logger;
         }
-        public async Task<IEnumerable<MedicoDTO>> Handle(ObterMedicosQuery request, CancellationToken cancellationToken)
+        public async Task<List<MedicoDTO>> Handle(ObterMedicosQuery request, CancellationToken cancellationToken)
         {
             //Obter dados do banco
             var medicos = await _medicoRepository.ObterTodos();
 
             //Converte os objetos médicos para MedicoDTO
-            var data = _mapper.Map<IEnumerable<MedicoDTO>>(medicos);
+            var data = _mapper.Map<List<MedicoDTO>>(medicos);
 
             //Retorna a lista de MedicoDTO
             _logger.LogInformation("Lista de médicos foi retornada com sucesso");

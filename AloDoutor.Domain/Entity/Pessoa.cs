@@ -11,8 +11,9 @@ namespace AloDoutor.Domain.Entity
         public string? Estado { get; private set; }
         public string? Telefone { get; private set; }
 
-        protected Pessoa(string? nome, string? cpf, string? cep, string? endereco, string? estado, string? telefone)
+        protected Pessoa(Guid id, string? nome, string? cpf, string? cep, string? endereco, string? estado, string? telefone)
         {
+            Id = id;
             Nome = nome;
             Cpf = cpf;
             Cep = cep;

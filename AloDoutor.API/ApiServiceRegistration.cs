@@ -42,7 +42,9 @@ namespace AloDoutor.Api
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
                     var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
-                     dbContext.Database.Migrate();
+
+                    if(dbContext.Database.EnsureCreated())
+                        dbContext.Database.Migrate();
                 }
             }
 
@@ -51,8 +53,6 @@ namespace AloDoutor.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            //app.UseAuthConfiguration();
 
             app.UseCors("Total");
 

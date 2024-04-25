@@ -1,4 +1,6 @@
 ﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+using AloDoutor.Application.Features.Medicos.Queries.ObterMedicoPorId;
 using AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos;
 using AloDoutor.Application.ViewModel;
 using AloDoutor.Domain.Entity;
@@ -12,7 +14,9 @@ namespace AloDoutor.Application.MappingProfiles
         {
             //Escrita
             CreateMap<MedicoDTO, Medico>().ReverseMap();
-            CreateMap<AdicionarMedicoCommand, Medico>();
+            CreateMap<AdicionarMedicoCommand, Medico>().ReverseMap();
+            CreateMap<AtualizarMedicoCommand, Medico>().ReverseMap();
+            CreateMap<MedicoPorIdDTO, Medico>().ReverseMap();
 
             //Leitura
             CreateMap<Medico, EspecialidadeMedicosViewModel>();

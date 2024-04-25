@@ -1,9 +1,8 @@
 ﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.DeletarMedico;
+using AloDoutor.Application.Features.Medicos.Queries.ObterMedicoPorId;
 using AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos;
-using AloDoutor.Core.Controllers;
-using AloDoutor.Domain.Entity;
-using AutoMapper;
-using MassTransit.Futures.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,12 +14,12 @@ namespace AloDoutor.Api.Controllers
     {
         //private readonly IMedicoService _medicoService;
         private readonly IMediator _mediator;
-        public MedicoController(IMediator mediator) : base()
+        public MedicoController(IMediator mediator)
         {
-           /* _medicoRepository = medicoRepository;
-            _mapper = mapper;
-            _medicoService = medicoService;
-            _logger = logger;*/
+            /* _medicoRepository = medicoRepository;
+             _mapper = mapper;
+             _medicoService = medicoService;
+             _logger = logger;*/
             _mediator = mediator;
         }
 
@@ -41,12 +40,12 @@ namespace AloDoutor.Api.Controllers
         /// </summary>
         /// <param name="id">O ID do médico a ser obtido.</param>
         /// <returns>O médico encontrado ou um erro 404 se não encontrado.</returns>
-       /* [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<ActionResult> ObterPorId(Guid id)
         {
-            _logger.LogInformation("Endpoint de obtenção de médico por ID.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterPorId(id)));
-        }*/
+            var medico = await _mediator.Send(new ObterMedicoPorIdQuery(id));
+            return Ok(medico);
+        }
 
         /// <summary>
         /// Obtém as especialidades de um médico por ID do médico.
@@ -75,7 +74,7 @@ namespace AloDoutor.Api.Controllers
         /// <summary>
         /// Adiciona um novo médico.
         /// </summary>
-        /// <param name="medicoDTO">Os dados do médico a ser adicionado.</param>
+        /// <param name="medico">Os dados do médico a ser adicionado.</param>
         /// <returns>O médico adicionado ou um erro 400 em caso de falha na adição.</returns>
         [HttpPost]
         public async Task<ActionResult> Adicionar(AdicionarMedicoCommand medico)
@@ -90,25 +89,27 @@ namespace AloDoutor.Api.Controllers
         /// <summary>
         /// Atualiza um médico existente.
         /// </summary>
-        /// <param name="medicoDTO">Os novos dados do médico a ser atualizado.</param>
+        /// <param name="medico">Os novos dados do médico a ser atualizado.</param>
         /// <returns>Um código 201 em caso de sucesso na atualização ou um erro 400 em caso de falha.</returns>
-       /* [HttpPut()]
-        public async Task<ActionResult> Atualizar(MedicoDTO medicoDTO)
+        [HttpPut("{id}")]
+        public async Task<ActionResult> Atualizar(AtualizarMedicoCommand medico)
         {
-            _logger.LogInformation("Endpoint para alteração de cadastro do médico.");
-            return CustomResponse(await _medicoService.Atualizar(_mapper.Map<Medico>(medicoDTO)));
-        }*/
+            //_logger.LogInformation("Endpoint para alteração de cadastro do médico.");
+            await _mediator.Send(medico);
+            return NoContent();
+        }
 
         /// <summary>
         /// Remove um médico por ID.
         /// </summary>
         /// <param name="id">O ID do médico a ser removido.</param>
         /// <returns>Um código 201 em caso de sucesso na remoção ou um erro 404 se não encontrado.</returns>
-       /* [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> Remover(Guid id)
         {
-            _logger.LogInformation("Endpoint para excluir cadastro do médico.");
-            return CustomResponse(await _medicoService.Remover(id));
-        }*/
+            var command = new DeletarMedicoCommand { Id = id };
+            await _mediator.Send(command);
+            return NoContent();
+        }
     }
 }

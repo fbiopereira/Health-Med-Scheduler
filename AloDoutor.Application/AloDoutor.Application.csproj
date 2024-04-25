@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\EspecialidadesMedicos\Queries\" />
+    <Folder Include="Features\Especialidades\Queries\" />
     <Folder Include="Features\Pacientes\Commands\" />
   </ItemGroup>
 

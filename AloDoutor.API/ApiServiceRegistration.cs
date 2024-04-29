@@ -63,8 +63,6 @@ namespace AloDoutor.Api
 
             app.UseRouting();
 
-            //app.UseAuthConfiguration();
-
             app.UseCors("Total");
 
             app.UseEndpoints(endpoints =>

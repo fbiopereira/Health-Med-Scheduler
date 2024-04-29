@@ -505,3 +505,6 @@ $RECYCLE.BIN/
 **/bin
 /AloDoutor.API/Controllers/EspecialidadeMedicoController.cs
 /AloDoutor.API/Controllers/MedicoController.cs
+/AloDoutor.Application/Features/Medicos/Commands/AtualizarMedico/AtualizarMedicoCommand.cs
+/AloDoutor.Application/Features/Medicos/Commands/AtualizarMedico/AtualizarMedicoCommandHandler.cs
+/AloDoutor.Application/Features/Medicos/Commands/AtualizarMedico/AtualizarMedicoCommandValidator.cs

@@ -21,7 +21,7 @@ namespace AloDoutor.Api.Controllers
             _logger.LogError(mensagem);
         }
 
-        protected ActionResult CustomResponse(object result = null)
+        protected ActionResult CustomResponse(object? result = null)
         {
             if (OperacaoValida())
             {

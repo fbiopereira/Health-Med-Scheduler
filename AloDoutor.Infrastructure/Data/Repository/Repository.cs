@@ -50,11 +50,6 @@ namespace AloDoutor.Infrastructure.Data.Repository
             DbSet.Remove(entity);
         }
 
-        //public async Task<int> SaveChanges()
-        //{
-        //    return await Db.SaveChangesAsync();
-        //}
-
         public void Dispose()
         {
             Db?.Dispose();

@@ -503,3 +503,5 @@ $RECYCLE.BIN/
 *.bkp
 **/obj
 **/bin
+/AloDoutor.API/Controllers/EspecialidadeMedicoController.cs
+/AloDoutor.API/Controllers/MedicoController.cs

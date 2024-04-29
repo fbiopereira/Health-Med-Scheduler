@@ -24,12 +24,12 @@ namespace AloDoutor.Application.Features.Especialidades.Queries
         public async Task<IEnumerable<EspecialidadeViewModel>> Handle(ObterEspecialidadeQuery request, CancellationToken cancellationToken)
         {
             //Obter dados do banco
-            var pacientes = await _especialidadeRepository.ObterTodos();
+            var especialidades = await _especialidadeRepository.ObterTodos();
 
-            //Converte os objetos Pacientes para EspecialidadeViewModel
-            var data = _mapper.Map<IEnumerable<EspecialidadeViewModel>>(pacientes);
+            //Converte os objetos Especialdiades para EspecialidadeViewModel
+            var data = _mapper.Map<IEnumerable<EspecialidadeViewModel>>(especialidades);
 
-            //Retorna a lista de PacientesViewModel
+            //Retorna a lista de EspecialidadeViewModel
             _logger.LogInformation("Lista de especialidades foi retornada com sucesso");
             return data;
         }
@@ -37,26 +37,26 @@ namespace AloDoutor.Application.Features.Especialidades.Queries
         public async Task<EspecialidadeViewModel> Handle(ObterEspecialidadePorIdQuery request, CancellationToken cancellationToken)
         {
             //Obter dados do banco
-            var pacientes = await _especialidadeRepository.ObterPorId(request.idEspecialidade);
+            var especialidade = await _especialidadeRepository.ObterPorId(request.idEspecialidade);
 
-            //Converte os objetos pacientes para EspecialidadeViewModel
-            var data = _mapper.Map<EspecialidadeViewModel>(pacientes);
+            //Converte os objetos especialidade para EspecialidadeViewModel
+            var data = _mapper.Map<EspecialidadeViewModel>(especialidade);
 
-            //Retorna a lista de PacientesViewModel
-            _logger.LogInformation("Especialdiade foi retornado com sucesso!");
+            //Retorna a lista de EspecialidadeViewModel
+            _logger.LogInformation("Especialidade foi retornado com sucesso!");
             return data;
         }
 
         public async Task<EspecialidadeViewModel> Handle(ObterEspecialidadeMedicosPorIdQuery request, CancellationToken cancellationToken)
         {
             //Obter dados do banco
-            var pacientes = await _especialidadeRepository.ObterMedicosPorEspecialidadeId(request.idEspecialidade);
+            var especialidade = await _especialidadeRepository.ObterMedicosPorEspecialidadeId(request.idEspecialidade);
 
-            //Converte os objetos pacientes para EspecialidadeViewModel
-            var data = _mapper.Map<EspecialidadeViewModel>(pacientes);
+            //Converte os objetos especialidade para EspecialidadeViewModel
+            var data = _mapper.Map<EspecialidadeViewModel>(especialidade);
 
-            //Retorna a lista de PacientesViewModel
-            _logger.LogInformation("Especialdiade foi retornado com sucesso!");
+            //Retorna a lista de EspecialidadeViewModel
+            _logger.LogInformation("Especialidade foi retornado com sucesso!");
             return data;
         }
     }

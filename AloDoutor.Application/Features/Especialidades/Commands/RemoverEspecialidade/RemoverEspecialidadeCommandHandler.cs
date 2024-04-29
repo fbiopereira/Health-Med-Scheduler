@@ -21,16 +21,16 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.RemoverEspecial
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Especialidade inválido", validationResult);
 
-            if (!_especialidadeRepository.Buscar(p => p.Id == request.IdEspecialdiade).Result.Any())
+            if (!_especialidadeRepository.Buscar(p => p.Id == request.idEspecialidade).Result.Any())
             {
                 throw new BadRequestException("Especialidade Não localizado!", validationResult);
             }
 
-            await _especialidadeRepository.Remover(await _especialidadeRepository.ObterPorId(request.IdEspecialdiade));
+            await _especialidadeRepository.Remover(await _especialidadeRepository.ObterPorId(request.idEspecialidade));
 
             await _especialidadeRepository.UnitOfWork.Commit();
 
-            return request.IdEspecialdiade;
+            return request.idEspecialidade;
         }
     }
 }

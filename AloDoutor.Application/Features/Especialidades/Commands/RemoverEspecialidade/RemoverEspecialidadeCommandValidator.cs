@@ -7,7 +7,7 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.RemoverEspecial
     {
         public RemoverEspecialidadeCommandValidator()
         {
-            RuleFor(c => c.IdEspecialdiade)
+            RuleFor(c => c.idEspecialidade)
                 .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório");
 
         }

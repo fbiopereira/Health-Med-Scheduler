@@ -1,4 +1,5 @@
-﻿using AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspecialidade;
+﻿using AloDoutor.Application.Features.Agendamentos.Commands.AdicionarAgendamento;
+using AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspecialidade;
 using AloDoutor.Application.Features.Especialidades.Commands.AtualizarEspecialidade;
 using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
 using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AtualizarEspecialidadeMedico;
@@ -17,7 +18,7 @@ namespace AloDoutor.Application.MappingProfiles
         public AgendamentoProfile()
         {
             // CreateMap<AgendamentoDTO, Agendamento>();
-
+            CreateMap<AdicionarAgendamentoCommand, Agendamento>();
             CreateMap<AdicionarEspecialidadeCommand, Especialidade>();
             CreateMap<AtualizarEspecialidadeCommand, Especialidade>();
             CreateMap<AdicionarMedicoCommand, Medico>();

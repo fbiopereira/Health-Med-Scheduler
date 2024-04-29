@@ -1,4 +1,5 @@
-﻿using AloDoutor.Application.Interfaces;
+﻿using AloDoutor.Application.Features.Especialidades.Queries;
+using AloDoutor.Application.Interfaces;
 using AloDoutor.Application.ViewModel;
 using AutoMapper;
 using MediatR;
@@ -6,14 +7,14 @@ using Microsoft.Extensions.Logging;
 
 namespace AloDoutor.Application.Features.EspecialidadesMedicos.Queries
 {
-    public class ObterEspecialdiadePacientesQueryHandler : IRequestHandler<ObterEspecialidadeMedicoQuery, IEnumerable<EspecialidadeMedicosViewModel>>,
+    public class ObterEspecialidadesMedicoQueryHandler : IRequestHandler<ObterEspecialidadeMedicoQuery, IEnumerable<EspecialidadeMedicosViewModel>>,
      IRequestHandler<ObterMedicoEspecialidadePorIdQuery, EspecialidadeMedicosViewModel>
     {
         private readonly IMapper _mapper;
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
-        private readonly ILogger<ObterEspecialdiadePacientesQueryHandler> _logger;
+        private readonly ILogger<ObterEspecialidadesMedicoQueryHandler> _logger;
 
-        public ObterEspecialdiadePacientesQueryHandler(IMapper mapper, IEspecialidadeMedicoRepository especiaidadeRepository, ILogger<ObterEspecialdiadePacientesQueryHandler> logger)
+        public ObterEspecialidadesMedicoQueryHandler(IMapper mapper, IEspecialidadeMedicoRepository especiaidadeRepository, ILogger<ObterEspecialidadesMedicoQueryHandler> logger)
         {
             _mapper = mapper;
             _especialidadeMedicoRepository = especiaidadeRepository;

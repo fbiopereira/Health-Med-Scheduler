@@ -1,5 +1,6 @@
-﻿using AloDoutor.Application.DTO;
-using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialdiadeMedico;
+﻿using AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspecialidade;
+using AloDoutor.Application.Features.Especialidades.Commands.AtualizarEspecialidade;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
 using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AtualizarEspecialidadeMedico;
 using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
 using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
@@ -15,8 +16,10 @@ namespace AloDoutor.Application.MappingProfiles
     {
         public AgendamentoProfile()
         {
-           // CreateMap<AgendamentoDTO, Agendamento>();
+            // CreateMap<AgendamentoDTO, Agendamento>();
 
+            CreateMap<AdicionarEspecialidadeCommand, Especialidade>();
+            CreateMap<AtualizarEspecialidadeCommand, Especialidade>();
             CreateMap<AdicionarMedicoCommand, Medico>();
             CreateMap<AtualizarMedicoCommand, Medico>();
             CreateMap<AdicionarPacienteCommand, Paciente>();
@@ -33,7 +36,9 @@ namespace AloDoutor.Application.MappingProfiles
                 .ForMember(dest => dest.CrmMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Crm));
 
 
-            CreateMap<Especialidade, EspecialidadeViewModel>();
+            CreateMap<Especialidade, EspecialidadeViewModel>()
+                .ForMember(dest => dest.Medicos, opt => opt.MapFrom(src => src.EspecialidadeMedicos));
+
             CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
             CreateMap<Medico, MedicoViewModel>();
 

@@ -1,4 +1,5 @@
 ﻿using AloDoutor.Application.Exceptions;
+using AloDoutor.Application.Features.Especialidades.Commands.RemoverEspecialidade;
 using AloDoutor.Application.Interfaces;
 using MediatR;
 

@@ -25,6 +25,12 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspeci
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Especialidade inválida", validationResult);
 
+            //Validar se já existe uma especialidade cadastrada com esse cpf
+            if (_especialidadeRepository.Buscar(p => p.Nome.ToLower() == request.Nome.ToLower()).Result.Any())
+            {
+                throw new BadRequestException("Falha ao cadastrar Especialidade!", validationResult);
+            }
+
             //Converter para objeto entidade no dominio
             var especialidadeCriada = _mapper.Map<Especialidade>(request);
 

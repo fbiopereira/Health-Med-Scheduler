@@ -1,11 +1,9 @@
-﻿/*using AloDoutor.Api.Application.DTO;
-using AloDoutor.Api.Application.ViewModel;
-using AloDoutor.Core.Controllers;
+﻿using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialdiadeMedico;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AtualizarEspecialidadeMedico;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.RemoverEspecialidadeMedico;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Queries;
 using AloDoutor.Domain.Entity;
-using AloDoutor.Domain.Interfaces;
-using AloDoutor.Domain.Services;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
@@ -13,18 +11,14 @@ namespace AloDoutor.Api.Controllers
     [Route("api/especialidade-medico")]
     public class EspecialidadeMedicoController : MainController<EspecialidadeMedicoController>
     {
-        private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
-        private readonly IEspecialidadeMedicoService _especialidadeMedicoService;
-        private readonly IMapper _mapper;
+
+        private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
-        public EspecialidadeMedicoController(IEspecialidadeMedicoRepository especialidadeMedicoRepository,
-            IMapper mapper, IEspecialidadeMedicoService especialidadeMedicoService, ILogger<EspecialidadeMedicoController> logger) : base(logger)
-        {
-            _especialidadeMedicoRepository = especialidadeMedicoRepository;
-            _mapper = mapper;
-            _especialidadeMedicoService = especialidadeMedicoService;
+        public EspecialidadeMedicoController(ILogger<EspecialidadeMedicoController> logger, IMediator mediator) : base(logger)
+        {           
             _logger = logger;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -35,8 +29,9 @@ namespace AloDoutor.Api.Controllers
         [ProducesResponseType(200, Type = typeof(IEnumerable<EspecialidadeMedico>))]
         public async Task<IActionResult> ObterTodos()
         {
-            _logger.LogInformation("Endpoint de obtenção de todas especialidades de médico cadastradas.");
-            return CustomResponse(_mapper.Map<IEnumerable<EspecialidadeMedicosViewModel>>(await _especialidadeMedicoService.ObterTodos()));
+            var especialidadesMedicos = await _mediator.Send(new ObterEspecialidadeMedicoQuery());
+            return CustomResponse(especialidadesMedicos);
+           
         }
 
         /// <summary>
@@ -49,23 +44,23 @@ namespace AloDoutor.Api.Controllers
         [ProducesResponseType(404)]
         public async Task<ActionResult> ObterPorId(Guid id)
         {
-            _logger.LogInformation("Endpoint de obtenção de especialidades de médico por ID.");
-            return CustomResponse(_mapper.Map<EspecialidadeMedicosViewModel>(await _especialidadeMedicoService.ObterPorId(id)));
+            var medicos = await _mediator.Send(new ObterMedicoEspecialidadePorIdQuery(id));
+            return CustomResponse(medicos);
         }
-
-        /// <summary>
-        /// Adiciona uma nova especialidade de médico.
-        /// </summary>
-        /// <param name="especialidadeDTO">Os dados da especialidade de médico a ser adicionada.</param>
-        /// <returns>A especialidade de médico adicionada ou um erro 400 em caso de falha na adição.</returns>
+            /// <summary>
+            /// Adiciona uma nova especialidade de médico.
+            /// </summary>
+            /// <param name="especialidadeDTO">Os dados da especialidade de médico a ser adicionada.</param>
+            /// <returns>A especialidade de médico adicionada ou um erro 400 em caso de falha na adição.</returns>
         [HttpPost]
         [ProducesResponseType(201, Type = typeof(EspecialidadeMedico))]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Adicionar(EspecialidadeMedicoDTO especialidadeDTO)
+        public async Task<ActionResult> Adicionar(AdicionarEspecialidadeMedicoCommand especialidadeMedico)
         {
-            _logger.LogInformation("Endpoint para cadastramento de especialidades do medico.");            
-            var validation = await _especialidadeMedicoService.Adicionar(_mapper.Map<EspecialidadeMedico>(especialidadeDTO));
-            return validation.IsValid ? Created("", especialidadeDTO) : CustomResponse(validation);
+            _logger.LogInformation("Endpoint para cadastramento de especialidades do medico.");
+            var response = await _mediator.Send(especialidadeMedico);
+            //return validation.IsValid ? Created("", medicoDTO) : CustomResponse(validation);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
 
         /// <summary>
@@ -76,10 +71,12 @@ namespace AloDoutor.Api.Controllers
         [HttpPut]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
-        public async Task<ActionResult> Atualizar(EspecialidadeMedicoDTO especialidadeDTO)
+        public async Task<ActionResult> Atualizar(AtualizarEspecialidadeMedicoCommand especialidadeMedico)
         {
             _logger.LogInformation("Endpoint para alteração de cadastro da especialidades de médico.");
-            return CustomResponse(await _especialidadeMedicoService.Atualizar(_mapper.Map<EspecialidadeMedico>(especialidadeDTO)));
+            var response = await _mediator.Send(especialidadeMedico);
+            //return validation.IsValid ? Created("", medicoDTO) : CustomResponse(validation);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
 
         /// <summary>
@@ -90,11 +87,11 @@ namespace AloDoutor.Api.Controllers
         [HttpDelete]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]
-        public async Task<ActionResult> Remover(Guid id)
+        public async Task<ActionResult> Remover(RemoverEspecialidadeMedicoCommand especialidadeMedico)
         {
             _logger.LogInformation("Endpoint para excluir cadastro de especialidades de médico.");
-            return CustomResponse(await _especialidadeMedicoService.Remover(id));
+            var response = await _mediator.Send(especialidadeMedico);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
     }
 }
-*/

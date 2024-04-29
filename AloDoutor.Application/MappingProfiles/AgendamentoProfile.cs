@@ -1,4 +1,10 @@
 ﻿using AloDoutor.Application.DTO;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialdiadeMedico;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AtualizarEspecialidadeMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+using AloDoutor.Application.Features.Pacientes.Commands.AdicionarPaciente;
+using AloDoutor.Application.Features.Pacientes.Commands.AtualizarPaciente;
 using AloDoutor.Application.ViewModel;
 using AloDoutor.Domain.Entity;
 using AutoMapper;
@@ -9,24 +15,66 @@ namespace AloDoutor.Application.MappingProfiles
     {
         public AgendamentoProfile()
         {
-            CreateMap<AgendamentoDTO, Agendamento>();
+           // CreateMap<AgendamentoDTO, Agendamento>();
 
-            //Configurar agendamentoPaciente
-            CreateMap<Agendamento, AgendamentoPacienteViewModel>()
-                .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
-                .ForMember(dest => dest.NomeMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Nome));
+            CreateMap<AdicionarMedicoCommand, Medico>();
+            CreateMap<AtualizarMedicoCommand, Medico>();
+            CreateMap<AdicionarPacienteCommand, Paciente>();
+            CreateMap<AtualizarPacienteCommand, Paciente>();
+            CreateMap<AdicionarEspecialidadeMedicoCommand, EspecialidadeMedico>();
+            CreateMap<AtualizarEspecialidadeMedicoCommand, EspecialidadeMedico>();
 
-            //Configurar agendamentoMedico
-            CreateMap<Agendamento, AgendamentoMedicoViewModel>()
-                .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
-                .ForMember(dest => dest.NomePaciente, opt => opt.MapFrom(src => src.Paciente.Nome));
-
+            //Leitura
             CreateMap<Agendamento, AgendamentoViewModel>()
                 .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
                 .ForMember(dest => dest.NomePaciente, opt => opt.MapFrom(src => src.Paciente.Nome))
                 .ForMember(dest => dest.CpfPaciente, opt => opt.MapFrom(src => src.Paciente.Cpf))
                 .ForMember(dest => dest.NomeMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Nome))
                 .ForMember(dest => dest.CrmMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Crm));
+
+
+            CreateMap<Especialidade, EspecialidadeViewModel>();
+            CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
+            CreateMap<Medico, MedicoViewModel>();
+
+            CreateMap<Medico, MedicoViewModel>()
+                .ForMember(dest => dest.Especialidades, opt => opt.MapFrom(src => src.EspecialidadesMedicos))
+                .ForMember(dest => dest.agendasMedico, opt => opt.MapFrom(src => src.EspecialidadesMedicos.SelectMany(e => e.Agendamentos ?? Enumerable.Empty<Agendamento>())));
+
+            CreateMap<Agendamento, AgendamentoMedicoViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.NomePaciente, opt => opt.MapFrom(src => src.Paciente.Nome))
+                .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
+                .ForMember(dest => dest.DataHoraAtendimento, opt => opt.MapFrom(src => src.DataHoraAtendimento))
+                .ForMember(dest => dest.StatusAgendamento, opt => opt.MapFrom(src => src.StatusAgendamento));
+
+            CreateMap<Paciente, PacienteViewModel>()
+                .ForMember(dest => dest.agendasPaciente, opt => opt.MapFrom(src => src.Agendamentos));
+
+            CreateMap<Agendamento, AgendamentoPacienteViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.NomeMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Nome))
+                .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
+                .ForMember(dest => dest.StatusAgendamento, opt => opt.MapFrom(src => src.StatusAgendamento))
+                .ForMember(dest => dest.DataHoraAtendimento, opt => opt.MapFrom(src => src.DataHoraAtendimento));
+            /*
+                        //Configurar agendamentoPaciente
+                        CreateMap<Agendamento, AgendamentoPacienteViewModel>()
+                            .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
+                            .ForMember(dest => dest.NomeMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Nome));
+
+                        //Configurar agendamentoMedico
+                        CreateMap<Agendamento, AgendamentoMedicoViewModel>()
+                            .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
+                            .ForMember(dest => dest.NomePaciente, opt => opt.MapFrom(src => src.Paciente.Nome));
+
+                        CreateMap<Agendamento, AgendamentoViewModel>()
+                            .ForMember(dest => dest.NomeEspecialidade, opt => opt.MapFrom(src => src.EspecialidadeMedico.Especialidade.Nome))
+                            .ForMember(dest => dest.NomePaciente, opt => opt.MapFrom(src => src.Paciente.Nome))
+                            .ForMember(dest => dest.CpfPaciente, opt => opt.MapFrom(src => src.Paciente.Cpf))
+                            .ForMember(dest => dest.NomeMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Nome))
+                            .ForMember(dest => dest.CrmMedico, opt => opt.MapFrom(src => src.EspecialidadeMedico.Medico.Crm));
+            */
         }
     }
 }

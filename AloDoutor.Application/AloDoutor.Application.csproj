@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Pacientes\Commands\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\AloDoutor.Domain\AloDoutor.Domain.csproj" />
   </ItemGroup>
 

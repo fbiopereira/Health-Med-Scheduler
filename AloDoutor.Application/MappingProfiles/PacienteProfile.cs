@@ -13,8 +13,8 @@ namespace AloDoutor.Application.MappingProfiles
             CreateMap<PacienteDTO, Paciente>();
 
             //Recuperar lista de agendamentos para do Paciente
-            CreateMap<Paciente, PacienteViewModel>()
-                .ForMember(dest => dest.agendasPaciente, opt => opt.MapFrom(src => src.Agendamentos));
+        /*    CreateMap<Paciente, PacienteViewModel>()
+                .ForMember(dest => dest.agendasPaciente, opt => opt.MapFrom(src => src.Agendamentos));*/
         }
 
     }

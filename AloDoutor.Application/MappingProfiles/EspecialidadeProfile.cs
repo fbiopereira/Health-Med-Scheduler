@@ -10,14 +10,18 @@ namespace AloDoutor.Application.MappingProfiles
         public EspecialidadeProfile()
         {
             //Escrita
-            CreateMap<EspecialidadeDTO, Especialidade>();           
+            CreateMap<EspecialidadeDTO, Especialidade>();
 
             //Leitura
-            CreateMap<Especialidade, EspecialidadeViewModel>();
+            //CreateMap<Especialidade, EspecialidadeViewModel>();
+            /*
+                        //Leitura
+                        CreateMap<Especialidade, EspecialidadeViewModel>();
 
-            //Obter todos os medicos de uma especialidade
-            CreateMap<Especialidade, EspecialidadeViewModel>()
-                .ForMember(dest => dest.Medicos, opt => opt.MapFrom(src => src.EspecialidadeMedicos!.Select(m => m.Medico)));
+                        //Obter todos os medicos de uma especialidade
+                        CreateMap<Especialidade, EspecialidadeViewModel>()
+                            .ForMember(dest => dest.Medicos, opt => opt.MapFrom(src => src.EspecialidadeMedicos!.Select(m => m.Medico)));
+            */
         }
     }
 }

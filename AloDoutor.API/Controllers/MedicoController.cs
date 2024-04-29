@@ -1,27 +1,22 @@
 ﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.RemoverMedico;
 using AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos;
-using AloDoutor.Core.Controllers;
 using AloDoutor.Domain.Entity;
-using AutoMapper;
-using MassTransit.Futures.Contracts;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MedicoController : ControllerBase
+    [Route("(medico)")]
+    public class MedicoController : MainController<MedicoController>
     {
-        //private readonly IMedicoService _medicoService;
         private readonly IMediator _mediator;
-        public MedicoController(IMediator mediator) : base()
-        {
-           /* _medicoRepository = medicoRepository;
-            _mapper = mapper;
-            _medicoService = medicoService;
-            _logger = logger;*/
+        private readonly ILogger _logger;
+        public MedicoController(IMediator mediator, ILogger<MedicoController> logger) : base(logger)
+        {    
             _mediator = mediator;
+            _logger = logger;
         }
 
         /// <summary>
@@ -29,11 +24,10 @@ namespace AloDoutor.Api.Controllers
         /// </summary>
         /// <returns>Uma lista de médicos.</returns>
         [HttpGet]
-        public async Task<IEnumerable<MedicoDTO>> ObterTodos()
+        public async Task<ActionResult> ObterTodos()
         {
-            var medicos = await _mediator.Send(new ObterMedicosQuery());
-            //return CustomResponse(medicos);
-            return medicos;
+            var medicos = await _mediator.Send(new ObterPacinetesQuery());
+            return CustomResponse(medicos);            
         }
 
         /// <summary>
@@ -41,36 +35,37 @@ namespace AloDoutor.Api.Controllers
         /// </summary>
         /// <param name="id">O ID do médico a ser obtido.</param>
         /// <returns>O médico encontrado ou um erro 404 se não encontrado.</returns>
-       /* [HttpGet("{id:guid}")]
+        [HttpGet("{id:guid}")]
         public async Task<ActionResult> ObterPorId(Guid id)
         {
-            _logger.LogInformation("Endpoint de obtenção de médico por ID.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterPorId(id)));
-        }*/
+            var medico = await _mediator.Send(new ObterMedicoPorIdQuery(id));
+            return CustomResponse(medico);
+        }
 
         /// <summary>
         /// Obtém as especialidades de um médico por ID do médico.
         /// </summary>
         /// <param name="idMedico">O ID do médico para obter as especialidades.</param>
         /// <returns>O médico com suas especialidades ou um erro 404 se não encontrado.</returns>
-       /* [HttpGet("MedicoEspecialidades/{idMedico:guid}")]
+        [HttpGet("MedicoEspecialidades/{idMedico:guid}")]
         public async Task<ActionResult> ObterMedicoEspecialidadePorIdMedico(Guid idMedico)
         {
-            _logger.LogInformation("Endpoint para obtenção de especialidades do médico por ID do médico.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterEspecialidadesPorIdMedico(idMedico)));
-        }*/
+            var medico = await _mediator.Send(new ObterEspecialidadePorIdMedicoQuery(idMedico));
+            return CustomResponse(medico);
+            
+        }
 
         /// <summary>
         /// Obtém os agendamentos de um médico por ID do médico.
         /// </summary>
         /// <param name="idMedico">O ID do médico para obter os agendamentos.</param>
         /// <returns>O médico com seus agendamentos ou um erro 404 se não encontrado.</returns>
-     /*   [HttpGet("Agendamento/{idMedico:guid}")]
+        [HttpGet("Agendamento/{idMedico:guid}")]
         public async Task<ActionResult> ObterAgendamentoPorMedico(Guid idMedico)
         {
-            _logger.LogInformation("Endpoint para obtenção de agendamentos por médico.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterAgendamentosPorIdMedico(idMedico)));
-        }*/
+            var medico = await _mediator.Send(new ObterAgendamentoMedicoPorIdMedicoQuery(idMedico));
+            return CustomResponse(medico);
+        }
 
         /// <summary>
         /// Adiciona um novo médico.
@@ -92,23 +87,25 @@ namespace AloDoutor.Api.Controllers
         /// </summary>
         /// <param name="medicoDTO">Os novos dados do médico a ser atualizado.</param>
         /// <returns>Um código 201 em caso de sucesso na atualização ou um erro 400 em caso de falha.</returns>
-       /* [HttpPut()]
-        public async Task<ActionResult> Atualizar(MedicoDTO medicoDTO)
+        [HttpPut()]
+        public async Task<ActionResult> Atualizar(AtualizarMedicoCommand medico)
         {
+            var response = await _mediator.Send(medico);
             _logger.LogInformation("Endpoint para alteração de cadastro do médico.");
-            return CustomResponse(await _medicoService.Atualizar(_mapper.Map<Medico>(medicoDTO)));
-        }*/
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
+        }
 
         /// <summary>
         /// Remove um médico por ID.
         /// </summary>
         /// <param name="id">O ID do médico a ser removido.</param>
         /// <returns>Um código 201 em caso de sucesso na remoção ou um erro 404 se não encontrado.</returns>
-       /* [HttpDelete]
-        public async Task<ActionResult> Remover(Guid id)
+        [HttpDelete]
+        public async Task<ActionResult> Remover(RemoverMedicoCommand medico)
         {
-            _logger.LogInformation("Endpoint para excluir cadastro do médico.");
-            return CustomResponse(await _medicoService.Remover(id));
-        }*/
+            var response = await _mediator.Send(medico);
+            _logger.LogInformation("Endpoint para remoção de cadastro do médico.");
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
+        }
     }
 }

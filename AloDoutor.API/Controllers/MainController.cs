@@ -3,7 +3,7 @@ using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-namespace AloDoutor.Core.Controllers
+namespace AloDoutor.Api.Controllers
 {
     [ApiController]
     public abstract class MainController<T> : Controller

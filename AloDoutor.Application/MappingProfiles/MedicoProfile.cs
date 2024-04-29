@@ -14,14 +14,19 @@ namespace AloDoutor.Application.MappingProfiles
             CreateMap<MedicoDTO, Medico>().ReverseMap();
             CreateMap<AdicionarMedicoCommand, Medico>();
 
+           // CreateMap<Medico, MedicoViewModel>();
+
+            //CreateMap<Medico, MedicoViewModel>()
+            //   .ForMember(dest => dest.agendasMedico, opt => opt.MapFrom(src => src.EspecialidadesMedicos.SelectMany(e => e.Agendamentos ?? Enumerable.Empty<Agendamento>())));
+
             //Leitura
-            CreateMap<Medico, EspecialidadeMedicosViewModel>();
+           /* CreateMap<Medico, EspecialidadeMedicosViewModel>();
 
             //Obter todas as especialidades de um médico
             CreateMap<Medico, MedicoViewModel>()
                 .ForMember(dest => dest.Especialidades, opt => opt.MapFrom(src => src.EspecialidadesMedicos!.Select(e => e.Especialidade)))
                 .ForMember(dest => dest.agendasMedico, opt => opt.MapFrom(src => src.EspecialidadesMedicos!.SelectMany(a => a.Agendamentos ?? Enumerable.Empty<Agendamento>())));
-
+           */
         }
     }
 }

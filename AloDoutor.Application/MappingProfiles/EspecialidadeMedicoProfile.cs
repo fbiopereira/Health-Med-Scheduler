@@ -13,7 +13,7 @@ namespace AloDoutor.Application.MappingProfiles
             CreateMap<EspecialidadeMedicoDTO, EspecialidadeMedico>();
 
             //Leitura
-            CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
+            //CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
 
 
         }

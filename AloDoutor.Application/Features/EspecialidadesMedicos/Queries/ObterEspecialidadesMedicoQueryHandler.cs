@@ -1,5 +1,4 @@
-﻿using AloDoutor.Application.Features.Especialidades.Queries;
-using AloDoutor.Application.Interfaces;
+﻿using AloDoutor.Application.Interfaces;
 using AloDoutor.Application.ViewModel;
 using AutoMapper;
 using MediatR;

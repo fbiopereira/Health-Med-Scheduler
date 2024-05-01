@@ -1,9 +1,7 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
 using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Enums;
-using AutoMapper;
 using FluentValidation.Results;
 using MediatR;
 

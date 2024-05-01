@@ -2,7 +2,6 @@
 using AloDoutor.Application.Features.Especialidades.Commands.AtualizarEspecialidade;
 using AloDoutor.Application.Features.Especialidades.Commands.RemoverEspecialidade;
 using AloDoutor.Application.Features.Especialidades.Queries;
-using AloDoutor.Domain.Entity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

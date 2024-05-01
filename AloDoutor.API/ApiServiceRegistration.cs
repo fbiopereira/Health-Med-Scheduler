@@ -1,11 +1,11 @@
 ﻿using AloDoutor.Api.Middlewares;
-using Microsoft.OpenApi.Models;
-using Serilog.Extensions.Logging;
-using Serilog.Formatting.Compact;
-using Serilog;
-using System.Reflection;
 using AloDoutor.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using Serilog;
+using Serilog.Extensions.Logging;
+using Serilog.Formatting.Compact;
+using System.Reflection;
 
 namespace AloDoutor.Api
 {

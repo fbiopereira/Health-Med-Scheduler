@@ -2,7 +2,6 @@
 using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
 using AloDoutor.Application.Features.Medicos.Commands.RemoverMedico;
 using AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos;
-using AloDoutor.Domain.Entity;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

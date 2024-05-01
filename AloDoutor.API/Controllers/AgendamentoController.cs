@@ -2,9 +2,6 @@
 using AloDoutor.Application.Features.Agendamentos.Commands.AtualizarAgendamento;
 using AloDoutor.Application.Features.Agendamentos.Commands.RemoverAgendamento;
 using AloDoutor.Application.Features.Agendamentos.Queries;
-using AloDoutor.Application.Features.Especialidades.Queries;
-using AloDoutor.Domain.Entity;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

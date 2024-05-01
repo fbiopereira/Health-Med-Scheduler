@@ -1,5 +1,4 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Features.Medicos.Commands.RemoverMedico;
 using AloDoutor.Application.Interfaces;
 using MediatR;
 

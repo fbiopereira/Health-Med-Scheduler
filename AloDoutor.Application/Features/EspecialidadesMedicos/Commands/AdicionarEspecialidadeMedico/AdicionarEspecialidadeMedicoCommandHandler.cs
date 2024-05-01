@@ -1,5 +1,4 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspecialidade;
 using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity;
 using AutoMapper;

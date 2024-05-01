@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System.Text.RegularExpressions;
 
 namespace AloDoutor.Application.Features.Especialidades.Commands.AtualizarEspecialidade
 {

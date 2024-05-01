@@ -24,6 +24,18 @@ namespace AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Médico inválido", validationResult);
 
+            var medicoCPFExistente = await _medicoRepository.ObterMedicoPorCPF(request.Cpf);
+            if(medicoCPFExistente != null)
+            {
+                throw new BadRequestException("Esse CPF Já se encontra cadastrado!", validationResult);
+            }
+
+            var medicoCRMExistente = await _medicoRepository.ObterMedicoPorCRM(request.Crm);
+            if (medicoCRMExistente != null)
+            {
+                throw new BadRequestException("Esse CRF Já se encontra cadastrado!", validationResult);
+            }
+
             //Converter para objeto entidade no dominio
             var medicoCriado = _mapper.Map<Medico>(request);
 

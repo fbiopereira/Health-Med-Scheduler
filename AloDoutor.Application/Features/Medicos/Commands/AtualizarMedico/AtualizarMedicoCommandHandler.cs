@@ -25,10 +25,11 @@ namespace AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Médico inválido", validationResult);
 
-            if (!_medicoRepository.Buscar(p => p.Id == request.Id).Result.Any())
+            var medicoExistente = await _medicoRepository.ObterPorId(request.Id);
+
+            if (medicoExistente == null)
             {
                 throw new BadRequestException("Medico Não localizado!", validationResult);
-
             }
 
             //Validar se existe algum cpf ou crm com esse mesmo numero vinculado a algum outro medico

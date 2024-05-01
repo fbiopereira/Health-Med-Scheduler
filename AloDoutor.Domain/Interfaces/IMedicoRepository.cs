@@ -6,7 +6,7 @@ namespace AloDoutor.Domain.Interfaces
     {
         Task<Medico> ObterAgendamentosPorIdMedico(Guid idMedico);
         Task<Medico> ObterEspecialidadesPorIdMedico(Guid idMedico);
-        Task<Medico> ObterPacientePorCPF(string cpf);
-        Task<Medico> ObterPacientePorCRM(string crm);
+        Task<Medico> ObterMedicoPorCPF(string cpf);
+        Task<Medico> ObterMedicoPorCRM(string crm);
     }
 }

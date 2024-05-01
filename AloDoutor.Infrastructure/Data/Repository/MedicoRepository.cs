@@ -28,12 +28,12 @@ namespace AloDoutor.Infrastructure.Data.Repository
                 .FirstOrDefaultAsync(m => m.Id == idMedico);
         }
 
-        public async Task<Medico> ObterPacientePorCPF(string cpf)
+        public async Task<Medico> ObterMedicoPorCPF(string cpf)
         {
             return await DbSet.FirstOrDefaultAsync(p => p.Cpf == cpf);
         }
 
-        public async Task<Medico> ObterPacientePorCRM(string crm)
+        public async Task<Medico> ObterMedicoPorCRM(string crm)
         {
             return await DbSet.FirstOrDefaultAsync(p => p.Crm == crm);
         }

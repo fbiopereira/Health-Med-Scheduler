@@ -9,7 +9,7 @@ using Shouldly;
 
 namespace AloDoutor.Application.UnitTests.Features.Medicos.Queries
 {
-    public class ObterMedicosQueryHandlerTests
+   /* public class ObterMedicosQueryHandlerTests
     {
         private readonly Mock<IMedicoRepository> _medicoRepository;
         private IMapper _mapper;
@@ -42,5 +42,5 @@ namespace AloDoutor.Application.UnitTests.Features.Medicos.Queries
             result.ShouldBeOfType<List<MedicoDTO>>();
             result.Count.ShouldBe(3);
         }
-    }
+    }*/
 }

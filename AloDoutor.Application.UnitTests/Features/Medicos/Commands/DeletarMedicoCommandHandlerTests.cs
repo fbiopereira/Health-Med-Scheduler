@@ -1,29 +1,49 @@
-﻿using AloDoutor.Application.Features.Medicos.Commands.DeletarMedico;
+﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.DeletarMedico;
 using AloDoutor.Application.UnitTests.Mocks;
+using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
+using AutoMapper;
 using Moq;
+using Moq.AutoMock;
 using Shouldly;
 
 namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
 {
+    [Collection(nameof(MedicoTestsAutoMockerCollection))]
     public class DeletarMedicoCommandHandlerTests
     {
-        private readonly Mock<IMedicoRepository> _mockMedicoRepo;
+        private readonly DeletarMedicoCommandHandler _medicoHandler;
+        private readonly MedicoTestsAutoMockerFixture _medicofixture;
+        private readonly AutoMocker _mocker;
 
-        public DeletarMedicoCommandHandlerTests()
+        public DeletarMedicoCommandHandlerTests(MedicoTestsAutoMockerFixture medicofixture)
         {
-            _mockMedicoRepo = MockMedicoRepository.ObterTodosMockMedicoRepository();
+            _mocker = new AutoMocker();
+            _medicoHandler = _mocker.CreateInstance<DeletarMedicoCommandHandler>();
+            _medicofixture = medicofixture;
+            _medicofixture = medicofixture;
         }
 
-        [Fact]
-        public async Task DeletarMedico_DeveRetornarUnitValue_ParaSucesso()
+        [Fact(DisplayName = "Excluir medico com Sucesso")]
+        [Trait("Categoria", "Excluir Medico - Medico Command Handler")]
+        public async Task ExcluirMedico_MedicoExistente_DeveExecutarComSucesso()
         {
-            var handler = new DeletarMedicoCommandHandler(_mockMedicoRepo.Object);
+            var medicoOriginal = _medicofixture.GerarMedicoValido();
+            var medico = new DeletarMedicoCommand();
+            medico.Id = medicoOriginal.Id;
+            _mocker.GetMock<IMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
+            _mocker.GetMock<IMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
+            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterPorId(medicoOriginal.Id)).ReturnsAsync(medicoOriginal);
 
-            await handler.Handle(new DeletarMedicoCommand() { Id = Guid.Parse("11111111-1111-1111-1111-111111111111") }, CancellationToken.None);
+            //Act            
+            var result = await _medicoHandler.Handle(medico, CancellationToken.None);
 
-            var medicos = await _mockMedicoRepo.Object.ObterTodos();
-            medicos.Count.ShouldBe(2);
+            //Assert
+            _mocker.GetMock<IMedicoRepository>().Verify(r => r.Remover(It.IsAny<Medico>()), Times.Once);
+            _mocker.GetMock<IMedicoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
         }
-    }
+           
+        }
 }

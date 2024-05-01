@@ -31,9 +31,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Agendamentos\Commands\" />
     <Folder Include="Features\Agendamentos\Queries\" />
-    <Folder Include="Features\Pacientes\Commands\" />
     <Folder Include="Features\Pacientes\Queries\" />
   </ItemGroup>
 

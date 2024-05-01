@@ -51,7 +51,7 @@ namespace AloDoutor.Api.Controllers
          [HttpGet("EspecialidadeMedicos/{idEspecialidade:guid}")]
          public async Task<ActionResult> ObterMedicoEspecialidadePorIdMedico(Guid idEspecialidade)
          {
-            var especialidade = await _mediator.Send(new ObterEspecialidadePorIdQuery(idEspecialidade));
+            var especialidade = await _mediator.Send(new ObterEspecialidadeMedicosPorIdQuery(idEspecialidade));
             return CustomResponse(especialidade);
         }
 

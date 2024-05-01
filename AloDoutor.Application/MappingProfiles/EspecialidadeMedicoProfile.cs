@@ -1,5 +1,5 @@
-﻿using AloDoutor.Application.DTO;
-using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
+﻿using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
+using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AtualizarEspecialidadeMedico;
 using AloDoutor.Application.ViewModel;
 using AloDoutor.Domain.Entity;
 using AutoMapper;
@@ -11,12 +11,12 @@ namespace AloDoutor.Application.MappingProfiles
         public EspecialidadeMedicoProfile()
         {
             //Escrita
-            CreateMap<EspecialidadeMedicoDTO, EspecialidadeMedico>();
-            CreateMap<AdicionarEspecialidadeMedicoCommand, EspecialidadeMedico>().ReverseMap();
+            CreateMap<AdicionarEspecialidadeMedicoCommand, EspecialidadeMedico>();
+            CreateMap<AtualizarEspecialidadeMedicoCommand, EspecialidadeMedico>();
+
 
             //Leitura
-            //CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
-
+            CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
 
         }
     }

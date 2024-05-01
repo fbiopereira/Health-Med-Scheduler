@@ -1,4 +1,5 @@
-﻿using AloDoutor.Application.Features.Pacientes.Queries;
+﻿using AloDoutor.Application.Features.Pacientes.Commands.AdicionarPaciente;
+using AloDoutor.Application.Features.Pacientes.Commands.AtualizarPaciente;
 using AloDoutor.Application.ViewModel;
 using AloDoutor.Domain.Entity;
 using AutoMapper;
@@ -10,11 +11,12 @@ namespace AloDoutor.Application.MappingProfiles
         public PacienteProfile()
         {
             //Escrita
-            CreateMap<PacienteDTO, Paciente>();
+            CreateMap<AdicionarPacienteCommand, Paciente>();
+            CreateMap<AtualizarPacienteCommand, Paciente>();
 
-            //Recuperar lista de agendamentos para do Paciente
-        /*    CreateMap<Paciente, PacienteViewModel>()
-                .ForMember(dest => dest.agendasPaciente, opt => opt.MapFrom(src => src.Agendamentos));*/
+            //Leitura
+            CreateMap<Paciente, PacienteViewModel>()
+                 .ForMember(dest => dest.agendasPaciente, opt => opt.MapFrom(src => src.Agendamentos));
         }
 
     }

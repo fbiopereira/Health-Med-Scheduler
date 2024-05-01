@@ -1,11 +1,8 @@
-﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
-using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+﻿using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
 using AloDoutor.Application.Interfaces;
 using AloDoutor.Application.MappingProfiles;
 using AloDoutor.Application.UnitTests.Mocks;
-using AloDoutor.Domain.Entity;
 using AutoMapper;
-using Castle.Core.Logging;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Shouldly;

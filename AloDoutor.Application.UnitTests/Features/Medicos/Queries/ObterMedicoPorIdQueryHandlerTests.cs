@@ -1,8 +1,8 @@
 ﻿using AloDoutor.Application.Features.Medicos.Queries.ObterMedicoPorId;
 using AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos;
-using AloDoutor.Application.Interfaces;
 using AloDoutor.Application.MappingProfiles;
 using AloDoutor.Application.UnitTests.Mocks;
+using AloDoutor.Domain.Interfaces;
 using AutoMapper;
 using Moq;
 using Shouldly;

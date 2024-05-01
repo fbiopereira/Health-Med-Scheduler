@@ -1,5 +1,5 @@
-﻿using AloDoutor.Application.Interfaces;
-using AloDoutor.Application.ViewModel;
+﻿using AloDoutor.Application.ViewModel;
+using AloDoutor.Domain.Interfaces;
 using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Logging;

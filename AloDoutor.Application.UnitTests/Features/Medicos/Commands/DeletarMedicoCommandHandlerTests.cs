@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Application.Features.Medicos.Commands.DeletarMedico;
-using AloDoutor.Application.Interfaces;
 using AloDoutor.Application.UnitTests.Mocks;
+using AloDoutor.Domain.Interfaces;
 using Moq;
 using Shouldly;
 

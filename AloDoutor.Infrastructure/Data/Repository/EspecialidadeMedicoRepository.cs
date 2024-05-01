@@ -1,6 +1,6 @@
-﻿using AloDoutor.Application.Interfaces;
-using AloDoutor.Domain.Entity;
+﻿using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Enums;
+using AloDoutor.Domain.Interfaces;
 using AloDoutor.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 

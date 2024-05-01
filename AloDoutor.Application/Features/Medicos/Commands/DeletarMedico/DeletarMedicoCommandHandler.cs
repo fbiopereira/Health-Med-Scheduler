@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity;
+using AloDoutor.Domain.Interfaces;
 using MediatR;
 
 namespace AloDoutor.Application.Features.Medicos.Commands.DeletarMedico

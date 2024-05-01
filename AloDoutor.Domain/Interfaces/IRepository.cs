@@ -1,7 +1,7 @@
 ﻿using AloDoutor.Domain.Entity.Common;
 using System.Linq.Expressions;
 
-namespace AloDoutor.Application.Interfaces
+namespace AloDoutor.Domain.Interfaces
 {
     public interface IRepository<TEntity> : IDisposable where TEntity : Entidade
     {

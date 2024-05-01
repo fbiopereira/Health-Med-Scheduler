@@ -1,4 +1,4 @@
-﻿namespace AloDoutor.Application.Interfaces
+﻿namespace AloDoutor.Domain.Interfaces
 {
     public interface IUnitOfWork
     {

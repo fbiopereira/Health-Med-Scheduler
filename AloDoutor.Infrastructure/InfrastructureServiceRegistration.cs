@@ -1,4 +1,4 @@
-﻿using AloDoutor.Application.Interfaces;
+﻿using AloDoutor.Domain.Interfaces;
 using AloDoutor.Infrastructure.Data.Context;
 using AloDoutor.Infrastructure.Data.Repository;
 using Microsoft.Extensions.DependencyInjection;

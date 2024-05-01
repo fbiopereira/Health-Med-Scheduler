@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Domain.Entity;
 
-namespace AloDoutor.Application.Interfaces
+namespace AloDoutor.Domain.Interfaces
 {
     public interface IEspecialidadeRepository : IRepository<Especialidade>
     {

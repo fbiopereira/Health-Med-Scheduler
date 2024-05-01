@@ -1,7 +1,7 @@
 ﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
-using AloDoutor.Application.Interfaces;
 using AloDoutor.Application.MappingProfiles;
 using AloDoutor.Application.UnitTests.Mocks;
+using AloDoutor.Domain.Interfaces;
 using AutoMapper;
 using Moq;
 using Shouldly;

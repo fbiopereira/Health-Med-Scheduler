@@ -1,7 +1,7 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Enums;
+using AloDoutor.Domain.Interfaces;
 using FluentValidation.Results;
 using MediatR;
 

@@ -1,6 +1,6 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Interfaces;
 using AloDoutor.Domain.Entity;
+using AloDoutor.Domain.Interfaces;
 using AutoMapper;
 using MediatR;
 

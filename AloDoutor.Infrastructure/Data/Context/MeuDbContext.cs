@@ -1,5 +1,5 @@
-﻿using AloDoutor.Application.Interfaces;
-using AloDoutor.Domain.Entity;
+﻿using AloDoutor.Domain.Entity;
+using AloDoutor.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace AloDoutor.Infrastructure.Data.Context

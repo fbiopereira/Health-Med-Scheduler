@@ -1,5 +1,5 @@
 ﻿using AloDoutor.Application.Exceptions;
-using AloDoutor.Application.Interfaces;
+using AloDoutor.Domain.Interfaces;
 using MediatR;
 
 namespace AloDoutor.Application.Features.EspecialidadesMedicos.Commands.RemoverEspecialidadeMedico

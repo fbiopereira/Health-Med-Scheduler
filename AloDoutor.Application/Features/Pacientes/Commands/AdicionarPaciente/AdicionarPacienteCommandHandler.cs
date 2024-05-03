@@ -24,8 +24,10 @@ namespace AloDoutor.Application.Features.Pacientes.Commands.AdicionarPaciente
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Paciente inválido", validationResult);
 
+            var pacienteCPF = await _pacienteRepository.ObterPacientePorCPF(request.Cpf);
+
             //Validar se já existe um paciente cadastrado com esse cpf
-            if (_pacienteRepository.Buscar(p => p.Cpf == request.Cpf).Result.Any())
+            if (pacienteCPF != null)
             {
                 throw new BadRequestException("Falha ao adicionar Paciente!", validationResult);
             }

@@ -1,27 +1,23 @@
-﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
-using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
-using AloDoutor.Application.Features.Medicos.Commands.DeletarMedico;
+﻿using AloDoutor.Application.Features.Medicos.Commands.RemoverMedico;
 using AloDoutor.Application.UnitTests.Mocks;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
-using AutoMapper;
 using Moq;
 using Moq.AutoMock;
-using Shouldly;
 
 namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
 {
     [Collection(nameof(MedicoTestsAutoMockerCollection))]
     public class DeletarMedicoCommandHandlerTests
     {
-        private readonly DeletarMedicoCommandHandler _medicoHandler;
+        private readonly RemoverMedicoCommandHandler _medicoHandler;
         private readonly MedicoTestsAutoMockerFixture _medicofixture;
         private readonly AutoMocker _mocker;
 
         public DeletarMedicoCommandHandlerTests(MedicoTestsAutoMockerFixture medicofixture)
         {
             _mocker = new AutoMocker();
-            _medicoHandler = _mocker.CreateInstance<DeletarMedicoCommandHandler>();
+            _medicoHandler = _mocker.CreateInstance<RemoverMedicoCommandHandler>();
             _medicofixture = medicofixture;
             _medicofixture = medicofixture;
         }
@@ -31,8 +27,8 @@ namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
         public async Task ExcluirMedico_MedicoExistente_DeveExecutarComSucesso()
         {
             var medicoOriginal = _medicofixture.GerarMedicoValido();
-            var medico = new DeletarMedicoCommand();
-            medico.Id = medicoOriginal.Id;
+            var medico = new RemoverMedicoCommand();
+            medico.IdMedico = medicoOriginal.Id;
             _mocker.GetMock<IMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
             _mocker.GetMock<IMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
             _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterPorId(medicoOriginal.Id)).ReturnsAsync(medicoOriginal);

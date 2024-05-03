@@ -21,7 +21,9 @@ namespace AloDoutor.Application.Features.Medicos.Commands.RemoverMedico
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Médico inválido", validationResult);
 
-            if (!_medicoRepository.Buscar(p => p.Id == request.IdMedico).Result.Any())
+            var medicoExistente = await _medicoRepository.ObterPorId(request.IdMedico);
+
+            if (medicoExistente == null)
             {
                 throw new BadRequestException("Medico Não localizado!", validationResult);
             }

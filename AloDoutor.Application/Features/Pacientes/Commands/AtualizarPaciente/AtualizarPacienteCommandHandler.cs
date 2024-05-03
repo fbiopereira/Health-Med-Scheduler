@@ -25,7 +25,9 @@ namespace AloDoutor.Application.Features.Pacientes.Commands.AtualizarPaciente
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Paciente inválido", validationResult);
 
-            if (!_pacienteRepository.Buscar(p => p.Id == request.Id).Result.Any())
+            var pacienteExistente = await _pacienteRepository.ObterPorId(request.Id);
+
+            if (pacienteExistente == null)
             {
                 throw new BadRequestException("Paciente Não localizado!", validationResult);
 

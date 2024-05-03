@@ -1,17 +1,11 @@
-﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
-using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+﻿using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
 using AloDoutor.Application.MappingProfiles;
 using AloDoutor.Application.UnitTests.Mocks;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;
 using AutoMapper;
-using FluentValidation;
-using Microsoft.Extensions.Logging;
 using Moq;
 using Moq.AutoMock;
-using Shouldly;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
 
 namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
 {

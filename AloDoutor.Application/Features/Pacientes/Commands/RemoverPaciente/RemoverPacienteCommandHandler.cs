@@ -21,10 +21,13 @@ namespace AloDoutor.Application.Features.Pacientes.Commands.RemoverPaciente
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Médico inválido", validationResult);
 
-            if (!_pacienteRepository.Buscar(p => p.Id == request.IdPaciente).Result.Any())
+            var medicoExistente = await _pacienteRepository.ObterPorId(request.IdPaciente);
+
+            if (medicoExistente == null)
             {
-                throw new BadRequestException("Medico Não localizado!", validationResult);
-            }
+                throw new BadRequestException("Paciente Não localizado!", validationResult);
+
+            }            
 
             await _pacienteRepository.Remover(await _pacienteRepository.ObterPorId(request.IdPaciente));
 

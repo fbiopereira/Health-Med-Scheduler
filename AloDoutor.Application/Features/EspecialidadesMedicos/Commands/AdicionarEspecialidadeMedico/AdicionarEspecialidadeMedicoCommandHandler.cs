@@ -10,10 +10,14 @@ namespace AloDoutor.Application.Features.EspecialidadesMedicos.Commands.Adiciona
     {
         private readonly IMapper _mapper;
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
-        public AdicionarEspecialidadeMedicoCommandHandler(IMapper mapper, IEspecialidadeMedicoRepository especialidadeMedicoRepository)
+        private readonly IEspecialidadeRepository _especialidadeRepository;
+        private readonly IMedicoRepository _medicoRepository;
+        public AdicionarEspecialidadeMedicoCommandHandler(IMapper mapper, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IEspecialidadeRepository especialidadeRepository, IMedicoRepository medicoRepository)
         {
             _mapper = mapper;
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
+            _especialidadeRepository = especialidadeRepository;
+            _medicoRepository = medicoRepository;
         }
         public async Task<Guid> Handle(AdicionarEspecialidadeMedicoCommand request, CancellationToken cancellationToken)
         {
@@ -23,6 +27,20 @@ namespace AloDoutor.Application.Features.EspecialidadesMedicos.Commands.Adiciona
 
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Especialidade Médico inválida", validationResult);
+
+            //Verificar se a especialidade está cadastrada na base de dados
+            var especialidade = await _especialidadeRepository.ObterPorId(request.EspecialidadeId);
+            if (especialidade == null)
+            {
+                throw new BadRequestException("Especialidade não cadastrada na base de dados!", validationResult);
+            }
+
+            //Verificar se o medico está cadastrado na base de dados
+            var medico = await _medicoRepository.ObterPorId(request.MedicoId);
+            if (medico == null)
+            {
+                throw new BadRequestException("Medico não cadastrado na base de dados! ", validationResult);
+            }
 
             //Converter para objeto entidade no dominio
             var especialidadeMedicoCriada = _mapper.Map<EspecialidadeMedico>(request);

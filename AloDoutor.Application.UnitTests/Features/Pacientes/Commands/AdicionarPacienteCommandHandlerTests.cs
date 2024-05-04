@@ -33,7 +33,7 @@ namespace AloDoutor.Application.UnitTests.Features.Pacientes.Commands
         }
 
         [Fact(DisplayName = "Adicionar paciente Novo Paciente com Sucesso")]
-        [Trait("Categoria", "Adicionar Paciente - Paciente Command Handler")]
+        [Trait("Categoria", "Paciente - Paciente Command Handler")]
         public async Task AdicionarPaciente_NovoPaciente_DeveExecutarComSucesso()
         {
             //Arrange
@@ -52,7 +52,7 @@ namespace AloDoutor.Application.UnitTests.Features.Pacientes.Commands
         }
 
         [Fact(DisplayName = "Adicionar novo paciente com Fallha")]
-        [Trait("Categoria", "Adicionar Paciente - Paciente Command Handler")]
+        [Trait("Categoria", "Paciente - Paciente Command Handler")]
         public async Task AdicionarPaciente_CPFPacienteExistente_DeveExecutarComFalha()
         {
             // Arrange
@@ -73,7 +73,7 @@ namespace AloDoutor.Application.UnitTests.Features.Pacientes.Commands
         }
 
         [Fact(DisplayName = "Adicionar paciente Novo Paciente com Falha")]
-        [Trait("Categoria", "Adicionar Paciente - Paciente Command Handler")]
+        [Trait("Categoria", "Paciente - Paciente Command Handler")]
         public async Task AdicionarPaciente_NovoPaciente_DeveExecutarComFalha()
         {
             //Arrange

@@ -35,7 +35,7 @@ namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
         }
 
         [Fact(DisplayName = "Adicionar medico Novo Medico com Sucesso")]
-        [Trait("Categoria", "Adicionar Medico - Medico Command Handler")]
+        [Trait("Categoria", "Medico - Medico Command Handler")]
         public async Task AdicionarMedico_NovoMedico_DeveExecutarComSucesso()
         {
             //Arrange
@@ -54,7 +54,7 @@ namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
         }
 
         [Fact(DisplayName = "Adicionar novo medico com Fallha")]
-        [Trait("Categoria", "Adicionar Medico - Medico Command Handler")]
+        [Trait("Categoria", "Medico - Medico Command Handler")]
         public async Task AdicionarMedico_CPFMedicoExistente_DeveExecutarComFalha()
         {
             // Arrange
@@ -76,7 +76,7 @@ namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
         }
 
         [Fact(DisplayName = "Adicionar medico Novo Medico com Falha")]
-        [Trait("Categoria", "Adicionar Medico - Medico Command Handler")]
+        [Trait("Categoria", "Medico - Medico Command Handler")]
         public async Task AdicionarMedico_NovoMedico_DeveExecutarComFalha()
         {
             //Arrange

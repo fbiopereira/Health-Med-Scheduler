@@ -30,19 +30,22 @@ namespace AloDoutor.Application.Features.EspecialidadesMedicos.Commands.Atualiza
                 throw new BadRequestException("Especialidade Médico inválido", validationResult);
 
             //Validar se a especialidade-Medico está cadastrado na base
-            if (!_especialidadeMedicoRepository.Buscar(p => p.Id == request.Id).Result.Any())
+            var especialidadeMedico = await _especialidadeMedicoRepository.ObterPorId(request.Id);
+            if (especialidadeMedico == null)
             {
                 throw new BadRequestException("Especialidade-medico Não localizada!", validationResult); ;
             }
 
             //Verificar se a especialidade está cadastrada na base de dados
-            if (!_especialidadeRepository.Buscar(e => e.Id == request.EspecialidadeId).Result.Any())
+            var especialidade = await _especialidadeRepository.ObterPorId(request.EspecialidadeId);
+            if (especialidade == null)
             {
                 throw new BadRequestException("Especialidade não cadastrada na base de dados!", validationResult);
             }
 
             //Verificar se o medico está cadastrado na base de dados
-            if (!_medicoRepository.Buscar(m => m.Id == request.MedicoId).Result.Any())
+            var medico = await _medicoRepository.ObterPorId(request.MedicoId);
+            if (medico == null)
             {
                 throw new BadRequestException("Medico não cadastrado na base de dados! ", validationResult);
             }

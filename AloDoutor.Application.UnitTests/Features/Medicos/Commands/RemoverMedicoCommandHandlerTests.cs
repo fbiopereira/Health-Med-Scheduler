@@ -8,13 +8,13 @@ using Moq.AutoMock;
 namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
 {
     [Collection(nameof(MedicoTestsAutoMockerCollection))]
-    public class DeletarMedicoCommandHandlerTests
+    public class RemoverMedicoCommandHandlerTests
     {
         private readonly RemoverMedicoCommandHandler _medicoHandler;
         private readonly MedicoTestsAutoMockerFixture _medicofixture;
         private readonly AutoMocker _mocker;
 
-        public DeletarMedicoCommandHandlerTests(MedicoTestsAutoMockerFixture medicofixture)
+        public RemoverMedicoCommandHandlerTests(MedicoTestsAutoMockerFixture medicofixture)
         {
             _mocker = new AutoMocker();
             _medicoHandler = _mocker.CreateInstance<RemoverMedicoCommandHandler>();
@@ -23,7 +23,7 @@ namespace AloDoutor.Application.UnitTests.Features.Medicos.Commands
         }
 
         [Fact(DisplayName = "Excluir medico com Sucesso")]
-        [Trait("Categoria", "Excluir Medico - Medico Command Handler")]
+        [Trait("Categoria", "Medico - Medico Command Handler")]
         public async Task ExcluirMedico_MedicoExistente_DeveExecutarComSucesso()
         {
             var medicoOriginal = _medicofixture.GerarMedicoValido();

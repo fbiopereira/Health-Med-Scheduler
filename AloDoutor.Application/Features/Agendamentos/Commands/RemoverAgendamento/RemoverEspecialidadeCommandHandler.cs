@@ -21,7 +21,9 @@ namespace AloDoutor.Application.Features.Agendamentos.Commands.RemoverAgendament
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Agendamento inválido", validationResult);
 
-            if (!_agendamentoRepository.Buscar(p => p.Id == request.IdAgendamento).Result.Any())
+            var agendamento = await _agendamentoRepository.ObterPorId(request.IdAgendamento);
+
+            if (agendamento == null)
             {
                 throw new BadRequestException("Agendamento Não localizado!", validationResult);
             }

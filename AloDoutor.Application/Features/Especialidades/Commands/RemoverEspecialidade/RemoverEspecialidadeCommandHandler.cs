@@ -21,7 +21,9 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.RemoverEspecial
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Especialidade inválido", validationResult);
 
-            if (!_especialidadeRepository.Buscar(p => p.Id == request.idEspecialidade).Result.Any())
+            var especialidadeRemovida = await _especialidadeRepository.ObterPorId(request.idEspecialidade);
+
+            if (especialidadeRemovida == null)
             {
                 throw new BadRequestException("Especialidade Não localizado!", validationResult);
             }

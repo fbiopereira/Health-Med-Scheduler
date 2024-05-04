@@ -32,7 +32,7 @@ namespace AloDoutor.Application.UnitTests.Features.Pacientes.Commands
         }
 
         [Fact(DisplayName = "Atualizar paciente com Sucesso")]
-        [Trait("Categoria", "Atualizar Paciente - Paciente Command Handler")]
+        [Trait("Categoria", "Paciente - Paciente Command Handler")]
         public async Task AtualizarPaciente_NovoPaciente_DeveExecutarComSucesso()
         {
             // Arrange

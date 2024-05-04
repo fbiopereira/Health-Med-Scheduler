@@ -22,7 +22,7 @@ namespace AloDoutor.Application.UnitTests.Features.Pacientes.Commands
         }
 
         [Fact(DisplayName = "Excluir paciente com Sucesso")]
-        [Trait("Categoria", "Excluir Paciente - Paciente Command Handler")]
+        [Trait("Categoria", "Paciente - Paciente Command Handler")]
         public async Task ExcluirPaciente_PacienteExistente_DeveExecutarComSucesso()
         {
             var pacienteOriginal = _pacientefixture.GerarPacienteValido();

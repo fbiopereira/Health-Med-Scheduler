@@ -25,8 +25,10 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.AtualizarEspeci
             if (validationResult.Errors.Any())
                 throw new BadRequestException("Especialidade inválida", validationResult);
 
+            var especialidadeUpdate = await _especialidadeRepository.ObterPorId(request.Id);
+
             //Validar se a especialidade está cadastrado na base
-            if (!_especialidadeRepository.Buscar(p => p.Id == request.Id).Result.Any())
+            if (especialidadeUpdate == null)
             {
                 throw new BadRequestException("Especialidade Não localizada!", validationResult);
             }
@@ -38,12 +40,12 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.AtualizarEspeci
             }
 
             //Converter para objeto entidade no dominio
-            var medicoAtualizado = _mapper.Map<Especialidade>(request);
+            var especialidadeAtualizado = _mapper.Map<Especialidade>(request);
 
-            await _especialidadeRepository.Atualizar(medicoAtualizado);
+            await _especialidadeRepository.Atualizar(especialidadeAtualizado);
             await _especialidadeRepository.UnitOfWork.Commit();
             // retorna o Guid Gerado
-            return medicoAtualizado.Id;
+            return especialidadeAtualizado.Id;
         }
     }
 }

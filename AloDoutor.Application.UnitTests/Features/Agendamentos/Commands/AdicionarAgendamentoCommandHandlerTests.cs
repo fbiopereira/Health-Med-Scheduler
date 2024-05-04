@@ -1,6 +1,4 @@
 ﻿using AloDoutor.Application.Features.Agendamentos.Commands.AdicionarAgendamento;
-using AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspecialidade;
-using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
 using AloDoutor.Application.MappingProfiles;
 using AloDoutor.Application.UnitTests.Mocks;
 using AloDoutor.Domain.Entity;
@@ -33,7 +31,7 @@ namespace AloDoutor.Application.UnitTests.Features.Agendamentos.Commands
         }
 
         [Fact(DisplayName = "Adicionar agendamento Novo Agendamento com Sucesso")]
-        [Trait("Categoria", "Adicionar Agendamento - Agendamento Command Handler")]
+        [Trait("Categoria", "Agendamento - Agendamento Command Handler")]
         public async Task AdicionarAgendamento_NovoAgendamento_DeveExecutarComSucesso()
         {
             var especialidadeMedico = new EspecialidadeMedico(Guid.NewGuid(), Guid.NewGuid(), DateTime.Parse("2023-05-09 09:00:00"));

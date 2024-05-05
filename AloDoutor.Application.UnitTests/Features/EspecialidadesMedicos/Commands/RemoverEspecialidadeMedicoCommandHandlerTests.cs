@@ -1,5 +1,4 @@
-﻿using AloDoutor.Application.Features.Agendamentos.Commands.RemoverAgendamento;
-using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.RemoverEspecialidadeMedico;
+﻿using AloDoutor.Application.Features.EspecialidadesMedicos.Commands.RemoverEspecialidadeMedico;
 using AloDoutor.Application.UnitTests.Mocks;
 using AloDoutor.Domain.Entity;
 using AloDoutor.Domain.Interfaces;

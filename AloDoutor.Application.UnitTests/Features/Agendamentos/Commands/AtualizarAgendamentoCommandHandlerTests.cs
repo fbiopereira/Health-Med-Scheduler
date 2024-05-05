@@ -34,7 +34,7 @@ namespace AloDoutor.Application.UnitTests.Features.Agendamentos.Commands
 
         [Fact(DisplayName = "Atualizar agendamento com Sucesso")]
         [Trait("Categoria", "Agendamento - Agendamento Command Handler")]
-        public async Task RTealizarReagendamento_NovoAgendamento_DeveExecutarComSucesso()
+        public async Task RealizarReagendamento_NovoAgendamento_DeveExecutarComSucesso()
         {
             var especialidadeMedico = new EspecialidadeMedico(Guid.NewGuid(), Guid.NewGuid(), DateTime.Parse("2023-05-09 09:00:00"));
 

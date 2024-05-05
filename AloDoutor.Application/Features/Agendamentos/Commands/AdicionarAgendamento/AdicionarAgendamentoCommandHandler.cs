@@ -60,22 +60,23 @@ namespace AloDoutor.Application.Features.Agendamentos.Commands.AdicionarAgendame
                 throw new BadRequestException("Atendimento das 09:00 até as 18 horas!", new ValidationResult());
             }
 
+            //Verificar se a hora atendimento é fracionada
+            if (!VerificarHoraFracionada(agendamento.DataHoraAtendimento))
+            {
+                throw new BadRequestException("A hora de atendimento não pode ser fracionada", new ValidationResult());
+            }
+
             if (medicoEspecialidade == null)
             {
                 throw new BadRequestException("EspecialidadeMedico não localizada!", new ValidationResult());
             }
 
             //Verificar se o médico tem agenda livre
-            if (!await _especialidadeMedicoRepository.VerificarAgendaLivreMedico(medicoEspecialidade.MedicoId, agendamento.DataHoraAtendimento))
+            var boolEspecialidade = await _especialidadeMedicoRepository.VerificarAgendaLivreMedico(medicoEspecialidade.MedicoId, agendamento.DataHoraAtendimento);
+            if (!boolEspecialidade)
             {
                 throw new BadRequestException("Esse médico não poderá te atender nesse horário!", new ValidationResult());
-            }
-
-            //Verificar se a hora atendimento é fracionada
-            if (!VerificarHoraFracionada(agendamento.DataHoraAtendimento))
-            {
-                throw new BadRequestException("A hora de atendimento não pode ser fracionada", new ValidationResult());
-            }
+            }            
 
             //Verificar se o paciente está cadastrado na base;
             if (!await _pacienteRepository.VerificarPacienteCadastrado(agendamento.PacienteId))
@@ -86,7 +87,7 @@ namespace AloDoutor.Application.Features.Agendamentos.Commands.AdicionarAgendame
             if (!await _pacienteRepository.VerificarAgendaLivrePaciente(agendamento.PacienteId, agendamento.DataHoraAtendimento))
             {
                 throw new BadRequestException("Esse paciente não pode ser atendimento nesse horário!", new ValidationResult());
-            }
+            };
         }
 
         private bool VerificarHoraFracionada(DateTime data)

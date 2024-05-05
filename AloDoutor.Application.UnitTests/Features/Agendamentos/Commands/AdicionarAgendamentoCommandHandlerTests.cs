@@ -161,7 +161,7 @@ namespace AloDoutor.Application.UnitTests.Features.Agendamentos.Commands
         }
 
         [Fact(DisplayName = "Adicionar Agendamento Horario Medico Indisponivel")]
-        [Trait("Categoria", "Não concluido Agendamento - Agendamento Command Handler")]
+        [Trait("Categoria", "Agendamento - Agendamento Command Handler")]
         public async Task AdicionarAgendamento_HorarioMedicoIndisponivel_DeveExecutarComFalha()
         {
             //Arrange

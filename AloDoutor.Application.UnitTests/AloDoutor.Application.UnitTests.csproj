@@ -30,9 +30,4 @@
     <ProjectReference Include="..\AloDoutor.Application\AloDoutor.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Features\Agendamentos\Queries\" />
-    <Folder Include="Features\Pacientes\Queries\" />
-  </ItemGroup>
-
 </Project>

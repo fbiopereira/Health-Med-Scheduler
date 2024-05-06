@@ -20,8 +20,8 @@ namespace AloDoutor.Api.IntegrationTests.Controllers
             _testsFixture = testsFixture;
         }
 
-        [Fact(DisplayName = "Adicionar Novo Paciente")]
-        [Trait("Categoria", "Integração API - Paciente")]
+        [Fact(DisplayName = "Cadastros")]
+        [Trait("Categoria", "Integração API - Fluxo de Cadastros")]
         public async Task Adicionar_novoPaciente_DeveRetornarComSucesso()
         {
             var paciente = _testsFixture.GerarPacienteCommand(1).FirstOrDefault();

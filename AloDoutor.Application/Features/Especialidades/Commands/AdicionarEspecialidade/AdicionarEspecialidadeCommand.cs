@@ -10,6 +10,8 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspeci
             Descricao = descricao;
         }
 
+        public AdicionarEspecialidadeCommand() { }
+
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
     }

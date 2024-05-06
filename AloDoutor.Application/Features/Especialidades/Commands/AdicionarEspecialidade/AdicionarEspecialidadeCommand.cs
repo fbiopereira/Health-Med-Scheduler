@@ -4,6 +4,12 @@ namespace AloDoutor.Application.Features.Especialidades.Commands.AdicionarEspeci
 {
     public class AdicionarEspecialidadeCommand : IRequest<Guid>
     {
+        public AdicionarEspecialidadeCommand(string? nome, string? descricao)
+        {
+            Nome = nome;
+            Descricao = descricao;
+        }
+
         public string? Nome { get; set; }
         public string? Descricao { get; set; }
     }

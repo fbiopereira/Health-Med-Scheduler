@@ -14,6 +14,7 @@ namespace AloDoutor.Application.Features.Pacientes.Commands.AdicionarPaciente
             Idade = idade;
             Telefone = telefone;
         }
+        public AdicionarPacienteCommand() { }
 
         public string Nome { get; set; }
         public string Cpf { get; set; }

@@ -26,3 +26,5 @@ app.UseSwaggerConfiguration();
 app.UseApiConfiguration(app.Environment);
 
 app.Run();
+
+public partial class Program { }

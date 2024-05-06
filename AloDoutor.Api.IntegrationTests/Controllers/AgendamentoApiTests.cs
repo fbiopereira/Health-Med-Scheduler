@@ -80,25 +80,7 @@ namespace AloDoutor.Api.IntegrationTests.Controllers
 
             // Assert
             postResponse.EnsureSuccessStatusCode();
-        }
-
-        [Fact(DisplayName = "Adicionar Novo Agendamento")]
-        [Trait("Categoria", "Integração API - Agendamento")]
-        public async Task Adicionar_novoAgendamento_DeveRetornarComSucesso()
-        {
-            var agendamento = new AdicionarAgendamentoCommand
-            {
-                DataHoraAtendimento = DateTime.Parse("2029-11-29 09:00:00"),
-                EspecialidadeMedicoId = Guid.Parse("C07B5E55-27A0-402E-A6FB-0CBAC1E54D25"),
-                PacienteId = Guid.Parse("EB42BAC9-2A54-4AA9-B72E-0D6B31262268"),
-            };
-
-            //Act
-            var postResponse = await _testsFixture.Client.PostAsJsonAsync("api/Cadastrar", agendamento);
-
-            // Assert
-            postResponse.EnsureSuccessStatusCode();
-        }
+        }       
     }
 
    

@@ -16,10 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1BEE3838-E163-43C5-9E85-252E62193DDB}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
-		docker-compose.yml = docker-compose.yml
-		Dockerfile.AloDoutor = Dockerfile.AloDoutor
-		Dockerfile.AloFinances = Dockerfile.AloFinances
-		Dockerfile.Identidade = Dockerfile.Identidade
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloDoutor.Infrastructure", "AloDoutor.Infrastructure\AloDoutor.Infrastructure.csproj", "{4A679F1F-EAB2-476A-9513-CACA86A8FD03}"
@@ -32,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloDoutor.Application", "Al
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloDoutor.Application.UnitTests", "AloDoutor.Application.UnitTests\AloDoutor.Application.UnitTests.csproj", "{81A12DBD-4AAF-4C71-A186-A51C0918286B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AloDoutor.Api.IntegrationTests", "AloDoutor.Api.IntegrationTests\AloDoutor.Api.IntegrationTests.csproj", "{018AF9B5-EEAB-4D23-B665-8D606BCCC643}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AloDoutor.Api.IntegrationTests", "AloDoutor.Api.IntegrationTests\AloDoutor.Api.IntegrationTests.csproj", "{018AF9B5-EEAB-4D23-B665-8D606BCCC643}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

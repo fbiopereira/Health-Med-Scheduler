@@ -35,16 +35,16 @@ namespace AloDoutor.Api
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
-            //if (env.IsDevelopment() || env.IsStaging())
-            //{
-            //    app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment() || env.IsStaging())
+            {
+                app.UseDeveloperExceptionPage();
 
-            //    using (var scope = app.ApplicationServices.CreateScope())
-            //    {
-            //        var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
-            //         dbContext.Database.Migrate();
-            //    }
-            //}
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
+                     dbContext.Database.Migrate();
+                }
+            }
 
             if (env.IsStaging())
             {

@@ -11,21 +11,26 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<NoWarn>$(NoWarn);1591</NoWarn>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Extentions\**" />
+	  <Content Remove="Extentions\**" />
+	  <EmbeddedResource Remove="Extentions\**" />
+	  <None Remove="Extentions\**" />
+	</ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
-    <PackageReference Include="FluentValidation" Version="11.7.1" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="7.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.17">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.12">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="7.0.17">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Serilog" Version="3.0.1" />
     <PackageReference Include="Serilog.Extensions.Logging" Version="7.0.0" />
     <PackageReference Include="Serilog.Formatting.Compact" Version="1.1.0" />
@@ -39,12 +44,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AloDoutor.Core\AloDoutor.Core.csproj" />
-    <ProjectReference Include="..\AloDoutor.Infra\AloDoutor.Infra.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extentions\" />
+    <ProjectReference Include="..\AloDoutor.Application\AloDoutor.Application.csproj" />
+    <ProjectReference Include="..\AloDoutor.Infrastructure\AloDoutor.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

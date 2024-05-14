@@ -1,28 +1,20 @@
-﻿using AloDoutor.Api.Application.DTO;
-using AloDoutor.Api.Application.ViewModel;
-using AloDoutor.Core.Controllers;
-using AloDoutor.Domain.Entity;
-using AloDoutor.Domain.Interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using AloDoutor.Application.Features.Medicos.Commands.AdicionarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.AtualizarMedico;
+using AloDoutor.Application.Features.Medicos.Commands.RemoverMedico;
+using AloDoutor.Application.Features.Medicos.Queries.ObterTodosMedicos;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
 {
-    [Authorize]
     [Route("Medico")]
-    public class MedicoController :  MainController<MedicoController>
+    public class MedicoController : MainController<MedicoController>
     {
-        private readonly IMedicoRepository _medicoRepository;
-        private readonly IMedicoService _medicoService;
-        private readonly IMapper _mapper;
+        private readonly IMediator _mediator;
         private readonly ILogger _logger;
-
-        public MedicoController(IMedicoRepository medicoRepository, IMapper mapper, IMedicoService medicoService, ILogger<MedicoController> logger) : base(logger)
+        public MedicoController(IMediator mediator, ILogger<MedicoController> logger) : base(logger)
         {
-            _medicoRepository = medicoRepository;
-            _mapper = mapper;
-            _medicoService = medicoService;
+            _mediator = mediator;
             _logger = logger;
         }
 
@@ -31,10 +23,10 @@ namespace AloDoutor.Api.Controllers
         /// </summary>
         /// <returns>Uma lista de médicos.</returns>
         [HttpGet]
-        public async Task<IActionResult> ObterTodos()
+        public async Task<ActionResult> ObterTodos()
         {
-            _logger.LogInformation("Endpoint de obtenção de todos médicos cadastrados.");
-            return CustomResponse(_mapper.Map<IEnumerable<MedicoViewModel>>(await _medicoService.ObterTodos()));
+            var medicos = await _mediator.Send(new ObterMedicosQuery());
+            return CustomResponse(medicos);
         }
 
         /// <summary>
@@ -45,8 +37,8 @@ namespace AloDoutor.Api.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult> ObterPorId(Guid id)
         {
-            _logger.LogInformation("Endpoint de obtenção de médico por ID.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterPorId(id)));
+            var medico = await _mediator.Send(new ObterMedicoPorIdQuery(id));
+            return CustomResponse(medico);
         }
 
         /// <summary>
@@ -57,8 +49,9 @@ namespace AloDoutor.Api.Controllers
         [HttpGet("MedicoEspecialidades/{idMedico:guid}")]
         public async Task<ActionResult> ObterMedicoEspecialidadePorIdMedico(Guid idMedico)
         {
-            _logger.LogInformation("Endpoint para obtenção de especialidades do médico por ID do médico.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterEspecialidadesPorIdMedico(idMedico)));
+            var medico = await _mediator.Send(new ObterEspecialidadePorIdMedicoQuery(idMedico));
+            return CustomResponse(medico);
+
         }
 
         /// <summary>
@@ -69,8 +62,8 @@ namespace AloDoutor.Api.Controllers
         [HttpGet("Agendamento/{idMedico:guid}")]
         public async Task<ActionResult> ObterAgendamentoPorMedico(Guid idMedico)
         {
-            _logger.LogInformation("Endpoint para obtenção de agendamentos por médico.");
-            return CustomResponse(_mapper.Map<MedicoViewModel>(await _medicoService.ObterAgendamentosPorIdMedico(idMedico)));
+            var medico = await _mediator.Send(new ObterAgendamentoMedicoPorIdMedicoQuery(idMedico));
+            return CustomResponse(medico);
         }
 
         /// <summary>
@@ -79,12 +72,13 @@ namespace AloDoutor.Api.Controllers
         /// <param name="medicoDTO">Os dados do médico a ser adicionado.</param>
         /// <returns>O médico adicionado ou um erro 400 em caso de falha na adição.</returns>
         [HttpPost]
-        public async Task<ActionResult> Adicionar(MedicoDTO medicoDTO)
+        public async Task<ActionResult> Adicionar(AdicionarMedicoCommand medico)
         {
 
-            _logger.LogInformation("Endpoint para cadastramento de medico.");
-            var validation = await _medicoService.Adicionar(_mapper.Map<Medico>(medicoDTO));
-           return validation.IsValid ?  Created("", medicoDTO) :  CustomResponse(validation);         
+            //_logger.LogInformation("Endpoint para cadastramento de medico.");
+            var response = await _mediator.Send(medico);
+            //return validation.IsValid ? Created("", medicoDTO) : CustomResponse(validation);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
 
         /// <summary>
@@ -93,10 +87,11 @@ namespace AloDoutor.Api.Controllers
         /// <param name="medicoDTO">Os novos dados do médico a ser atualizado.</param>
         /// <returns>Um código 201 em caso de sucesso na atualização ou um erro 400 em caso de falha.</returns>
         [HttpPut()]
-        public async Task<ActionResult> Atualizar(MedicoDTO medicoDTO)
+        public async Task<ActionResult> Atualizar(AtualizarMedicoCommand medico)
         {
+            var response = await _mediator.Send(medico);
             _logger.LogInformation("Endpoint para alteração de cadastro do médico.");
-            return CustomResponse(await _medicoService.Atualizar(_mapper.Map<Medico>(medicoDTO)));
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
 
         /// <summary>
@@ -105,10 +100,11 @@ namespace AloDoutor.Api.Controllers
         /// <param name="id">O ID do médico a ser removido.</param>
         /// <returns>Um código 201 em caso de sucesso na remoção ou um erro 404 se não encontrado.</returns>
         [HttpDelete]
-        public async Task<ActionResult> Remover(Guid id)
+        public async Task<ActionResult> Remover(RemoverMedicoCommand medico)
         {
-            _logger.LogInformation("Endpoint para excluir cadastro do médico.");
-            return CustomResponse(await _medicoService.Remover(id));
+            var response = await _mediator.Send(medico);
+            _logger.LogInformation("Endpoint para remoção de cadastro do médico.");
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
     }
 }

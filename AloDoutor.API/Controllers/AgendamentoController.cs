@@ -1,34 +1,21 @@
-﻿using AloDoutor.Api.Application.DTO;
-using AloDoutor.Api.Application.ViewModel;
-using AloDoutor.Core.Controllers;
-using AloDoutor.Core.Usuario;
-using AloDoutor.Domain.Entity;
-using AloDoutor.Domain.Interfaces;
-using AloDoutor.Domain.Services;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
+﻿using AloDoutor.Application.Features.Agendamentos.Commands.AdicionarAgendamento;
+using AloDoutor.Application.Features.Agendamentos.Commands.AtualizarAgendamento;
+using AloDoutor.Application.Features.Agendamentos.Commands.RemoverAgendamento;
+using AloDoutor.Application.Features.Agendamentos.Queries;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AloDoutor.Api.Controllers
 {
-    [Authorize]
     [Route("api")]
     public class AgendamentoController : MainController<AgendamentoController>
     {
-        private readonly IAspNetUser _user;
-        private readonly IAgendamentoService _agendamentoService;
-        private readonly IAgendamentoRepository _agendamentoRepository;
-        private readonly IMapper _mapper;
         private readonly ILogger _logger;
-
-        public AgendamentoController(IAgendamentoService agendamentoService, IMapper mapper, 
-            IAgendamentoRepository agendamentoRepository, ILogger<AgendamentoController> logger, IAspNetUser user) : base(logger)
+        private readonly IMediator _mediator;
+        public AgendamentoController(ILogger<AgendamentoController> logger, IMediator mediator) : base(logger)
         {
-            _agendamentoService = agendamentoService;
-            _mapper = mapper;
-            _agendamentoRepository = agendamentoRepository;
             _logger = logger;
-            _user = user;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -38,9 +25,8 @@ namespace AloDoutor.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> ObterTodos()
         {
-            _logger.LogInformation("Endpoint de obtenção de todos agendamentos cadastrados.");
-           
-             return CustomResponse(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoService.ObterTodos()));
+            var agendamentos = await _mediator.Send(new ObterAgendamentoQuery());
+            return CustomResponse(agendamentos);
         }
 
         /// <summary>
@@ -51,8 +37,8 @@ namespace AloDoutor.Api.Controllers
         [HttpGet("{id:guid}")]
         public async Task<ActionResult> ObterPorId(Guid id)
         {
-            _logger.LogInformation("Endpoint de obtenção de agendamento por ID.");
-            return CustomResponse(_mapper.Map<AgendamentoViewModel>(await _agendamentoService.ObterPorId(id)));
+            var agendamento = await _mediator.Send(new ObterAgendamentoPorIdQuery(id));
+            return CustomResponse(agendamento);
         }
 
         /// <summary>
@@ -63,8 +49,8 @@ namespace AloDoutor.Api.Controllers
         [HttpGet("Por-status/{status:int}")]
         public async Task<ActionResult> ObterAgendamentoPorStatus(int status)
         {
-            _logger.LogInformation("Endpoint de obtenção de agendamentos por status.");
-            return CustomResponse(_mapper.Map<IEnumerable<AgendamentoViewModel>>(await _agendamentoService.ObterAgendamentosPorIStatus(status)));
+            var agendamentos = await _mediator.Send(new ObterAgendamentoPorStatusQuery(status));
+            return CustomResponse(agendamentos);
         }
 
         /// <summary>
@@ -73,11 +59,11 @@ namespace AloDoutor.Api.Controllers
         /// <param name="agendamentoDTO">Os dados do agendamento a ser adicionado.</param>
         /// <returns>O agendamento adicionado ou um erro 400 em caso de falha na adição.</returns>
         [HttpPost("Cadastrar")]
-        public async Task<ActionResult> Adicionar(AgendamentoDTO agendamentoDTO)
+        public async Task<ActionResult> Adicionar(AdicionarAgendamentoCommand agendamento)
         {
             _logger.LogInformation("Endpoint para cadastramento de agendamento.");
-            var validation = await _agendamentoService.Adicionar(_mapper.Map<Agendamento>(agendamentoDTO));            
-            return validation.IsValid ? Created("", agendamentoDTO) : CustomResponse(validation);
+            var response = await _mediator.Send(agendamento);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
 
         /// <summary>
@@ -87,10 +73,11 @@ namespace AloDoutor.Api.Controllers
         /// <param name="data">A nova data de agendamento.</param>
         /// <returns>Um código 201 em caso de sucesso no reagendamento ou um erro 400 em caso de falha.</returns>
         [HttpPut("Reagendar/{id:guid}/{data:datetime}")]
-        public async Task<ActionResult> Cancelar(Guid id, DateTime data)
+        public async Task<ActionResult> Reagendar(RealizarReagendamentoCommand agendamento)
         {
             _logger.LogInformation("Endpoint para realizar um reagendamento.");
-            return CustomResponse(await _agendamentoService.Reagendar(id, data));
+            var response = await _mediator.Send(agendamento);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
 
         /// <summary>
@@ -99,10 +86,11 @@ namespace AloDoutor.Api.Controllers
         /// <param name="id">O ID do agendamento a ser cancelado.</param>
         /// <returns>Um código 201 em caso de sucesso no cancelamento ou um erro 400 em caso de falha.</returns>
         [HttpPut("Cancelar")]
-        public async Task<ActionResult> Cancelar(Guid id)
+        public async Task<ActionResult> Cancelar(RemoverAgendamentoCommand agendamento)
         {
             _logger.LogInformation("Endpoint para cancelar o agendamento por ID.");
-            return CustomResponse(await _agendamentoService.Cancelar(id));
+            var response = await _mediator.Send(agendamento);
+            return CreatedAtAction(nameof(ObterTodos), new { id = response });
         }
     }
 }

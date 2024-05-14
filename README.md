@@ -51,8 +51,6 @@ Este projeto faz parte do trabalho de conclusão da terceira fase da POSTECH FIA
 | [Serilog](https://serilog.net/)                                    | Captura de Logs                             |
 | [Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/)    | Editor de Código                            |
 | [Docker](https://www.docker.com/)                                  | Criação de Containers                       |
-| [RabbiMQ](https://www.rabbitmq.com/)                               | Message Broker                              |
-| [Mass Transit](https://masstransit.io/)                            | Software de Barramento                      |
 
 [voltar](#índice)
 
@@ -72,9 +70,7 @@ Existem duas opções para executar o projeto, utilizando o Docker ou executando
 3. Clone o repositório
 4. No terminal vá até a pasta `/AloDoutor` e execute o comando `docker-compose up -d` para executar os containers das aplicações, SQL Server e do RabbitMQ
 5. Abra o navegador e acesse:
-    -  [http://localhost:9090/swagger](http://localhost:9090/swagger) para a API de autenticação e autorização
     -  [http://localhost:9091/swagger](http://localhost:9091/swagger) para a API AloDoutor
-    -  [http://localhost:9092/swagger](http://localhost:9092/swagger) para a API AloFinances
 
 [voltar](#índice)
 
@@ -84,21 +80,9 @@ Existem duas opções para executar o projeto, utilizando o Docker ou executando
 2. No terminal execute os seguintes comandos para baixar a imagem e executar o container do Banco SQL Server
    - `docker pull mcr.microsoft.com/mssql/server`
    - `docker run -v ~/docker --name sqlserver -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=1q2w3e4r@#$" -p 1433:1433 -d mcr.microsoft.com/mssql/server`
-2. Na **appsettings.Development.json**  dos projetos `AloDoutor.Api`, `AloFinances.Api` e `Identidade.Api` e substitua o valor na chave DefaultConnection pela seguinte string de conexão.
+2. Na **appsettings.Development.json**  dos projetos `AloDoutor.Api` e substitua o valor na chave DefaultConnection pela seguinte string de conexão.
    1. Na AloDoutor.Api
       - `Server=localhost,1433;Database=AloDoutor;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;`
-   2. Na Identidade.Api
-      - `Server=localhost,1433;Database=AloIdentidade;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;`
-   3. Na AloFinances.Api
-      - `Server=localhost,1433;Database=AloFinances;User ID=sa;Password=1q2w3e4r@#$;Trusted_Connection=False; TrustServerCertificate=True;`
-
-      
-3. No terminal execute o seguinte comando para baixar a imagem e executar o container do RabbitMQ no Docker
-    - `docker pull masstransit/rabbitmq` 
-    - `docker run -p 15672:15672 -p 5672:5672 masstransit/rabbitmq`
-    - Usuário e senha padrão:
-        - Usuário: **guest**
-        - Senha: **guest**
 
 4. No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
 
@@ -106,53 +90,10 @@ Existem duas opções para executar o projeto, utilizando o Docker ou executando
     - Volte na pasta `/AloDoutor.Api` execute o comando `dotnet run` para executar o projeto
     - Abra um novo terminal na pasta `/Identidade.Api` execute o comando `dotnet run` para executar o projeto
     - Abra o navegador e acesse:
-        -  `http://localhost:5002/swagger/index.html` para a API de autenticação e autorização
         -  `http://localhost:5001/swagger/index.html` para a API AloDoutor 
-        -  `http://localhost:5003/swagger/index.html` para a API de finanças
 
 [voltar](#índice)
 
-### Autenticação e autorização
-
-- A aplicação cria um usuário padrão para testes com as seguintes credenciais:
-    - Email (login): **postechdotnet@gmail.com**
-    - Senha: **Pos@123**
-    - Perfil: **Administrador**
-
-- Com esse usuário é possível cadastrar novos usuários e realizar o login para acessar as funcionalidades do sistema.
-- Usuários não administradores não tem acesso a funcionalidades de cadastro de usuários. Somente as funcionalidades da API AloDoutor
-- Como fazer a autenticção:
-    - A autenticação é na API de Autenticação e Autorização
-    - Caso o login seja feito com sucesso onde um token JWT será gerado
-    - Este token deve ser utilizado na API AloDoutor para autorização dos endpoints e o token gerado é utilizado para autorizar o acesso as funcionalidades do sistema.
-
-[voltar](#índice)
-
-### Como funciona a comunicação entre os microsserviços
-#### Fluxograma Mensageria
-
-![FLuxograma Mensageria](./documentacao/imagens/Fluxograma_Broker.png)
-
-#### API AloDoutor
-1) **Paciente**
-    1. Quando é realizado um cadastro ou Atualização de um paciente é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteEvent*
-	2. Quando algum paciente é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *PacienteRemovidoEvent*
-2) **Médico**
-	1. Quando é realizado um cadastro ou Atualização de um médico é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoEvent*
-	2. Quando algum médico é removido, é disparado uma mensagem na fila do RabbitMQ do tipo *MedicoRemovidoEvent*	
-3) **Agendamento**
-	1. Quando é realizado um reagendamento ou cadastro de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoRealizadoEvent*
-	2. Quando é realizado um cancelamento de um agendamento é disparado uma mensagem na fila do RabbitMQ do tipo *AgendamentoCanceladoEvent*.
-
-	
-#### API AloFinances
-É uma api desenvolvida para gerencias as contas a receber com base nos agendamentos realizados na API Alo Doutor. Ela fica escutando as mensagens na fila do RabbitMQ dos tipos que vou destacar em seguida
-- *MedicoEvent*: Esse tipo de mensagem recebida basicamente serve para cadastrar ou atualizar um médico.
-- *MedicoRemovidoEvent*: Esse tipo de mensagem recebida é utilizado para remover um médico.
-- *PacienteEvent*:  Esse tipo de mensagem recebida basicamente serve para cadastrar ou atualizar um Paciente.
-- *PacienteRemovidoEvent*: Esse tipo de mensagem recebida é utilizado para remover um Paciente.
-- *AgendamentoRealizadoEvent*: Esse tipo de mensagem recebida basicamente serve para cadastrar ou atualizar uma conta.
-- *AgendamentoCanceladoEvent*: Esse tipo de mensagem recebida é utilizado para cancelar uma conta.
 
 ### Exemplo: Cadastro de Paciente
 

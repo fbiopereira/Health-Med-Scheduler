@@ -9,9 +9,6 @@
   - [Como Executar o Projeto](#como-executar-o-projeto)
     - [Execução com Docker (recomendada)](#execução-com-docker-recomendada)
     - [Execução local](#execução-local)
-    - [Como funciona a comunicação entre os microsserviços](#como-funciona-a-comunicação-entre-os-microsserviços)
-      - [API AloDoutor](#api-alodoutor)
-    - [Exemplo: Cadastro de Paciente](#exemplo-cadastro-de-paciente)
   - [Levantamento de Requisitos](#levantamento-de-requisitos)
     - [Histórico da Clínica](#histórico-da-clínica)
     - [DDD](#ddd)
@@ -91,43 +88,6 @@ Existem duas opções para executar o projeto, utilizando o Docker ou executando
 
 [voltar](#índice)
 
-
-### Exemplo: Cadastro de Paciente
-
-Segue abaixo um exemplo da API AloDoutor produzindo uma mensagem e publicando, o RabbitMQ recebe e é consumida pela API AloFinances.
-
-Antes devemos nos autenticar utilizando a Identidade.Api com o [usuário e a senha](#autenticação-e-autorização) que foram apresentados acima.
-
-![Autenticacao1](./documentacao/imagens/Autenticacao1.png)
-
-Copie o token que é fornecido após a autenticação.
-
-![Autenticacao2](./documentacao/imagens/Autenticacao2.png)
-
-Acesse a AloDoutor.Api e clique no botão Authorize
-
-![Autenticacao3](./documentacao/imagens/Autenticacao3.png)
-
-Agora é possível cadastrar um novo paciente.
-
-Quando é realizado um cadastro de paciente na API AloDoutor, vide imagem abaixo.
-
-![Cadastro Endpoint](./documentacao/imagens/AloFinances_1.png)
-
-É realizado a persistência dos dados na api AloDoutor, e caso o cadastro tenha sido realizado com sucesso é disparado uma mensagem do tipo “PacienteEvent”, como mostra a imagem abaixo: 
-
-![Exemplo Visual Studio 1](./documentacao/imagens/AloFinances_2.png)
-
-Mensagem disparada na fila do RabbitMQ aguardando ser consumida:
-
-![Fila do RabbitMQ](./documentacao/imagens/AloFinances_3.png)
-
-Do outro lado temos outro sistema que fica “escutando” essa fila. Quando executamos o projeto “Alo Finances” ela vai consumir essa mensagem como mostra a imagem abaixo: 
-
-![Exemplo Visual Studio 2](./documentacao/imagens/AloFinances_4.png)
-
-E posteriormente realizado toda a validação para depois ser persistido na base AloFinances.
-Todo esse processo ocorre da mesma maneira para Médicos e Agendamentos, onde cada um obedece a sua regra de negócio.
 
 ## Levantamento de Requisitos
 

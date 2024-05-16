@@ -60,6 +60,7 @@ a - Instale o SQL Server 2022 Developer na sua máquina
 b - Instale o SQL Server Management Studio
         - https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms     
 c - Crie uma base de dados com o nome AloDoutor
+
 d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o AloDoutor como banco default e de as devidas permissões de escrita nessa base de dados    
 
 2- Clone este repositório

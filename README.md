@@ -49,7 +49,7 @@ Richard Kendy Tanaka| 351234 | https://github.com/RichardKT88
 ## Solução
 Desenvolvimento de uma Web Api em .NET Core com uma abordagem em Code First Migrations, e o Entity Framework para a persistência dos dados em um banco de dados Sql Server.
 
-Na arquitetira de software utilizamos os conceitos da Clean Architecture e os pacotes estão divididos de acordo com a imagem abaixo:
+Na arquitetura de software utilizamos os conceitos da Clean Architecture e o projeto está estruturado de acordo com a imagem abaixo:
 
 ![Clean Architecture](./documentacao/imagens/Clean_AloDoutor.png)
 

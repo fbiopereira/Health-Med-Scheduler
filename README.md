@@ -43,7 +43,6 @@ Richard Kendy Tanaka| 351234 | https://github.com/RichardKT88
 [Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/) | Editor de Código
 [Run Coverlet Report](https://github.com/the-dext/RunCoverletReport/blob/master/README.md) | Plugin do Visual Studio para analisar a cobertura de testes
 
-
 [voltar](#índice)
 
 ## Solução
@@ -53,13 +52,14 @@ Na arquitetira de software utilizamos os conceitos da Clean Architecture e os pa
 
 ![Clean Architecture](./documentacao/imagens/Clean_AloDoutor.png)
 
-
+Na arquitetira de software utilizamos os conceitos da Clean Architecture
 
 [voltar](#índice)
 
 ## Como Executar o Projeto
 
 1- Preparando a base de dados
+feature/documentacao-fp
 
 a - Instale o SQL Server 2022 Developer na sua máquina
         - https://www.microsoft.com/pt-br/sql-server/sql-server-downloads        
@@ -88,12 +88,29 @@ Foram criados dois projetos para os testes automatizados:
 - AloDoutor.Api.IntegrationTests
     - Aqui testamos a API em si fazendo chamadas reais para a mesma e salvando as informações na base de dados
 
+
+a - Instale o SQL Server 2022 Developer na sua máquina
+        - https://www.microsoft.com/pt-br/sql-server/sql-server-downloads        
+b - Instale o SQL Server Management Studio
+        - https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms     
+c - Crie uma base de dados com o nome AloDoutor
+
+d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o AloDoutor como banco default e de as devidas permissões de escrita nessa base de dados    
+
+2- Clone este repositório
+
+3- No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
+
+4- Execute o comando `dotnet run` na mesma pasta `/AloDoutor` para executar o projeto. As tabelas serão criadas automaticamente    
+    - Acesse a documentação da API em:        
+        -  `http://localhost:5001/swagger` 
+
+
 A cobertura alcançada está demonstrada pelas imagens abaixo:
 
 ![Cobertura de Testes 1](./documentacao/imagens/cobertura_testes_1.png)
 
 ![Cobertura de Testes 2](./documentacao/imagens/cobertura_testes_2.png)
-
 
 ## Levantamento de Requisitos
 

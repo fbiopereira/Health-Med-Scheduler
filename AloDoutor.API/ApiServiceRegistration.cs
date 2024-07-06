@@ -14,7 +14,8 @@ namespace AloDoutor.Api
         public static IServiceCollection AddApiConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MeuDbContext>(options =>
-               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+               options.UseSqlServer(Environment.GetEnvironmentVariable("DefaultConnection")));
+
 
             services.AddControllers();
 

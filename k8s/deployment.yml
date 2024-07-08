@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: movies-deployment
+  namespace: alo-doutor-namespace
+spec:
+  selector:
+    matchLabels:
+      app: alo-doutor-app
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alo-doutor-app
+    spec:
+      serviceAccount: <SERV_ACCOUNT>
+      containers:
+      - name: alo-doutor-container
+        image: fbiopereira/alo-doutor-namespace:latest
+        ports:
+        - containerPort: 4040
+        env:
+        - name: aspnetcore_environment
+          value: Release
+        - name: ConnectionString
+          value: Server=localhost;Database=AloDoutor;User ID=sa;Password=P@ssw0rd;Trusted_Connection=False; TrustServerCertificate=True;MultipleActiveResultSets=True       
+        imagePullPolicy: Always
+        resources:
+          requests:
+            memory: "0Mi"
+            cpu: "0m"
+          limits:
+            memory: "300Mi"
+            cpu: "200m"
+    

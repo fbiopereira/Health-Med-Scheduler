@@ -3,13 +3,13 @@ version: "3.7"
 services:
   api-alodoutor:
     container_name: "api-alodoutor"
-    image: "alo-doutor:latest"
+    image: "fbiopereira/alo-doutor:latest"
     build: 
       context: .
       dockerfile: ./AloDoutor.API/Dockerfile
     restart: "always"
     ports:
-      - "9191:80"
+      - "4040:4040"
     environment:
       aspnetcore_environment: "Release"
       ConnectionString: "Server=localhost;Database=AloDoutor;User ID=sa;Password=P@ssw0rd;Trusted_Connection=False; TrustServerCertificate=True;MultipleActiveResultSets=True"

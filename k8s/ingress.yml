@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alo-doutor-ingress
+  namespace: alo-doutor-namespace
+spec:
+  rules:
+  - host: <HOST>
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: alo-doutor-service
+            port: 
+              number: 80

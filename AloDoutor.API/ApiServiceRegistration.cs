@@ -14,7 +14,7 @@ namespace AloDoutor.Api
         public static IServiceCollection AddApiConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MeuDbContext>(options =>
-               options.UseSqlServer(Environment.GetEnvironmentVariable("DefaultConnection")));
+               options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionString")));
 
 
             services.AddControllers();
@@ -103,12 +103,7 @@ namespace AloDoutor.Api
             var logConfig = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .Enrich.WithProperty("Application", "AloDoutor")
-                .ReadFrom.Configuration(configuration)
-                .WriteTo.File(
-                    new CompactJsonFormatter(),
-                    GetLogFilePath(environment),
-                    rollingInterval: RollingInterval.Day,
-                    retainedFileCountLimit: null)
+                .ReadFrom.Configuration(configuration)                
                 .WriteTo.Console(new CompactJsonFormatter())
                 .CreateLogger();
 

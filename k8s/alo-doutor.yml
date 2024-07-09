@@ -14,16 +14,14 @@ spec:
     spec:
       containers:
         - name: alo-doutor
-          image: fbiopereira/alo-doutor:latest
-          env:
-          - name: ASPNETCORE_HTTP_PORTS
-            value: "4141"
+          image: "fbiopereira/alo-doutor:latest"
+          env:        
           - name: "aspnetcore_environment"
-            value: "Release"
+            value: "Staging"          
           - name: "ConnectionString"
-            value: "Server=sql-server;Database=AloDoutor;User ID=sa;Password=P@ssw0rd;Trusted_Connection=False; TrustServerCertificate=True;MultipleActiveResultSets=True"
+            value: "Server=192.168.50.179;Database=AloDoutor;User ID=sa;Password=P@ssw0rd;Trusted_Connection=False; TrustServerCertificate=True;MultipleActiveResultSets=True"
           ports:
-            - containerPort: 4141
+            - containerPort: 4040
 ---
 apiVersion: v1
 kind: Service
@@ -33,6 +31,23 @@ spec:
   selector:
     app: alo-doutor
   ports:
-    - port: 80
-      targetPort: 4141      
+    - port: 4040
+      targetPort: 4040      
   type: ClusterIP
+---    
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alo-doutor  
+spec:
+  rules:
+  - host: alo-doutor.127.0.0.1.nip.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: alo-doutor
+            port: 
+              number: 4040

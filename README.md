@@ -5,7 +5,8 @@
     - [Integrantes](#integrantes)  
     - [Tecnologias Utilizadas](#tecnologias-utilizadas)
     - [Solução](#solução)
-        - [Como Executar o Projeto](#como-executar-o-projeto)            
+        - [Como Executar o Projeto](#como-executar-o-projeto)    
+        - [Como Executar o Projeto no Kubernetes](#como-executar-o-projeto-no-kubernetes)            
   - [Levantamento de Requisitos](#levantamento-de-requisitos)
     - [Histórico da Clínica](#histórico-da-clínica)
     - [DDD](#ddd)
@@ -75,6 +76,48 @@ d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o AloDouto
 4- Execute o comando `dotnet run` na mesma pasta `/AloDoutor` para executar o projeto. As tabelas serão criadas automaticamente    
     - Acesse a documentação da API em:        
         -  `http://localhost:5001/swagger` 
+
+[voltar](#índice)
+
+## Como Executar o Projeto no Kubernetes
+
+1- Preparando a base de dados
+
+a - Instale o SQL Server 2022 Developer na sua máquina
+        - https://www.microsoft.com/pt-br/sql-server/sql-server-downloads        
+b - Instale o SQL Server Management Studio
+        - https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms
+
+2- Instalando o Kubernetes
+
+a- Para utilizar o kubernetes recomendo o Rancher Desktop com containerd   
+    https://rancherdesktop.io/
+
+3- Instalando o Ingress Controller
+
+a- Para acessar a aplicação no Kubernetes sem port forward você precisará de um ingress controller. Para isso instale o Helm:
+    https://helm.sh/
+
+b- Com o helm instalado adicione o repositório do NGINX no mesmo com o seguinte comando:
+``` 
+helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+helm repo update
+helm install ingress-nginx-controller ingress-nginx/ingress-nginx
+```
+
+3- Executando a aplicação
+
+a- Abra o arquivo (./k8s/alo-doutor.yml)
+
+b- Altere a linha 22 para ter o IP correto da sua máquina
+
+c- Salve o arquivo e no diretorio k8s digite:
+```
+kubectl apply -f .\alo-doutor.yml
+```
+
+d- Acesse a url http://alo-doutor.127.0.0.1.nip.io/swagger
+
 
 [voltar](#índice)
 

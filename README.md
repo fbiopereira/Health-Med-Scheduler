@@ -90,8 +90,12 @@ b - Instale o SQL Server Management Studio
 
 2- Instalando o Kubernetes
 
-a- Para utilizar o kubernetes recomendo o Rancher Desktop com containerd   
+a- Você pode utilizar qualquer instância de Kubernetes. A aqui utilizamos o Rancher Desktop:  
     https://rancherdesktop.io/
+
+b- Durante a instalação utilize a opção abaixo, assim você não vai ter nenhum tipo de conflito caso tenha o Docker Desktop instalado:
+
+![Rancher Desktop com Containerd](./documentacao/imagens/instalacao-rancher.png)
 
 3- Instalando o Ingress Controller
 

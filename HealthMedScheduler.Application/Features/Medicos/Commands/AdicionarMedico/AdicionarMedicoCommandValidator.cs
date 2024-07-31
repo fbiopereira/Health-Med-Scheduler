@@ -20,12 +20,22 @@ namespace HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedi
 
             RuleFor(x => x.Endereco)
                 .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório")
-                .MinimumLength(2).WithMessage("O campo {PropertyName} precisa ter mais que {MinLength} caracteres");
-            
+                .MinimumLength(2).WithMessage("O campo {PropertyName} precisa ter mais que {MinLength} caracteres");            
 
             RuleFor(x => x.Estado)
                 .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório")
-                .MinimumLength(2).WithMessage("O campo {PropertyName} precisa ter mais que {MinLength} caracteres");            
+                .MinimumLength(2).WithMessage("O campo {PropertyName} precisa ter mais que {MinLength} caracteres");
+
+            RuleFor(x => x.Email)
+                .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório")
+                .EmailAddress().WithMessage("O campo {PropertyName} deve conter um e-mail válido");
+
+            RuleFor(x => x.Password)
+                .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório");
+
+            RuleFor(x => x.ConfirmPassword)
+                .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório")
+                .Equal(x => x.Password).WithMessage("As senhas não coincidem");
 
             RuleFor(x => x.Crm)
                 .NotEmpty().WithMessage("O campo {PropertyName} é obrigatório")

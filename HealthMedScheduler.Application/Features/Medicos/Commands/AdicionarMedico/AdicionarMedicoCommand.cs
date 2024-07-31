@@ -5,7 +5,7 @@ namespace HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedi
     public class AdicionarMedicoCommand : IRequest<Guid>
     {
         public AdicionarMedicoCommand() { }
-        public AdicionarMedicoCommand(string? nome, string? cpf, string? cep, string? endereco, string? estado, string? crm, string? telefone)
+        public AdicionarMedicoCommand(string? nome, string? cpf, string? cep, string? endereco, string? estado, string? crm, string? telefone, string email, string password, string confirmPassword)
         {
             Nome = nome;
             Cpf = cpf;
@@ -14,6 +14,9 @@ namespace HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedi
             Estado = estado;
             Crm = crm;
             Telefone = telefone;
+            Email = email;
+            Password = password;
+            ConfirmPassword = confirmPassword;
         }
 
         public string? Nome { get; set; }
@@ -23,5 +26,8 @@ namespace HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedi
         public string? Estado { get; set; }
         public string? Crm { get; set; }
         public string? Telefone { get; set; }
+        public string? Email { get; set; }
+        public string? Password { get; set; }
+        public string? ConfirmPassword { get; set; }
     }
 }

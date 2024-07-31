@@ -1,5 +1,6 @@
 ﻿using HealthMedScheduler.Domain.Entity;
 using HealthMedScheduler.Domain.Interfaces;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthMedScheduler.Infrastructure.Data.Context
@@ -30,5 +31,5 @@ namespace HealthMedScheduler.Infrastructure.Data.Context
             var sucesso = await base.SaveChangesAsync() > 0;
             return sucesso;
         }
-    }
+    }   
 }

@@ -1,13 +1,16 @@
-﻿using HealthMedScheduler.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
+﻿using Health.Core.Controllers;
+using HealthMedScheduler.Application.Features.EspecialidadesMedicos.Commands.AdicionarEspecialidadeMedico;
 using HealthMedScheduler.Application.Features.EspecialidadesMedicos.Commands.AtualizarEspecialidadeMedico;
 using HealthMedScheduler.Application.Features.EspecialidadesMedicos.Commands.RemoverEspecialidadeMedico;
 using HealthMedScheduler.Application.Features.EspecialidadesMedicos.Queries;
 using HealthMedScheduler.Domain.Entity;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMedScheduler.Api.Controllers
 {
+    [Authorize]
     [Route("api/especialidade-medico")]
     public class EspecialidadeMedicoController : MainController<EspecialidadeMedicoController>
     {

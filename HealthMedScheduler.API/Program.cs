@@ -11,6 +11,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddInfrastructureServices();
+builder.Services.AddIdentityConfiguration(builder.Configuration);
 builder.Services.AddApplicationServices();
 
 builder.Services.AddApiConfig(builder.Configuration);

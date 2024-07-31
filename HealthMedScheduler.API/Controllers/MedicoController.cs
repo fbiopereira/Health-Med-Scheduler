@@ -1,4 +1,5 @@
-﻿using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedico;
+﻿using Health.Core.Controllers;
+using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedico;
 using HealthMedScheduler.Application.Features.Medicos.Commands.AtualizarMedico;
 using HealthMedScheduler.Application.Features.Medicos.Commands.RemoverMedico;
 using HealthMedScheduler.Application.Features.Medicos.Queries.ObterTodosMedicos;

@@ -41,7 +41,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Agendamentos.Command
             //Arrange
             var agendamentoCommand = new AdicionarAgendamentoCommand
             {
-                DataHoraAtendimento = DateTime.Parse("2024-05-09 09:00:00"),
+                DataHoraAtendimento = DateTime.Parse("2024-10-09 09:00:00"),
                 EspecialidadeMedicoId = especialidadeMedico.Id,
                 PacienteId = paciente.Id,
             };

@@ -16,6 +16,7 @@ namespace HealthMedScheduler.Infrastructure.Data.Context
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<EspecialidadeMedico> EspecialideMedicos { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
+        public DbSet<AgendaMedico> AgendasMedico { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

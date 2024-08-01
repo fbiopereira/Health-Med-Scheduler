@@ -43,9 +43,9 @@ namespace HealthMedScheduler.Application.UnitTests.Features.EspecialidadesMedico
                 DataRegistro = DateTime.Parse("2024-05-03")
             };
 
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterPorId(medico.Id)).ReturnsAsync(medico);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterPorId(medico.Id)).ReturnsAsync(medico);
             _mocker.GetMock<IEspecialidadeRepository>().Setup(r => r.Adicionar(It.IsAny<Especialidade>())).Returns(Task.CompletedTask);
             _mocker.GetMock<IEspecialidadeRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
             _mocker.GetMock<IEspecialidadeRepository>().Setup(r => r.ObterPorId(especialidade.Id)).ReturnsAsync(especialidade);

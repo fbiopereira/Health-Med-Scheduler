@@ -6,8 +6,8 @@ namespace HealthMedScheduler.Application.Features.Medicos.Commands.RemoverMedico
 {
     public class RemoverMedicoCommandHandler : IRequestHandler<RemoverMedicoCommand, Guid>
     {
-        private readonly IMedicoRepository _medicoRepository;
-        public RemoverMedicoCommandHandler(IMedicoRepository medicoRepository)
+        private readonly IAgendaMedicoRepository _medicoRepository;
+        public RemoverMedicoCommandHandler(IAgendaMedicoRepository medicoRepository)
         {
             _medicoRepository = medicoRepository;
         }

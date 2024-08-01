@@ -23,6 +23,7 @@ namespace HealthMedScheduler.Infrastructure
             services.AddScoped<IEspecialidadeMedicoRepository, EspecialidadeMedicoRepository>();
             services.AddScoped<IEspecialidadeRepository, EspecialidadeRepository>();
             services.AddScoped<IMedicoRepository, MedicoRepository>();
+            services.AddScoped<IAgendaMedicoRepository, AgendaMedicoRepository>();
             services.AddScoped<IPacienteRepository, PacienteRepository>();
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 

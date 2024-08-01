@@ -4,13 +4,12 @@ namespace HealthMedScheduler.Domain.Entity
 {
     public class AgendaMedico : Entidade
     {
-        public AgendaMedico(Guid medicoId, DayOfWeek diaSemana, TimeSpan horaInicio, TimeSpan horaFim, Medico medico)
+        public AgendaMedico(Guid medicoId, DayOfWeek diaSemana, TimeSpan horaInicio, TimeSpan horaFim)
         {
             MedicoId = medicoId;
             DiaSemana = diaSemana;
             HoraInicio = horaInicio;
             HoraFim = horaFim;
-            Medico = medico;
         }
 
         public AgendaMedico() { }
@@ -20,5 +19,15 @@ namespace HealthMedScheduler.Domain.Entity
         public TimeSpan HoraInicio { get; private set; }
         public TimeSpan HoraFim { get; private set; }
         public Medico Medico { get; private set; }
-    }
+
+        public void AtualizarHoraInicio(TimeSpan horaInicio)
+        {
+            HoraInicio = horaInicio;
+        }
+
+        public void AtualizarHoraFim(TimeSpan horaFim)
+        {
+            HoraFim = horaFim;
+        }
+       }
 }

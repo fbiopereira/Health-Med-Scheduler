@@ -33,7 +33,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Queries
         public async Task Handler_DeveRetornarListaDeMedicos_DeveExecutarComSucesso()
          {
             var medicos = new List<MedicoViewModel> { new MedicoViewModel { /* Propriedades do médico */ } };
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterTodos()).ReturnsAsync(new List<Medico>());
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterTodos()).ReturnsAsync(new List<Medico>());
            
             var query = new ObterMedicosQuery();
 
@@ -51,7 +51,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Queries
         public async Task Handler_DeveRetornarMedicoPorId_DeveExecutarComSucesso()
         {
             var idMedico = Guid.NewGuid();
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterPorId(idMedico)).ReturnsAsync(new Medico());
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterPorId(idMedico)).ReturnsAsync(new Medico());
 
             var query = new ObterMedicoPorIdQuery(idMedico);
 
@@ -68,7 +68,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Queries
         public async Task Handler_DeveRetornarEspecialidadesMedicoPorId_DeveExecutarComSucesso()
         {
             var idMedico = Guid.NewGuid();
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterEspecialidadesPorIdMedico(idMedico)).ReturnsAsync(new Medico());
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterEspecialidadesPorIdMedico(idMedico)).ReturnsAsync(new Medico());
 
             var query = new ObterEspecialidadePorIdMedicoQuery(idMedico);
 
@@ -85,7 +85,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Queries
         public async Task Handler_DeveRetornarAgendamentosMedicoPorId_DeveExecutarComSucesso()
         {
             var idMedico = Guid.NewGuid();
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterAgendamentosPorIdMedico(idMedico)).ReturnsAsync(new Medico());
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterAgendamentosPorIdMedico(idMedico)).ReturnsAsync(new Medico());
 
             var query = new ObterAgendamentoMedicoPorIdMedicoQuery(idMedico);
 

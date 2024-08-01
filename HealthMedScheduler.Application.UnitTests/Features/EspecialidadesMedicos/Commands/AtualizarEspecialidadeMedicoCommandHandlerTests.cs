@@ -58,9 +58,9 @@ namespace HealthMedScheduler.Application.UnitTests.Features.EspecialidadesMedico
             _mocker.GetMock<IEspecialidadeRepository>().Setup(r => r.ObterPorId(especialidade.Id)).ReturnsAsync(especialidade);
 
             //EspecialidadeMedico
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterPorId(medico.Id)).ReturnsAsync(medico);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterPorId(medico.Id)).ReturnsAsync(medico);
 
             //Act
             var validationResult = await validator.ValidateAsync(especialidadeMedicoCommand);

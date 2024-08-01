@@ -8,7 +8,7 @@ namespace HealthMedScheduler.Application.UnitTests.Mocks
 {
     public class MockMedicoRepository
     {
-        public static Mock<IMedicoRepository> ObterTodosMockMedicoRepository()
+        public static Mock<IAgendaMedicoRepository> ObterTodosMockMedicoRepository()
         {
             var listaMedicos = new List<Medico>
             {
@@ -19,7 +19,7 @@ namespace HealthMedScheduler.Application.UnitTests.Mocks
 
             var unitOfWorkMock = new Mock<IUnitOfWork>();
 
-            var mockMedicoRepo = new Mock<IMedicoRepository>();
+            var mockMedicoRepo = new Mock<IAgendaMedicoRepository>();
             mockMedicoRepo.Setup(x => x.UnitOfWork).Returns(unitOfWorkMock.Object);
 
             //Mock para obter todos os medicos

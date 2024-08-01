@@ -13,7 +13,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Commands
     public class AtualizarMedicoCommandHandlerTests
     {
         private readonly IMapper _mapper;
-        private readonly Mock<IMedicoRepository> _mockMedicoRepo;
+        private readonly Mock<IAgendaMedicoRepository> _mockMedicoRepo;
         private readonly AtualizarMedicoCommandHandler _medicoHandler;
         private readonly MedicoTestsAutoMockerFixture _medicofixture;
         private readonly AutoMocker _mocker;
@@ -39,9 +39,9 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Commands
             var medicoOriginal = _medicofixture.GerarMedicoValido();
             var medicoUpdate = _medicofixture.AtualizarMedicoCommand();
             var validator = new AtualizarMedicoCommandValidator();
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
-            _mocker.GetMock<IMedicoRepository>().Setup(r => r.ObterPorId(medicoOriginal.Id)).ReturnsAsync(medicoOriginal);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.Adicionar(It.IsAny<Medico>())).Returns(Task.CompletedTask);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.UnitOfWork.Commit()).ReturnsAsync(true);
+            _mocker.GetMock<IAgendaMedicoRepository>().Setup(r => r.ObterPorId(medicoOriginal.Id)).ReturnsAsync(medicoOriginal);
 
             //Act
             var validationResult = await validator.ValidateAsync(medicoUpdate);
@@ -50,8 +50,8 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Commands
 
             //Assert
             Assert.True(validationResult.IsValid);
-            _mocker.GetMock<IMedicoRepository>().Verify(r => r.Atualizar(It.IsAny<Medico>()), Times.Once);
-            _mocker.GetMock<IMedicoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
+            _mocker.GetMock<IAgendaMedicoRepository>().Verify(r => r.Atualizar(It.IsAny<Medico>()), Times.Once);
+            _mocker.GetMock<IAgendaMedicoRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
 
         }       
 

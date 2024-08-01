@@ -3,6 +3,7 @@ using HealthMedScheduler.Application.Features.EspecialidadesMedicos.Commands.Atu
 using HealthMedScheduler.Application.ViewModel;
 using HealthMedScheduler.Domain.Entity;
 using AutoMapper;
+using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarAgenda;
 
 namespace HealthMedScheduler.Application.MappingProfiles
 {
@@ -18,6 +19,14 @@ namespace HealthMedScheduler.Application.MappingProfiles
             //Leitura
             CreateMap<EspecialidadeMedico, EspecialidadeMedicosViewModel>();
 
-        }
+            CreateMap<AdicionarAgendaMedicoCommand, AgendaMedico>()
+                .ConstructUsing(src => new AgendaMedico(
+                   src.MedicoId,
+                  (DayOfWeek) src.DiaSemana,
+                   TimeSpan.Parse(src.HoraInicio),
+                   TimeSpan.Parse(src.HoraFim)
+                ));
+        }    
     }
 }
+ 

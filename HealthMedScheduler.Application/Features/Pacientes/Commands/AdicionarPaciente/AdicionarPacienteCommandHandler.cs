@@ -1,9 +1,8 @@
-﻿using HealthMedScheduler.Application.Exceptions;
+﻿using AutoMapper;
+using HealthMedScheduler.Application.Exceptions;
 using HealthMedScheduler.Domain.Entity;
 using HealthMedScheduler.Domain.Interfaces;
-using AutoMapper;
 using MediatR;
-using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedico;
 using Microsoft.AspNetCore.Identity;
 
 namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPaciente
@@ -13,10 +12,11 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
         private readonly IMapper _mapper;
         private readonly IPacienteRepository _pacienteRepository;
         private readonly UserManager<IdentityUser> _userManager;
-        public AdicionarPacienteCommandHandler(IMapper mapper, IPacienteRepository pacienteRepository)
+        public AdicionarPacienteCommandHandler(IMapper mapper, IPacienteRepository pacienteRepository, UserManager<IdentityUser> userManager)
         {
             _mapper = mapper;
             _pacienteRepository = pacienteRepository;
+            _userManager = userManager;
         }
         public async Task<Guid> Handle(AdicionarPacienteCommand request, CancellationToken cancellationToken)
         {

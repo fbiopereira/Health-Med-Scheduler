@@ -1,12 +1,16 @@
-﻿using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedico;
+﻿using Health.Core.Controllers;
+using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarAgenda;
+using HealthMedScheduler.Application.Features.Medicos.Commands.AdicionarMedico;
 using HealthMedScheduler.Application.Features.Medicos.Commands.AtualizarMedico;
 using HealthMedScheduler.Application.Features.Medicos.Commands.RemoverMedico;
 using HealthMedScheduler.Application.Features.Medicos.Queries.ObterTodosMedicos;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMedScheduler.Api.Controllers
 {
+    [Authorize]
     [Route("Medico")]
     public class MedicoController : MainController<MedicoController>
     {
@@ -63,6 +67,13 @@ namespace HealthMedScheduler.Api.Controllers
         public async Task<ActionResult> ObterAgendamentoPorMedico(Guid idMedico)
         {
             var medico = await _mediator.Send(new ObterAgendamentoMedicoPorIdMedicoQuery(idMedico));
+            return CustomResponse(medico);
+        }
+
+        [HttpPost("Cadastrar-Agenda")]
+        public async Task<ActionResult> CadastrarAgendaMedico(AdicionarAgendaMedicoCommand agendaMedico)
+        {
+            var medico = await _mediator.Send(agendaMedico);
             return CustomResponse(medico);
         }
 

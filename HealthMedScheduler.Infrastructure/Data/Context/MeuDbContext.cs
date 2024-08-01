@@ -1,5 +1,6 @@
 ﻿using HealthMedScheduler.Domain.Entity;
 using HealthMedScheduler.Domain.Interfaces;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HealthMedScheduler.Infrastructure.Data.Context
@@ -15,6 +16,7 @@ namespace HealthMedScheduler.Infrastructure.Data.Context
         public DbSet<Paciente> Pacientes { get; set; }
         public DbSet<EspecialidadeMedico> EspecialideMedicos { get; set; }
         public DbSet<Agendamento> Agendamentos { get; set; }
+        public DbSet<AgendaMedico> AgendasMedico { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,5 +32,5 @@ namespace HealthMedScheduler.Infrastructure.Data.Context
             var sucesso = await base.SaveChangesAsync() > 0;
             return sucesso;
         }
-    }
+    }   
 }

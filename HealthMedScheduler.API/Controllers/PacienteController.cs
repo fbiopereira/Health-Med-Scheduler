@@ -1,4 +1,5 @@
-﻿using HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPaciente;
+﻿using Health.Core.Controllers;
+using HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPaciente;
 using HealthMedScheduler.Application.Features.Pacientes.Commands.AtualizarPaciente;
 using HealthMedScheduler.Application.Features.Pacientes.Commands.RemoverPaciente;
 using HealthMedScheduler.Application.Features.Pacientes.Queries;

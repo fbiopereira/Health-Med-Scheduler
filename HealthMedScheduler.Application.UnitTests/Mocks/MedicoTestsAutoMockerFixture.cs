@@ -79,7 +79,10 @@ namespace HealthMedScheduler.Application.UnitTests.Mocks
                     f.Address.StreetName(),
                     f.Address.State(),
                      f.Address.StateAbbr() + "-" + f.Random.Number(10000, 99999),
-                    f.Phone.PhoneNumber()
+                    f.Phone.PhoneNumber(),
+                    f.Internet.Email(),
+                    "Teste@123",
+                    "Teste@123"
                 ));
 
             return medicos.Generate(quantidade);
@@ -97,6 +100,9 @@ namespace HealthMedScheduler.Application.UnitTests.Mocks
                     "",
                     "",
                      "",
+                    "",
+                    "",
+                    "",
                     ""
                 ));
 

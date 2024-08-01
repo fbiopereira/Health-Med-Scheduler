@@ -68,7 +68,10 @@ namespace HealthMedScheduler.Api.IntegrationTests.Config
                     f.Address.StreetName(),
                     f.Address.State(),
                     f.Random.Number(1, 100).ToString(),
-                    f.Phone.PhoneNumber().Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("+", "").Substring(2)
+                    f.Phone.PhoneNumber().Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("+", "").Substring(2),
+                    f.Internet.Email(),
+                    "Teste@123",
+                    "Teste@123"
                 ));
 
             return pacientes.Generate(quantidade);
@@ -86,7 +89,10 @@ namespace HealthMedScheduler.Api.IntegrationTests.Config
                     f.Address.StreetName(),
                     f.Address.State(),
                     f.Address.StateAbbr() + "-" + f.Random.Number(10000, 99999),
-                    f.Phone.PhoneNumber().Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("+", "").Substring(2)
+                    f.Phone.PhoneNumber().Replace("(", "").Replace(")", "").Replace("-", "").Replace(" ", "").Replace("+", "").Substring(2),
+                    f.Internet.Email(),
+                    "Teste@123",
+                    "Teste@123"
                 ));
 
             return medicos.Generate(quantidade);

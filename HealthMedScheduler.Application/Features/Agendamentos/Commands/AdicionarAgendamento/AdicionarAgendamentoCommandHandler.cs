@@ -13,12 +13,14 @@ namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.Adiciona
         private readonly IAgendamentoRepository _agendamentoRepository;
         private readonly IPacienteRepository _pacienteRepository;
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
-        public AdicionarAgendamentoCommandHandler(IMapper mapper, IAgendamentoRepository agendamentoRepository, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository)
+        private readonly IAgendaMedicoRepository _agendaMedicoRepository;
+        public AdicionarAgendamentoCommandHandler(IMapper mapper, IAgendamentoRepository agendamentoRepository, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, IAgendaMedicoRepository agendaMedicoRepository)
         {
             _mapper = mapper;
             _agendamentoRepository = agendamentoRepository;
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
             _pacienteRepository = pacienteRepository;
+            _agendaMedicoRepository = agendaMedicoRepository;
         }
         public async Task<Guid> Handle(AdicionarAgendamentoCommand request, CancellationToken cancellationToken)
         {
@@ -71,7 +73,21 @@ namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.Adiciona
                 throw new BadRequestException("EspecialidadeMedico não localizada!", new ValidationResult());
             }
 
-            //Verificar se o médico tem agenda livre
+            //Validar se o médico tem agenda nesse dia é horario
+            var diaSemana = (int) agendamento.DataHoraAtendimento.DayOfWeek;
+            var agendaMedico = await _agendaMedicoRepository.ObterAgendaMedicoPorDia(medicoEspecialidade.MedicoId, diaSemana);
+            if(agendaMedico == null)
+            {
+                throw new BadRequestException("Esse médico não tem agenda para esse dia!", new ValidationResult());
+            }
+
+            //Caso o medico tenha agenda, precisa verificar se ele pode realizar o atendimento nesse horário
+            if(agendamento.DataHoraAtendimento.TimeOfDay < agendaMedico.HoraInicio || agendamento.DataHoraAtendimento.TimeOfDay > agendaMedico.HoraFim)
+            {
+                throw new BadRequestException("Esse médico não pode realizar o atendimento nesse horário!", new ValidationResult());
+            }
+
+            //Verificar se o médico tem agenda marcada nesse horario
             var boolEspecialidade = await _especialidadeMedicoRepository.VerificarAgendaLivreMedico(medicoEspecialidade.MedicoId, agendamento.DataHoraAtendimento);
             if (!boolEspecialidade)
             {

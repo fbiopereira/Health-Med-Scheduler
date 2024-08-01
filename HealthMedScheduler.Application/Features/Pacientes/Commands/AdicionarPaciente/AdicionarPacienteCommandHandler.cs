@@ -1,8 +1,9 @@
-﻿using HealthMedScheduler.Application.Exceptions;
+﻿using AutoMapper;
+using HealthMedScheduler.Application.Exceptions;
 using HealthMedScheduler.Domain.Entity;
 using HealthMedScheduler.Domain.Interfaces;
-using AutoMapper;
 using MediatR;
+using Microsoft.AspNetCore.Identity;
 
 namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPaciente
 {
@@ -10,10 +11,12 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
     {
         private readonly IMapper _mapper;
         private readonly IPacienteRepository _pacienteRepository;
-        public AdicionarPacienteCommandHandler(IMapper mapper, IPacienteRepository pacienteRepository)
+        private readonly UserManager<IdentityUser> _userManager;
+        public AdicionarPacienteCommandHandler(IMapper mapper, IPacienteRepository pacienteRepository, UserManager<IdentityUser> userManager)
         {
             _mapper = mapper;
             _pacienteRepository = pacienteRepository;
+            _userManager = userManager;
         }
         public async Task<Guid> Handle(AdicionarPacienteCommand request, CancellationToken cancellationToken)
         {
@@ -35,11 +38,29 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
             //Converter para objeto entidade no dominio
             var pacienteCriado = _mapper.Map<Paciente>(request);
 
+            if (!await CriarAcessoPaciente(request))
+            {
+                throw new BadRequestException("Falha ao cadastrar o acesso do médico!", validationResult);
+            }
+
             // Adicionar a base de dados
             await _pacienteRepository.Adicionar(pacienteCriado);
             await _pacienteRepository.UnitOfWork.Commit();
             // retorna o Guid Gerado
             return pacienteCriado.Id;
+        }
+
+        private async Task<bool> CriarAcessoPaciente(AdicionarPacienteCommand request)
+        {
+            var user = new IdentityUser
+            {
+                UserName = request.Email,
+                Email = request.Email,
+                EmailConfirmed = true
+            };
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            return result.Succeeded;
         }
     }
 }

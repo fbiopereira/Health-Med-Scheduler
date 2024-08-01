@@ -57,6 +57,12 @@ namespace HealthMedScheduler.Infrastructure.Data.Configurations
                 .WithOne(c => c.Medico)
                 .HasForeignKey(c => c.MedicoId);
 
+            // 1 : N => Medico : AgendaMedicos
+            builder.HasMany(c => c.AgendasMedico)
+                .WithOne(c => c.Medico)
+                .HasForeignKey(c => c.MedicoId);
+
+
             builder.ToTable("medico");
         }
     }

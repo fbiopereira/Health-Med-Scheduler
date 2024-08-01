@@ -40,12 +40,12 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Agendamentos.Command
 
             var paciente = _pacientefixture.GerarPacienteValido();
             //Arrange
-            var agendamento = new Agendamento(especialidadeMedico.Id, paciente.Id, DateTime.Parse("2024-05-09 09:00:00"));
+            var agendamento = new Agendamento(especialidadeMedico.Id, paciente.Id, DateTime.Parse("2024-10-09 09:00:00"));
 
             var agendamentoCommand = new RealizarReagendamentoCommand
             {
                 Id = agendamento.Id,
-                DataHoraAtendimento = DateTime.Parse("2024-05-09 09:00:00"),
+                DataHoraAtendimento = DateTime.Parse("2024-10-09 09:00:00"),
                 EspecialidadeMedicoId = especialidadeMedico.Id,
                 PacienteId = paciente.Id,
             };

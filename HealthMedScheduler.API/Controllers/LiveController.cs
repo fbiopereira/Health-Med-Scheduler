@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Health.Core.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMedScheduler.Api.Controllers
 {

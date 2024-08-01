@@ -1,48 +1,52 @@
-# Clínica Alô Doutor
+# Health&Med Scheduler
 ## Índice
-- [Clínica Alo Doutor](#clínica-alô-doutor)
-    - [Sobre](#sobre) 
-    - [Integrantes](#integrantes)  
-    - [Tecnologias Utilizadas](#tecnologias-utilizadas)
-    - [Solução](#solução)
-        - [Como Executar o Projeto](#como-executar-o-projeto)    
-        - [Como Executar o Projeto no Kubernetes](#como-executar-o-projeto-no-kubernetes)            
+- [Health\&Med Scheduler](#healthmed-scheduler)
+  - [Índice](#índice)
+  - [Sobre](#sobre)
+  - [Integrantes](#integrantes)
+  - [Tecnologias Utilizadas](#tecnologias-utilizadas)
+  - [Solução](#solução)
+  - [Como Executar o Projeto](#como-executar-o-projeto)
+  - [Como Executar o Projeto no Kubernetes](#como-executar-o-projeto-no-kubernetes)
+  - [Testes](#testes)
   - [Levantamento de Requisitos](#levantamento-de-requisitos)
-    - [Histórico da Clínica](#histórico-da-clínica)
+    - [Histórico da Empresa](#histórico-da-empresa)
     - [DDD](#ddd)
-        - [Domain Storytelling](#domain-storytelling)
-        - [Domínios e Contextos Delimitados Identificados](#domínios-e-contextos-delimitados-identificados)
-            - [Domínios](#domínios)
-            - [Contextos Delimitados](#contextos-delimitados)
-    - [Critérios de Aceite](#critérios-de-aceite)
+      - [Domain Storytelling](#domain-storytelling)
+      - [Domínios e Contextos Delimitados Identificados](#domínios-e-contextos-delimitados-identificados)
+        - [Domínios](#domínios)
+      - [Contextos Delimitados](#contextos-delimitados)
+    - [Requisitos Funcionais](#requisitos-funcionais)
+    - [Requisitos Não Funcionais](#requisitos-não-funcionais)
+    - [Diagrama da Base de Dados](#diagrama-da-base-de-dados)
     
 
 ## Sobre
-Este projeto faz parte do trabalho de conclusão da primeira fase da POSTECH FIAP de Arquitetura de Sistemas .Net com Azure.
+Este projeto faz parte do trabalho de conclusão do Hackathon da POSTECH FIAP de Arquitetura de Sistemas .Net com Azure.
 
 [voltar](#índice)
 
 ## Integrantes
 
-| Nome | RM | GitHub
------------- | ------------- | -------------
-Alex Jussiani Junior | 350671 | https://github.com/AlexJussiani
-Erick Setti dos Santos | 351206 | https://github.com/ESettiCalculist
-Fábio da Silva Pereira | 351053 | https://github.com/fbiopereira
-Richard Kendy Tanaka| 351234 | https://github.com/RichardKT88
+| Nome                   | RM     | GitHub                             |
+| ---------------------- | ------ | ---------------------------------- |
+| Alex Jussiani Junior   | 350671 | https://github.com/AlexJussiani    |
+| Erick Setti dos Santos | 351206 | https://github.com/ESettiCalculist |
+| Fábio da Silva Pereira | 351053 | https://github.com/fbiopereira     |
+| Richard Kendy Tanaka   | 351234 | https://github.com/RichardKT88     |
 
 [voltar](#índice)
 
 ## Tecnologias Utilizadas
 
-| Tecnologias | Uso
------------- | -------------
-[C#](https://docs.microsoft.com/en-us/dotnet/csharp/) | Linguagem de Programação
-[.NET](https://dotnet.microsoft.com/) | Framework web
-[Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/) | Biblioteca para persistência de Dados (ORM)
-[Serilog](https://serilog.net/) | Captura de Logs
-[Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/) | Editor de Código
-[Run Coverlet Report](https://github.com/the-dext/RunCoverletReport/blob/master/README.md) | Plugin do Visual Studio para analisar a cobertura de testes
+| Tecnologias                                                                                | Uso                                                         |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------- |
+| [C#](https://docs.microsoft.com/en-us/dotnet/csharp/)                                      | Linguagem de Programação                                    |
+| [.NET](https://dotnet.microsoft.com/)                                                      | Framework web                                               |
+| [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/)                         | Biblioteca para persistência de Dados (ORM)                 |
+| [Serilog](https://serilog.net/)                                                            | Captura de Logs                                             |
+| [Visual Studio 2022](https://visualstudio.microsoft.com/pt-br/)                            | Editor de Código                                            |
+| [Run Coverlet Report](https://github.com/the-dext/RunCoverletReport/blob/master/README.md) | Plugin do Visual Studio para analisar a cobertura de testes |
 
 
 [voltar](#índice)
@@ -52,7 +56,7 @@ Desenvolvimento de uma Web Api em .NET Core com uma abordagem em Code First Migr
 
 Na arquitetura de software utilizamos os conceitos da Clean Architecture e o projeto está estruturado de acordo com a imagem abaixo:
 
-![Clean Architecture](./documentacao/imagens/Clean_AloDoutor.png)
+![Clean Architecture](./documentacao/imagens/Clean_HealthMed.png)
 
 
 
@@ -66,14 +70,14 @@ a - Instale o SQL Server 2022 Developer na sua máquina
         - https://www.microsoft.com/pt-br/sql-server/sql-server-downloads        
 b - Instale o SQL Server Management Studio
         - https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms     
-c - Crie uma base de dados com o nome AloDoutor
-d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o AloDoutor como banco default e de as devidas permissões de escrita nessa base de dados    
+c - Crie uma base de dados com o nome HealthMedScheduler
+d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o HealthMedScheduler como banco default e de as devidas permissões de escrita nessa base de dados    
 
 2- Clone este repositório
 
-3- No terminal vá até a pasta `/AloDoutor` e execute o comando `dotnet restore` para restaurar as dependências do projeto
+3- No terminal vá até a pasta `/Health-Med-Scheduler` e execute o comando `dotnet restore` para restaurar as dependências do projeto
 
-4- Execute o comando `dotnet run` na mesma pasta `/AloDoutor` para executar o projeto. As tabelas serão criadas automaticamente    
+4- Execute o comando `dotnet run` na mesma pasta `/Health-Med-Scheduler` para executar o projeto. As tabelas serão criadas automaticamente    
     - Acesse a documentação da API em:        
         -  `http://localhost:5001/swagger` 
 
@@ -111,16 +115,16 @@ helm install ingress-nginx-controller ingress-nginx/ingress-nginx
 
 3- Executando a aplicação
 
-a- Abra o arquivo (./k8s/alo-doutor.yml)
+a- Abra o arquivo (./k8s/health-med.yml)
 
 b- Altere a linha 22 para ter o IP correto da sua máquina
 
 c- Salve o arquivo e no diretorio k8s digite:
 ```
-kubectl apply -f .\alo-doutor.yml
+kubectl apply -f .\health-med.yml
 ```
 
-d- Acesse a url http://alo-doutor.127.0.0.1.nip.io/swagger
+d- Acesse a url http://health-med.127.0.0.1.nip.io/swagger
 
 
 [voltar](#índice)
@@ -129,10 +133,10 @@ d- Acesse a url http://alo-doutor.127.0.0.1.nip.io/swagger
 
 Foram criados dois projetos para os testes automatizados:
 
-- AloDoutor.Application.unitTests
+- HealthMedScheduler.Application.unitTests
     - São testadas as entidades de domínio e casos de uso utilizando mocks
 
-- AloDoutor.Api.IntegrationTests
+- HealthMedScheduler.Api.IntegrationTests
     - Aqui testamos a API em si fazendo chamadas reais para a mesma e salvando as informações na base de dados
 
 A cobertura alcançada está demonstrada pelas imagens abaixo:
@@ -144,17 +148,11 @@ A cobertura alcançada está demonstrada pelas imagens abaixo:
 
 ## Levantamento de Requisitos
 
-### Histórico da Clínica
+### Histórico da Empresa
 
-A clínica Alô Doutor provê um serviço gratuito de consultas médicas para a população utilizando o sistema de atendimento presencial. 
-
-A  clínica foi fundada em 2010 e desde então vem atendendo a população de forma gratuita. A clínica conta com médicos voluntários que atendem a população de segunda a sexta das 8h às 18h. 
-
-Os médicos realizam consultas humanizadas de 1 hora e tem um intervalo de almoço das 12:00 as 14:00.
-
-Atualmente todo o trabalho da clínica é feito de forma manual em fichas de papel, porém a clínica está buscando modernizar o seu sistema de marcação de consultas para melhorar a experiência do paciente e do médico.
-
-Nesse momento foi solicitado que a informatização fosse realizada sem melhorias no processo atual.
+A Health&Med é uma Operadora de Saúde que tem como objetivo digitalizar seus processos e operação. O principal gargalo da empresa é o Agendamento de Consultas Médicas, que atualmente ocorre exclusivamente através de ligações para a central de atendimento da empresa. 
+Recentemente, a empresa recebeu um aporte e decidiu investir no desenvolvimento de um sistema proprietário, visando proporcionar um processo de Agendamentos de Consultas Médicas 100% digital e mais ágil.
+Para viabilizar o desenvolvimento de um sistema que esteja em conformidade com as melhores práticas de desenvolvimento, a Health&Med contratou os alunos do curso de Pós Graduação .NET da FIAP para fazer a análise do projeto e desenvolver o MVP da solução.
 
 [voltar](#índice)
 
@@ -163,7 +161,7 @@ Para a modelagem da solução utilizamos o Domain Driven Design e fizemos uso do
 
 #### Domain Storytelling
 
-O time de desenvolvimento conversou com o responsável administrativo pela clínica e identificou os seguintes pontos:
+O time de desenvolvimento conversou com o responsável administrativo pela operadora e identificou os seguintes pontos:
 
 ![Cadastro do Médico](./documentacao/imagens/01-CadastroMedico.png)
 </br>
@@ -180,7 +178,7 @@ O time de desenvolvimento conversou com o responsável administrativo pela clín
 
 ##### Domínios
 
-![Domínios Identificados](./documentacao/imagens/dominiosAloDoutor.png)
+![Domínios Identificados](./documentacao/imagens/dominiosHealthMed.png)
 
 [voltar](#índice)
 
@@ -190,54 +188,36 @@ O time de desenvolvimento conversou com o responsável administrativo pela clín
 
 [voltar](#índice)
 
-### Critérios de Aceite
+### Requisitos Funcionais
 
-- Cadastro de Médico 
-    - As seguintes informações são obrigatórias no cadastro:
-        - Nome
-        - CPF
-        - CRM
-        - Telefone
-        - Endereço
-        - Estado
-        - CEP
-    - A especialidade é opcional
-    - Um médico pode atender em mais de uma especialidade
-    - Não podem haver dois médicos com o mesmo CRM
-    - Não podem haver dois médicos com o mesmo CPF
-    - O CPF deve ter 11 caracteres númericos
-    - Nome precisa ter no mínimo 2 caracteres
-    - Estado e endereço deve ter mais do que 2 caracteres
-    
+1. Cadastro do Usuário (Médico)
+   - O médico deverá poder se cadastrar, preenchendo os campos obrigatórios: Nome, CPF, Número CRM, E-mail e Senha.  
+2. Autenticação do Usuário (Médico)
+   - O sistema deve permitir que o médico faça login usando o E-mail e uma Senha.  
+3. Cadastro/Edição de Horários Disponíveis (Médico)
+   - O sistema deve permitir que o médico faça o Cadastro e Edição de seus horários disponíveis para agendamento de consultas.
+4. Cadastro do Usuário (Paciente)
+    - O paciente poderá se cadastrar preenchendo os campos: Nome, CPF, Email e Senha.
+5. Autenticação do Usuário (Paciente)
+   - O sistema deve permitir que o paciente faça login usando um E-mail e Senha.
+6. Busca por Médicos (Paciente)
+   - O sistema deve permitir que o paciente visualize a listagem dos médicos disponíveis.
+7. Agendamento de Consultas (Paciente)
+   - Após selecionar o médico, o paciente deve poder visualizar a agenda do médico com os horários disponíveis e efetuar o agendamento.
+8. Notificação de consulta marcada (Médico)
+   - Após o agendamento, feito pelo usuário Paciente, o médico deverá receber um e-mail contendo:
+     - Título do e-mail: ˮHealth&Med - Nova consulta agendadaˮ
+     - Corpo do e-mail: ˮOlá, Dr. {nome_do_médico}! Você tem uma nova consulta marcada! Paciente: {nome_do_paciente}. Data e horário: {data} às {horário_agendado}.ˮ
 
-</br>
 
-- Cadastro do Paciente
-    - As seguintes informações são obrigatórias:
-        - Nome
-        - CPF
-        - Idade
-        - Telefone
-        - Endereço
-        - Estado
-        - CEP
+### Requisitos Não Funcionais
 
-    - Não podem haver dois pacientes com o mesmo CPF
-    - O CPF deve ter 11 caracteres númericos
-<br>
-
-- Marcação de Consultas
-    - O Paciente e o Médico já devem estar cadastrados
-    - Só podem ser considerados médicos que tem especialidade associada
-    - As consultas só podem ser agendadas para os seguites dias:
-        - Segunda-feira a Sexta-feira das 09h às 18h
-    - Cada consulta tem duração de 1 hora obrigatoriamente
-    - Não há necessidade de considerar feriados
-    - As consultas devem ser agendadas com um mínimo de 2 horas de antecedência
-    - O Paciente não pode marcar duas consultas no mesmo dia e horário
-    - A consulta pode ser cancelada pelos usuários do sistema
-    - Para reagendamentos e cancelamentos são necessários no mínimo 2 dias de antecedência (desconsiderando fins de semana)
+1. Concorrência de Agendamentos
+   - O sistema deve ser capaz de suportar múltiplos acessos simultâneos e garantir que apenas uma marcação de consulta seja permitida para um determinado horário.
+2. Validação de Conflito de Horários
+   - O sistema deve validar a disponibilidade do horário selecionado em tempo real, assegurando que não haja sobreposição de horários para consultas agendadas.
    
-<br>
+### Diagrama da Base de Dados
+![Banco de Dados](./documentacao/imagens/diagrama_banco.png)
 
 [voltar](#índice)

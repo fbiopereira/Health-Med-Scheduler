@@ -4,7 +4,7 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
 {
     public class AdicionarPacienteCommand : IRequest<Guid>
     {
-        public AdicionarPacienteCommand(string nome, string cpf, string cep, string endereco, string estado, string idade, string telefone)
+        public AdicionarPacienteCommand(string nome, string cpf, string cep, string endereco, string estado, string idade, string telefone, string email)
         {
             Nome = nome;
             Cpf = cpf;
@@ -13,6 +13,7 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
             Estado = estado;
             Idade = idade;
             Telefone = telefone;
+            Email = email;
         }
         public AdicionarPacienteCommand() { }
 
@@ -23,5 +24,6 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
         public string Estado { get; set; }
         public string Idade { get; set; }
         public string Telefone { get; set; }
+        public string Email { get; set; }
     }
 }

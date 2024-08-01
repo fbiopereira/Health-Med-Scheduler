@@ -1,13 +1,17 @@
-﻿using HealthMedScheduler.Domain.Interfaces;
+﻿using HealthMedScheduler.Application.Interfaces.Email;
+using HealthMedScheduler.Application.Models;
+using HealthMedScheduler.Domain.Interfaces;
 using HealthMedScheduler.Infrastructure.Data.Context;
 using HealthMedScheduler.Infrastructure.Data.Repository;
+using HealthMedScheduler.Infrastructure.EmailService;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthMedScheduler.Infrastructure
 {
     public static class InfrastructureServiceRegistration
     {
-        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
             //Repository
             services.AddScoped<MeuDbContext>();
@@ -18,13 +22,11 @@ namespace HealthMedScheduler.Infrastructure
             services.AddScoped<IAgendamentoRepository, AgendamentoRepository>();
 
             //Services
-            /* services.AddScoped<IEspecialidadeService, EspecialidadeService>();
-             services.AddScoped<IAgendamentoService, AgendamentoService>();
-             services.AddScoped<IPacienteService, PacienteService>();
-             services.AddScoped<IMedicoService, MedicoService>();
-             services.AddScoped<IEspecialidadeMedicoService, EspecialidadeMedicoService>();*/
+
+            services.Configure<EmailSettings>(o => configuration.GetSection("EmailSettings").Bind(o));
+            services.AddScoped<IEmailSender, EmailSender>();
 
             return services;
-        }        
+        }
     }
 }

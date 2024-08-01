@@ -14,7 +14,7 @@ namespace HealthMedScheduler.Api
         public static IServiceCollection AddApiConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MeuDbContext>(options =>
-               options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionString")));
+               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
 
             services.AddControllers();
@@ -78,9 +78,9 @@ namespace HealthMedScheduler.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "AloDoutor API",
+                    Title = "Health&Med Scheduler API",
                     Description = "Esta API é Controle de Agendamentos de Consulta",
-                    Contact = new OpenApiContact() { Name = "Alo Doutor", Email = "postechdotnet@gmail.com " }
+                    Contact = new OpenApiContact() { Name = "Health&Med", Email = "postechdotnet@gmail.com " }
                 });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -102,7 +102,7 @@ namespace HealthMedScheduler.Api
         {
             var logConfig = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .Enrich.WithProperty("Application", "AloDoutor")
+                .Enrich.WithProperty("Application", "HealthMedScheduler")
                 .ReadFrom.Configuration(configuration)                
                 .WriteTo.Console(new CompactJsonFormatter())
                 .CreateLogger();

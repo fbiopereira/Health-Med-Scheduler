@@ -10,8 +10,9 @@ namespace HealthMedScheduler.Domain.Entity
         public string? Endereco { get; private set; }
         public string? Estado { get; private set; }
         public string? Telefone { get; private set; }
+        public string? Email { get; private set; }
 
-        protected Pessoa(Guid id, string? nome, string? cpf, string? cep, string? endereco, string? estado, string? telefone)
+        protected Pessoa(Guid id, string? nome, string? cpf, string? cep, string? endereco, string? estado, string? telefone, string? email)
         {
             Id = id;
             Nome = nome;
@@ -20,6 +21,7 @@ namespace HealthMedScheduler.Domain.Entity
             Endereco = endereco;
             Estado = estado;
             Telefone = telefone;
+            Email = email;
         }
 
         protected Pessoa()

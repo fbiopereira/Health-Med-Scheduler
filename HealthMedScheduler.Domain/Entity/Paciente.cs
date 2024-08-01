@@ -2,8 +2,8 @@
 {
     public class Paciente : Pessoa
     {
-        public Paciente(Guid id, string idade, IEnumerable<Agendamento> agendamentos, string nome, string cpf, string cep, string endereco, string estado, string telefone)
-            : base(id, nome, cpf, cep, endereco, estado, telefone)
+        public Paciente(Guid id, string idade, IEnumerable<Agendamento> agendamentos, string nome, string cpf, string cep, string endereco, string estado, string telefone, string email)
+            : base(id, nome, cpf, cep, endereco, estado, telefone, email)
         {
             Idade = idade;
             Agendamentos = agendamentos;

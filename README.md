@@ -1,6 +1,6 @@
-# Clínica Alô Doutor
+# Health&Med Scheduler
 ## Índice
-- [Clínica Alô Doutor](#clínica-alô-doutor)
+- [Health\&Med Scheduler](#healthmed-scheduler)
   - [Índice](#índice)
   - [Sobre](#sobre)
   - [Integrantes](#integrantes)
@@ -56,7 +56,7 @@ Desenvolvimento de uma Web Api em .NET Core com uma abordagem em Code First Migr
 
 Na arquitetura de software utilizamos os conceitos da Clean Architecture e o projeto está estruturado de acordo com a imagem abaixo:
 
-![Clean Architecture](./documentacao/imagens/Clean_AloDoutor.png)
+![Clean Architecture](./documentacao/imagens/Clean_HealthMed.png)
 
 
 
@@ -70,8 +70,8 @@ a - Instale o SQL Server 2022 Developer na sua máquina
         - https://www.microsoft.com/pt-br/sql-server/sql-server-downloads        
 b - Instale o SQL Server Management Studio
         - https://learn.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms?view=sql-server-ver16#download-ssms     
-c - Crie uma base de dados com o nome AloDoutor
-d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o HealthMed como banco default e de as devidas permissões de escrita nessa base de dados    
+c - Crie uma base de dados com o nome HealthMedScheduler
+d - Crie um usuário com o login 'fiap' e senha 'Fi@p_2@24' e coloque o HealthMedScheduler como banco default e de as devidas permissões de escrita nessa base de dados    
 
 2- Clone este repositório
 
@@ -178,7 +178,7 @@ O time de desenvolvimento conversou com o responsável administrativo pela opera
 
 ##### Domínios
 
-![Domínios Identificados](./documentacao/imagens/dominiosAloDoutor.png)
+![Domínios Identificados](./documentacao/imagens/dominiosHealthMed.png)
 
 [voltar](#índice)
 

@@ -4,6 +4,7 @@ namespace HealthMedScheduler.Application.Features.Pacientes.Commands.AdicionarPa
 {
     public class AdicionarPacienteCommand : IRequest<Guid>
     {
+
         public AdicionarPacienteCommand(string nome, string cpf, string cep, string endereco, string estado, string idade, string telefone, string email, string password, string confirmPassword)
         {
             Nome = nome;

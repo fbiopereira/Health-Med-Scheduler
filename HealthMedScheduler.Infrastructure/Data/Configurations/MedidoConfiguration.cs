@@ -52,6 +52,12 @@ namespace HealthMedScheduler.Infrastructure.Data.Configurations
             .HasColumnType("varchar")
              .HasColumnName("telefone");
 
+            builder.Property(c => c.Email)
+            .IsRequired()
+            .HasMaxLength(150)
+            .HasColumnType("varchar")
+             .HasColumnName("email");
+
             // 1 : N => Medico : EspecialidadeMedico
             builder.HasMany(c => c.EspecialidadesMedicos)
                 .WithOne(c => c.Medico)

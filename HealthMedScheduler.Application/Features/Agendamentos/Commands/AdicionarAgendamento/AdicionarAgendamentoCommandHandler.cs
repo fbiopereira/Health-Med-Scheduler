@@ -4,6 +4,10 @@ using HealthMedScheduler.Domain.Interfaces;
 using AutoMapper;
 using FluentValidation.Results;
 using MediatR;
+using HealthMedScheduler.Application.Interfaces.Email;
+using System.Net.Mail;
+using HealthMedScheduler.Application.ViewModel;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.AdicionarAgendamento
 {
@@ -13,13 +17,18 @@ namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.Adiciona
         private readonly IAgendamentoRepository _agendamentoRepository;
         private readonly IPacienteRepository _pacienteRepository;
         private readonly IEspecialidadeMedicoRepository _especialidadeMedicoRepository;
+        private readonly IMedicoRepository _medicoRepository;
+        private readonly IEmailSender _emailSender;
         private readonly IAgendaMedicoRepository _agendaMedicoRepository;
-        public AdicionarAgendamentoCommandHandler(IMapper mapper, IAgendamentoRepository agendamentoRepository, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, IAgendaMedicoRepository agendaMedicoRepository)
+        
+        public AdicionarAgendamentoCommandHandler(IMapper mapper, IAgendamentoRepository agendamentoRepository, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, IEmailSender emailSender, IMedicoRepository medicoRepository)
         {
             _mapper = mapper;
             _agendamentoRepository = agendamentoRepository;
             _especialidadeMedicoRepository = especialidadeMedicoRepository;
             _pacienteRepository = pacienteRepository;
+            _emailSender = emailSender;
+            _medicoRepository = medicoRepository;
             _agendaMedicoRepository = agendaMedicoRepository;
         }
         public async Task<Guid> Handle(AdicionarAgendamentoCommand request, CancellationToken cancellationToken)
@@ -38,6 +47,23 @@ namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.Adiciona
             await _agendamentoRepository.Adicionar(agendamento);
 
             await _agendamentoRepository.UnitOfWork.Commit();
+
+            var medico = await _medicoRepository.ObterPorId(agendamento.EspecialidadeMedico.MedicoId);
+            var paciente = await _pacienteRepository.ObterPorId(agendamento.PacienteId);
+            try
+            {
+                var email = new EmailViewModel
+                {
+                    ToEmail = $"{medico.Email}",
+                    Body = $"Olá, Dr. {medico.Nome}! Você tem uma nova consulta marcada! Paciente: {paciente.Nome}. Data e horário: {request.DataHoraAtendimento.ToString("dd/MM/yyyy")} às {request.DataHoraAtendimento.ToString("HH:mm")}",
+                    Subject = "Health&Med - Nova consulta agendada"
+                };
+                await _emailSender.SendEmailAsync(email);
+            }          
+            catch (Exception)
+            {
+                throw new BadRequestException("Não foi possível enviar o email.", new ValidationResult());
+            }
             // retorna o Guid Gerado
             return agendamento.Id;
         }

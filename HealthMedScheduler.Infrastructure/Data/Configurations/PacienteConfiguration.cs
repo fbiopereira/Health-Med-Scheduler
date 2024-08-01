@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace HealthMedScheduler.Infrastructure.Data.Configurations 
-{ 
+namespace HealthMedScheduler.Infrastructure.Data.Configurations
+{
     public class PacienteConfiguration : IEntityTypeConfiguration<Paciente>
     {
         public void Configure(EntityTypeBuilder<Paciente> builder)
@@ -39,6 +39,12 @@ namespace HealthMedScheduler.Infrastructure.Data.Configurations
             .HasColumnType("varchar")
             .HasMaxLength(11)
              .HasColumnName("telefone");
+
+            builder.Property(c => c.Email)
+              .IsRequired()
+              .HasMaxLength(150)
+              .HasColumnType("varchar")
+               .HasColumnName("email");
 
             builder.Property(c => c.Estado)
               .IsRequired()

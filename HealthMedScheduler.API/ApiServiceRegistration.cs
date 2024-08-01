@@ -81,6 +81,7 @@ namespace HealthMedScheduler.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
+
                     Title = "Health&Med API",
                     Description = "Esta API é Controle de Agendamentos de Consulta",
                     Contact = new OpenApiContact() { Name = "Health&Med", Email = "postechdotnet@gmail.com " }

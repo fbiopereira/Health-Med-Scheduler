@@ -10,7 +10,7 @@ ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["HealthMedScheduler.API/HealthMedScheduler.Api.csproj", "HealthMedScheduler.API/"]
 COPY ["HealthMedScheduler.Application/HealthMedScheduler.Application.csproj", "HealthMedScheduler.Application/"]
-COPY ["HealthMedScheduler.Domain/HealthMedScheduler.Domain.csproj.csproj", "HealthMedScheduler.Domain/"]
+COPY ["HealthMedScheduler.Domain/HealthMedScheduler.Domain.csproj", "HealthMedScheduler.Domain/"]
 COPY ["HealthMedScheduler.Infrastructure/HealthMedScheduler.Infrastructure.csproj", "HealthMedScheduler.Infrastructure/"]
 RUN dotnet restore "HealthMedScheduler.API/HealthMedScheduler.Api.csproj"
 

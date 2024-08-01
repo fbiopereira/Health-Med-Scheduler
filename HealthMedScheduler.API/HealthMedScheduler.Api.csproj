@@ -35,6 +35,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Health.Core\Health.Core.csproj" />
     <ProjectReference Include="..\HealthMedScheduler.Application\HealthMedScheduler.Application.csproj" />
     <ProjectReference Include="..\HealthMedScheduler.Infrastructure\HealthMedScheduler.Infrastructure.csproj" />
   </ItemGroup>

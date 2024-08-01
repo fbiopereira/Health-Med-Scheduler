@@ -13,7 +13,7 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Medicos.Commands
     public class AtualizarMedicoCommandHandlerTests
     {
         private readonly IMapper _mapper;
-        private readonly Mock<IMedicoRepository> _mockMedicoRepo;
+        private readonly Mock<IAgendaMedicoRepository> _mockMedicoRepo;
         private readonly AtualizarMedicoCommandHandler _medicoHandler;
         private readonly MedicoTestsAutoMockerFixture _medicofixture;
         private readonly AutoMocker _mocker;

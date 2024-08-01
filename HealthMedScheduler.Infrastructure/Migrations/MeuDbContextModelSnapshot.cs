@@ -22,6 +22,33 @@ namespace HealthMedScheduler.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("HealthMedScheduler.Domain.Entity.AgendaMedico", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("DiaSemana")
+                        .HasColumnType("int");
+
+                    b.Property<TimeSpan>("HoraFim")
+                        .HasColumnType("time")
+                        .HasColumnName("hora_fim");
+
+                    b.Property<TimeSpan>("HoraInicio")
+                        .HasColumnType("time")
+                        .HasColumnName("hora_inicio");
+
+                    b.Property<Guid>("MedicoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicoId");
+
+                    b.ToTable("agendas_medico", (string)null);
+                });
+                
             modelBuilder.Entity("HealthMedScheduler.Domain.Entity.Agendamento", b =>
                 {
                     b.Property<Guid>("Id")
@@ -214,6 +241,16 @@ namespace HealthMedScheduler.Infrastructure.Migrations
                     b.ToTable("paciente", (string)null);
                 });
 
+            modelBuilder.Entity("HealthMedScheduler.Domain.Entity.AgendaMedico", b =>
+                {
+                    b.HasOne("HealthMedScheduler.Domain.Entity.Medico", "Medico")
+                        .WithMany("AgendasMedico")
+                        .HasForeignKey("MedicoId")
+                        .IsRequired();
+
+                    b.Navigation("Medico");
+                });
+
             modelBuilder.Entity("HealthMedScheduler.Domain.Entity.Agendamento", b =>
                 {
                     b.HasOne("HealthMedScheduler.Domain.Entity.EspecialidadeMedico", "EspecialidadeMedico")
@@ -260,6 +297,9 @@ namespace HealthMedScheduler.Infrastructure.Migrations
 
             modelBuilder.Entity("HealthMedScheduler.Domain.Entity.Medico", b =>
                 {
+
+                    b.Navigation("AgendasMedico");
+
                     b.Navigation("EspecialidadesMedicos");
                 });
 

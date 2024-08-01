@@ -64,6 +64,9 @@ namespace HealthMedScheduler.Api
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseCors("Total");
 
             app.UseEndpoints(endpoints =>
@@ -78,13 +81,39 @@ namespace HealthMedScheduler.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo()
                 {
-                    Title = "Health&Med Scheduler API",
+
+                    Title = "Health&Med API",
                     Description = "Esta API é Controle de Agendamentos de Consulta",
                     Contact = new OpenApiContact() { Name = "Health&Med", Email = "postechdotnet@gmail.com " }
                 });
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+                    Name = "Authorization",
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[] {}
+                    }
+                });
             });
         }
 
@@ -102,7 +131,7 @@ namespace HealthMedScheduler.Api
         {
             var logConfig = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .Enrich.WithProperty("Application", "HealthMedScheduler")
+                .Enrich.WithProperty("Application", "Health&Med")
                 .ReadFrom.Configuration(configuration)                
                 .WriteTo.Console(new CompactJsonFormatter())
                 .CreateLogger();

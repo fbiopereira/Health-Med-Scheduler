@@ -1,12 +1,15 @@
-﻿using HealthMedScheduler.Application.Features.Agendamentos.Commands.AdicionarAgendamento;
+﻿using Health.Core.Controllers;
+using HealthMedScheduler.Application.Features.Agendamentos.Commands.AdicionarAgendamento;
 using HealthMedScheduler.Application.Features.Agendamentos.Commands.AtualizarAgendamento;
 using HealthMedScheduler.Application.Features.Agendamentos.Commands.RemoverAgendamento;
 using HealthMedScheduler.Application.Features.Agendamentos.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMedScheduler.Api.Controllers
 {
+    [Authorize]
     [Route("api")]
     public class AgendamentoController : MainController<AgendamentoController>
     {

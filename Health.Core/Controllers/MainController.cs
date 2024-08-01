@@ -1,9 +1,10 @@
-﻿using HealthMedScheduler.Api.Models;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
+using Health.Core.Communication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Extensions.Logging;
 
-namespace HealthMedScheduler.Api.Controllers
+namespace Health.Core.Controllers
 {
     [ApiController]
     public abstract class MainController<T> : Controller
@@ -21,7 +22,7 @@ namespace HealthMedScheduler.Api.Controllers
             _logger.LogError(mensagem);
         }
 
-        protected ActionResult CustomResponse(object? result = null)
+        protected ActionResult CustomResponse(object result = null)
         {
             if (OperacaoValida())
             {

@@ -1,0 +1,14 @@
+name: CICD
+
+on:
+  push: 
+    branches:   
+    - 'feature/*'
+    - 'main'    
+
+  release:
+    types: 
+     - created  
+
+  env:
+  IMAGE_NAME: containerregistryfiap.azurecr.io/health-med-scheduler

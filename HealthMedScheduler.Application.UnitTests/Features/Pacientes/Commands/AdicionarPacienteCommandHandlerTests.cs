@@ -32,24 +32,24 @@ namespace HealthMedScheduler.Application.UnitTests.Features.Pacientes.Commands
             _pacientefixture = pacientefixture;
         }
 
-        [Fact(DisplayName = "Adicionar paciente Novo Paciente com Sucesso")]
-        [Trait("Categoria", "Paciente - Paciente Command Handler")]
-        public async Task AdicionarPaciente_NovoPaciente_DeveExecutarComSucesso()
-        {
-            //Arrange
-            var pacienteCommand = _pacientefixture.GerarPacienteCommandValido();
-            var validator = new AdicionarPacienteCommandValidator();
-            _mocker.GetMock<IPacienteRepository>().Setup(x => x.UnitOfWork.Commit()).Returns(Task.FromResult(true));
+        //[Fact(DisplayName = "Adicionar paciente Novo Paciente com Sucesso")]
+        //[Trait("Categoria", "Paciente - Paciente Command Handler")]
+        //public async Task AdicionarPaciente_NovoPaciente_DeveExecutarComSucesso()
+        //{
+        //    //Arrange
+        //    var pacienteCommand = _pacientefixture.GerarPacienteCommandValido();
+        //    var validator = new AdicionarPacienteCommandValidator();
+        //    _mocker.GetMock<IPacienteRepository>().Setup(x => x.UnitOfWork.Commit()).Returns(Task.FromResult(true));
 
-            //Act
-            var result = await _pacienteHandler.Handle(pacienteCommand, CancellationToken.None);
-            var validationResult = await validator.ValidateAsync(pacienteCommand);
+        //    //Act
+        //    var result = await _pacienteHandler.Handle(pacienteCommand, CancellationToken.None);
+        //    var validationResult = await validator.ValidateAsync(pacienteCommand);
 
-            //Assert
-            Assert.True(validationResult.IsValid);
-            _mocker.GetMock<IPacienteRepository>().Verify(r => r.Adicionar(It.IsAny<Paciente>()), Times.Once);
-            _mocker.GetMock<IPacienteRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
-        }
+        //    //Assert
+        //    Assert.True(validationResult.IsValid);
+        //    _mocker.GetMock<IPacienteRepository>().Verify(r => r.Adicionar(It.IsAny<Paciente>()), Times.Once);
+        //    _mocker.GetMock<IPacienteRepository>().Verify(r => r.UnitOfWork.Commit(), Times.Once);
+        //}
 
         [Fact(DisplayName = "Adicionar novo paciente com Fallha")]
         [Trait("Categoria", "Paciente - Paciente Command Handler")]

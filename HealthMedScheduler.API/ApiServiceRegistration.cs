@@ -14,7 +14,7 @@ namespace HealthMedScheduler.Api
         public static IServiceCollection AddApiConfig(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<MeuDbContext>(options =>
-               options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+               options.UseSqlServer(Environment.GetEnvironmentVariable("ConnectionString")));
 
 
             services.AddControllers();
@@ -36,27 +36,22 @@ namespace HealthMedScheduler.Api
 
         public static void UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseDeveloperExceptionPage();
+
             if (env.IsDevelopment() || env.IsStaging())
-            {
-                app.UseDeveloperExceptionPage();
+            {               
 
                 using (var scope = app.ApplicationServices.CreateScope())
                 {
+                    var dbContextAuth = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    dbContextAuth.Database.Migrate();
+
                     var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
                      dbContext.Database.Migrate();
                 }
             }
 
-            if (env.IsStaging())
-            {
-                app.UseDeveloperExceptionPage();
-
-                using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var dbContext = scope.ServiceProvider.GetRequiredService<MeuDbContext>();
-                    dbContext.Database.Migrate();
-                }
-            }
+          
 
             app.UseMiddleware<ExceptionMiddleware>();
 

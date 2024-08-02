@@ -115,7 +115,7 @@ jobs:
         with:
           namespace: 'default'
           manifests: |
-              azure-vote-all-in-one-redis.yaml
+              ./k8s/health-med.yml
           images: ' ${{env.IMAGE_NAME}}:${{ env.IMAGE_VERSION }}'
           pull-images: false      
         

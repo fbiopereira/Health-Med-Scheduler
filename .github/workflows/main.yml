@@ -115,7 +115,7 @@ jobs:
         with:
           namespace: 'health-med'
           manifests: |
-              /k8s/health-med.yml
+              k8s/health-med.yml
           images: ' ${{env.IMAGE_NAME}}:${{ env.IMAGE_VERSION }}'
           pull-images: false      
         

@@ -1,18 +1,15 @@
-﻿using HealthMedScheduler.Application.Interfaces.Email;
-using HealthMedScheduler.Application.Models;
-using HealthMedScheduler.Domain.Interfaces;
-using HealthMedScheduler.Infrastructure.Data.Context;
-using HealthMedScheduler.Infrastructure.Data.Repository;
-using HealthMedScheduler.Infrastructure.EmailService;
-using Microsoft.Extensions.Configuration;
 ﻿using Health.Core.Usuario;
 using HealthMedScheduler.Application.Features.Auth.Commands;
+using HealthMedScheduler.Application.Interfaces.Email;
+using HealthMedScheduler.Application.Models;
 using HealthMedScheduler.Application.ViewModel.Auth;
 using HealthMedScheduler.Domain.Interfaces;
 using HealthMedScheduler.Infrastructure.Data.Context;
 using HealthMedScheduler.Infrastructure.Data.Repository;
+using HealthMedScheduler.Infrastructure.EmailService;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace HealthMedScheduler.Infrastructure

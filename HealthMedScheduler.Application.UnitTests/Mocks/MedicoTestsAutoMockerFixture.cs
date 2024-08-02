@@ -42,7 +42,8 @@ namespace HealthMedScheduler.Application.UnitTests.Mocks
                     f.Address.ZipCode(),
                     f.Address.StreetName(),
                     f.Address.State(),
-                    f.Phone.PhoneNumber()
+                    f.Phone.PhoneNumber(),
+                    f.Internet.Email()
                 ));
 
             return medicos.Generate(quantidade);

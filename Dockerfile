@@ -15,7 +15,7 @@ COPY ["HealthMedScheduler.Infrastructure/HealthMedScheduler.Infrastructure.cspro
 RUN dotnet restore "HealthMedScheduler.API/HealthMedScheduler.Api.csproj"
 
 COPY . . 
-WORKDIR "/src/AloDoutor.API"
+WORKDIR "/src/HealthMedScheduler.API"
 RUN dotnet build "./HealthMedScheduler.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

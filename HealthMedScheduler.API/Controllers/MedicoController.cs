@@ -82,6 +82,7 @@ namespace HealthMedScheduler.Api.Controllers
         /// </summary>
         /// <param name="medicoDTO">Os dados do médico a ser adicionado.</param>
         /// <returns>O médico adicionado ou um erro 400 em caso de falha na adição.</returns>
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> Adicionar(AdicionarMedicoCommand medico)
         {

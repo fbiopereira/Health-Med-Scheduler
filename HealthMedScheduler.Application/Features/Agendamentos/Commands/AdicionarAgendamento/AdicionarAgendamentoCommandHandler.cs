@@ -20,8 +20,8 @@ namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.Adiciona
         private readonly IMedicoRepository _medicoRepository;
         private readonly IEmailSender _emailSender;
         private readonly IAgendaMedicoRepository _agendaMedicoRepository;
-        
-        public AdicionarAgendamentoCommandHandler(IMapper mapper, IAgendamentoRepository agendamentoRepository, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, IEmailSender emailSender, IMedicoRepository medicoRepository)
+
+        public AdicionarAgendamentoCommandHandler(IMapper mapper, IAgendamentoRepository agendamentoRepository, IEspecialidadeMedicoRepository especialidadeMedicoRepository, IPacienteRepository pacienteRepository, IEmailSender emailSender, IMedicoRepository medicoRepository, IAgendaMedicoRepository agendaMedicoRepository)
         {
             _mapper = mapper;
             _agendamentoRepository = agendamentoRepository;
@@ -48,7 +48,10 @@ namespace HealthMedScheduler.Application.Features.Agendamentos.Commands.Adiciona
 
             await _agendamentoRepository.UnitOfWork.Commit();
 
-            var medico = await _medicoRepository.ObterPorId(agendamento.EspecialidadeMedico.MedicoId);
+            var especialidadeMedico = await _especialidadeMedicoRepository.ObterPorId(request.EspecialidadeMedicoId);
+
+            var medico = await _medicoRepository.ObterPorId(especialidadeMedico.MedicoId);
+
             var paciente = await _pacienteRepository.ObterPorId(agendamento.PacienteId);
             try
             {

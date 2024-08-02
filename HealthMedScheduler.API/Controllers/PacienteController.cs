@@ -4,10 +4,12 @@ using HealthMedScheduler.Application.Features.Pacientes.Commands.AtualizarPacien
 using HealthMedScheduler.Application.Features.Pacientes.Commands.RemoverPaciente;
 using HealthMedScheduler.Application.Features.Pacientes.Queries;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HealthMedScheduler.Api.Controllers
 {
+    [Authorize]
     [Route("Paciente")]
     public class PacienteController : MainController<PacienteController>
     {
@@ -56,12 +58,13 @@ namespace HealthMedScheduler.Api.Controllers
             var medicos = await _mediator.Send(new ObterAgendamentoPacientePorIdQuery(idPaciente));
             return CustomResponse(medicos);
         }
-        
+
         /// <summary>
         /// Adiciona um novo paciente.
         /// </summary>
         /// <param name="pacienteDTO">Os dados do paciente a ser adicionado.</param>
         /// <returns>O paciente adicionado ou um erro 400 em caso de falha na adição.</returns>
+        [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult> Adicionar(AdicionarPacienteCommand paciente)
         {

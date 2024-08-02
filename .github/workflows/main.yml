@@ -71,7 +71,7 @@ jobs:
     needs: [CI]
     steps:
       - name: Azure Login
-        uses: Azure/login@v1.4.5
+        uses: Azure/login@v1
         with:      
           creds: ${{secrets.AZURE_CREDENTIALS}}
           
@@ -96,18 +96,31 @@ jobs:
               TAG_NAME=${GITHUB_REF#refs/tags/}
               echo "IMAGE_VERSION=$TAG_NAME" >> $GITHUB_ENV              
           fi
-          
-       # Set the target AKS cluster.
-      - uses: Azure/aks-set-context@v1
+      
+      - name: Azure login
+        id: login
+        uses: azure/login@v1.4.3
         with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
-          cluster-name: aks-fiap-hackaton
-          resource-group: AKS-Demo-Cluster-RG
+         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - uses: Azure/k8s-deploy@v1
+      - name: Set AKS context
+        id: set-context
+        uses: azure/aks-set-context@v3
         with:
+         resource-group: '${{ secrets.AZURE_RESOURCE_GROUP }}' 
+         cluster-name: '${{ secrets.AZURE_CLUSTER_NAME }}'
+      
+      - name: Setup kubectl
+        id: install-kubectl
+        uses: azure/setup-kubectl@v3
+   
+      - name: Deploy to AKS
+        id: deploy-aks
+        uses: Azure/k8s-deploy@v4
+        with:
+          namespace: 'default'
           manifests: |
-            k8s/health-med.yaml          
-          images: |
-            ${{env.IMAGE_NAME}}:${{ env.IMAGE_VERSION }}
+              azure-vote-all-in-one-redis.yaml
+          images: ' ${{env.IMAGE_NAME}}:${{ env.IMAGE_VERSION }}'
+          pull-images: false      
         

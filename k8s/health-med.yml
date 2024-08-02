@@ -21,7 +21,7 @@ spec:
           - name: "ConnectionString"
             value: "Server=tcp:srv-db-heatlh-med-scheduler.database.windows.net,1433;Database=sql-health-med-scheduler;User ID=group35;Password=p8c4eU*onU;Trusted_Connection=False;TrustServerCertificate=True"
           ports:
-            - containerPort: 80
+            - containerPort: 4040
           resources:
             requests:
               memory: "256Mi"
@@ -38,6 +38,6 @@ spec:
   selector:
     app: health-med-scheduler
   ports:
-    - port: 80
-      targetPort: 80      
+    - port: 4040
+      targetPort: 4040     
   type: LoadBalancer

@@ -25,6 +25,7 @@ RUN dotnet publish "./HealthMedScheduler.Api.csproj" -c $BUILD_CONFIGURATION -o 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-EXPOSE 4040
-ENV ASPNETCORE_URLS=http://*:4040
+EXPOSE 80
+EXPOSE 443
+ENV ASPNETCORE_URLS=http://*:80
 ENTRYPOINT ["dotnet", "HealthMedScheduler.Api.dll"]

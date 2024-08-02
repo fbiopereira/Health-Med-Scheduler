@@ -113,9 +113,9 @@ jobs:
         id: deploy-aks
         uses: Azure/k8s-deploy@v4
         with:
-          namespace: 'default'
+          namespace: 'health-med'
           manifests: |
-              ./k8s/health-med.yml
+              /k8s/health-med.yml
           images: ' ${{env.IMAGE_NAME}}:${{ env.IMAGE_VERSION }}'
           pull-images: false      
         

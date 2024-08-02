@@ -1,72 +1,43 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alo-doutor
+  name: health-med-scheduler
 spec: 
   replicas: 1
   selector:
     matchLabels: 
-      app: alo-doutor
+      app: health-med-scheduler
   template:
     metadata:
       labels:
-        app: alo-doutor
+        app: health-med-scheduler
     spec:
       containers:
-        - name: alo-doutor
-          image: "fbiopereira/alo-doutor:latest"
+        - name: health-med-scheduler
+          image: "crfiappostech.azurecr.io/health-med-scheduler:latest"
           env:        
           - name: "aspnetcore_environment"
-            value: "Staging"          
+            value: "Release"          
           - name: "ConnectionString"
-            value: "Server=192.168.50.179;Database=AloDoutor;User ID=sa;Password=P@ssw0rd;Trusted_Connection=False; TrustServerCertificate=True;MultipleActiveResultSets=True"
+            value: "Server=tcp:srv-db-heatlh-med-scheduler.database.windows.net,1433;Database=sql-health-med-scheduler;User ID=group35;Password=p8c4eU*onU;Trusted_Connection=False;TrustServerCertificate=True"
           ports:
-            - containerPort: 4040
+            - containerPort: 80
           resources:
             requests:
               memory: "256Mi"
               cpu: "250m"
             limits:
               memory: "512Mi"
-              cpu: "500m"
-          livenessProbe:
-            httpGet:
-              path: /live
-              port: 4040
-            initialDelaySeconds: 30
-            periodSeconds: 10
-          readinessProbe:
-            httpGet:
-              path: /live
-              port: 4040
-            initialDelaySeconds: 30
-            periodSeconds: 20
+              cpu: "500m"          
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: alo-doutor
+  name: health-med-scheduler
 spec: 
   selector:
-    app: alo-doutor
+    app: health-med-scheduler
   ports:
-    - port: 4040
-      targetPort: 4040      
-  type: ClusterIP
----    
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: alo-doutor  
-spec:
-  rules:
-  - host: alo-doutor.127.0.0.1.nip.io
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: alo-doutor
-            port: 
-              number: 4040
+    - port: 80
+      targetPort: 80      
+  type: LoadBalancer

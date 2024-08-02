@@ -69,11 +69,7 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     needs: [CI]
-    steps:
-      - name: Azure Login
-        uses: Azure/login@v1
-        with:      
-          creds: ${{secrets.AZURE_CREDENTIALS}}
+    steps:   
           
       - name: Set Branch Name and Version to be Used
         id: vars

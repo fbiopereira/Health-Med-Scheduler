@@ -65,6 +65,49 @@ jobs:
           tags: |            
             ${{env.IMAGE_NAME}}:latest
             ${{env.IMAGE_NAME}}:${{env.IMAGE_VERSION}}
-            
-           
- 
+    
+  CD:
+    runs-on: ubuntu-latest
+    needs: [CI]
+    steps:
+      - name: Azure Login
+        uses: Azure/login@v1.4.5
+        with:      
+          creds: ${{secrets.AZURE_CREDENTIALS}}
+          
+      - name: Set Branch Name and Version to be Used
+        id: vars
+        run: |
+          BRANCH_NAME=$(echo ${GITHUB_REF#refs/heads/})
+          echo "BRANCH_NAME=${BRANCH_NAME}" >> $GITHUB_ENV             
+          SHA_SHORT=${{github.sha}}
+          echo "SHA_SHORT=${SHA_SHORT:0:7}" >> $GITHUB_ENV
+          
+      - name: Set Image Version
+        shell: bash
+        run: |
+          if [ "${BRANCH_NAME}" = "main" ] ; then
+            echo "IMAGE_VERSION=hml-$SHA_SHORT" >> $GITHUB_ENV
+          elif [ "${BRANCH_NAME}" = "develop" ] ; then
+            echo "IMAGE_VERSION=stg-$SHA_SHORT" >> $GITHUB_ENV
+          elif [[ "${BRANCH_NAME}" == feature/* ]] ; then
+            echo "IMAGE_VERSION=dev-$SHA_SHORT" >> $GITHUB_ENV          
+          elif [[ "${{ github.event_name }}" == "release" ]]; then
+              TAG_NAME=${GITHUB_REF#refs/tags/}
+              echo "IMAGE_VERSION=$TAG_NAME" >> $GITHUB_ENV              
+          fi
+          
+       # Set the target AKS cluster.
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+          cluster-name: aks-fiap-hackaton
+          resource-group: AKS-Demo-Cluster-RG
+
+      - uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            k8s/health-med.yaml          
+          images: |
+            ${{env.IMAGE_NAME}}:${{ env.IMAGE_VERSION }}
+        

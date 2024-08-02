@@ -12,7 +12,7 @@ on:
      - created
 
 env:
-  IMAGE_NAME: fbiopereira/movies-api-pos-tech-fiap 
+  IMAGE_NAME: crfiappostech.azurecr.io/health-med-scheduler
   
 jobs:
   CI:
